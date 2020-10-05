@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.WorkMapper" >
+  <resultMap id="WorkResultMap" type="org.lanqiao.entity.Work" >
+    <id column="work_id" property="workId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="work_title" property="workTitle" jdbcType="VARCHAR" />
+    <result column="work_detaile" property="workDetaile" jdbcType="VARCHAR" />
+    <result column="work_theme" property="workTheme" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="work_tag" property="workTag" jdbcType="VARCHAR" />
+    <result column="work_time" property="workTime" jdbcType="DATE" />
+    <result column="work_hot" property="workHot" jdbcType="INTEGER" />
+    <result column="work_cover" property="workCover" jdbcType="VARCHAR" />
+    <association property="users" javaType="org.lanqiao.entity.Users">
+      <id column="user_id" property="userId" jdbcType="INTEGER" />
+      <result column="user_rickname" property="userRickname" jdbcType="VARCHAR" />
+      <result column="user_passw" property="userPassw" jdbcType="VARCHAR" />
+      <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+      <result column="user_name" property="userName" jdbcType="VARCHAR" />
+      <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+      <result column="user_birthday" property="userBirthday" jdbcType="DATE" />
+      <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+      <result column="user_picaddress" property="userPicaddress" jdbcType="VARCHAR" />
+      <result column="user_sign" property="userSign" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+
+<!--    hcy-->
+    <select id="selectAllWork" resultMap="WorkResultMap" parameterType="org.lanqiao.entity.Work" >
+        select * from work where user_id=#{userId}
+    </select>
+  <!--    zgb-->
+  <delete id="deleteWorkInfo" parameterType="java.lang.Integer">
+    delete from workinfo where work_id =#{workId}
+  </delete>
+  <select id="selectWorkId" resultType="int" parameterType="org.lanqiao.entity.Work">
+    select work_id from work where work.user_id=#{userId} and work_title=#{workTitle} and work_theme =#{workTheme}
+  </select>
+  <select id="selectByTag" resultMap="WorkResultMap" parameterType="java.lang.String">
+    select * from work where work_theme = #{workTheme}
+  </select>
+  <select id="selectThisWork" resultMap="WorkResultMap" parameterType="java.lang.Integer">
+    select * from work w,users u where w.user_id = u.user_id and work_id = #{workId};
+  </select>
+  <select id="selectBydefault" resultMap="WorkResultMap">
+    select * from work order by work_id;
+  </select>
+  <select id="selectBydTime" resultMap="WorkResultMap">
+    select * from work order by work_time desc;
+  </select>
+  <select id="selectByHot" resultMap="WorkResultMap">
+    select * from work order by work_hot desc;
+  </select>
+  <select id="selectHisWork" resultMap="WorkResultMap" parameterType="java.lang.Integer">
+    select * from work as w,users as u where w.user_id = u.user_id and w.user_id = #{userId} limit 3;
+  </select>
+
+
+
+  <sql id="Base_Column_List" >
+    work_id, user_id, work_title, work_detaile, work_theme, copyright, work_tag, work_time, 
+    work_hot, work_cover
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="WorkResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from work
+    where work_id = #{workId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from work
+    where work_id = #{workId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.Work" >
+    insert into work (work_id, user_id, work_title, 
+      work_detaile, work_theme, copyright, 
+      work_tag, work_time, work_hot, 
+      work_cover)
+    values (#{workId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{workTitle,jdbcType=VARCHAR}, 
+      #{workDetaile,jdbcType=VARCHAR}, #{workTheme,jdbcType=VARCHAR}, #{copyright,jdbcType=VARCHAR}, 
+      #{workTag,jdbcType=VARCHAR}, #{workTime,jdbcType=DATE}, #{workHot,jdbcType=INTEGER}, 
+      #{workCover,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Work" >
+    insert into work
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="workTitle != null" >
+        work_title,
+      </if>
+      <if test="workDetaile != null" >
+        work_detaile,
+      </if>
+      <if test="workTheme != null" >
+        work_theme,
+      </if>
+      <if test="copyright != null" >
+        copyright,
+      </if>
+      <if test="workTag != null" >
+        work_tag,
+      </if>
+      <if test="workTime != null" >
+        work_time,
+      </if>
+      <if test="workHot != null" >
+        work_hot,
+      </if>
+      <if test="workCover != null" >
+        work_cover,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workId != null" >
+        #{workId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="workTitle != null" >
+        #{workTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="workDetaile != null" >
+        #{workDetaile,jdbcType=VARCHAR},
+      </if>
+      <if test="workTheme != null" >
+        #{workTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="workTag != null" >
+        #{workTag,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null" >
+        #{workTime,jdbcType=DATE},
+      </if>
+      <if test="workHot != null" >
+        #{workHot,jdbcType=INTEGER},
+      </if>
+      <if test="workCover != null" >
+        #{workCover,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Work" >
+    update work
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="workTitle != null" >
+        work_title = #{workTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="workDetaile != null" >
+        work_detaile = #{workDetaile,jdbcType=VARCHAR},
+      </if>
+      <if test="workTheme != null" >
+        work_theme = #{workTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="copyright != null" >
+        copyright = #{copyright,jdbcType=VARCHAR},
+      </if>
+      <if test="workTag != null" >
+        work_tag = #{workTag,jdbcType=VARCHAR},
+      </if>
+      <if test="workTime != null" >
+        work_time = #{workTime,jdbcType=DATE},
+      </if>
+      <if test="workHot != null" >
+        work_hot = #{workHot,jdbcType=INTEGER},
+      </if>
+      <if test="workCover != null" >
+        work_cover = #{workCover,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where work_id = #{workId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Work" >
+    update work
+    set user_id = #{userId,jdbcType=INTEGER},
+      work_title = #{workTitle,jdbcType=VARCHAR},
+      work_detaile = #{workDetaile,jdbcType=VARCHAR},
+      work_theme = #{workTheme,jdbcType=VARCHAR},
+      copyright = #{copyright,jdbcType=VARCHAR},
+      work_tag = #{workTag,jdbcType=VARCHAR},
+      work_time = #{workTime,jdbcType=DATE},
+      work_hot = #{workHot,jdbcType=INTEGER},
+      work_cover = #{workCover,jdbcType=VARCHAR}
+    where work_id = #{workId,jdbcType=INTEGER}
+  </update>
+</mapper>

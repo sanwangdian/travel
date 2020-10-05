@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频分类页</title>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/jquery.validate.regex.js"></script>
+    <script src="js/vue.min1.js"></script>
+    <link rel="stylesheet" href="css_w/videoSort.css">
+    <link rel="stylesheet" href="css_w/public.css">
+    <link rel="stylesheet" href="css_w/video.css">
+    <link rel="stylesheet" href="css_w/bootstrap.css">
+    <script>
+        $(function () {
+            var vm = new Vue({
+                el:"#main",
+                data:{
+                    items1:[],
+                    pagenum:1,
+                    pagesize:8,
+                    Count:0,
+                    NavigatepageNums:[],
+                },created: function () {
+                    // vm.items1=[];
+                    // vm.NavigatepageNums=[];
+                    $.ajax({
+                        // url: "/getAllVideo",
+                        url: "/getAll",
+                        type: "post",
+                        dataType: "json",
+                        data:{
+                            "pageNum":1,
+                            "pageSize":8,
+                        },
+                        success:function (data) {
+                            $("#allPart").removeClass("nav_li");
+                            $("#allPart").addClass("btn-primary");
+                            $("#allPart").siblings().removeClass("btn-primary");
+                            $("#allPart").siblings().addClass("nav_li");
+                            for(var i=0;i<data.size;i++){
+                                vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                            }
+                            for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                            }
+                            vm.Count=data.total;
+                        }
+                    });
+                },
+                methods:{
+                    created: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            // url: "/getAllVideo",
+                            url: "/getAll",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "pageNum":vm.pagenum,
+                                "pageSize":vm.pagesize,
+                            },
+                            success:function (data) {
+                                $("#allPart").removeClass("nav_li");
+                                $("#allPart").addClass("btn-primary");
+                                $("#allPart").siblings().removeClass("btn-primary");
+                                $("#allPart").siblings().addClass("nav_li");
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    //分页------------------------
+                    pagedown: function () {
+                        if(vm.pagenum<Math.ceil(vm.Count/vm.pagesize)){
+                            $(".item_article").remove();
+                            vm.pagenum++;
+                            vm.created();
+                        }else{
+                            confirm("最后一页")
+                        }
+                    },
+                    pageup: function () {
+                        if(vm.pagenum>1){
+                            $(".item_article").remove();
+                            vm.pagenum--;
+                            vm.created();
+                        }else{
+                            confirm("第一页");
+                        }
+
+                    },
+                    pageclick:function (index) {
+                        vm.pagenum=index+1;
+                        $(".item_article").remove();
+                        vm.created();
+
+                    },
+                    created1: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getVideoItem",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "videoSort":1,
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    created2: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getVideoItem",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "videoSort":2,
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    created3: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getVideoItem",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "videoSort":3,
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    created4: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getVideoItem",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "videoSort":4,
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    created5: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getVideoItem",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "videoSort":5,
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    created6: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getVideoItem",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "videoSort":6,
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    lastInput: function () {
+                        vm.items1=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getAllLast",
+                            type: "post",
+                            dataType: "json",
+                            data:{
+                                "pageNum":1,
+                                "pageSize":8,
+                            },
+                            success:function (data) {
+                                for(var i=0;i<data.size;i++){
+                                    vm.items1.push({video_id:data.list[i].videoId,upload_time:data.list[i].uploadTime.toString().substr(0,10),video_last:data.list[i].videoLast,video_title:data.list[i].videoTitle,video_hot:data.list[i].videoHot, main_id:data.list[i].mainId,discuss_id:data.list[i].discussId,video_num:data.list[i].videoNum});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        });
+                    },
+                    // 推荐模块点击跳转播放页事件
+                    chooseOpen1:function (index) {
+                        sessionStorage.setItem("videoId1",this.items1[index].video_id);
+                        window.location.href="videoOpen.html";
+                    },
+                    //点击小视频
+                }
+            });
+            $("#allPart").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+            $("#smallVideo").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+            $("#travel").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+            $("#huoDong").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+            $("#fanTan").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+            $("#hangPai").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+            $("#yanShi").click(function () {
+                $(this).removeClass("nav_li");
+                $(this).addClass("btn-primary");
+                $(this).siblings().removeClass("btn-primary");
+                $(this).siblings().addClass("nav_li");
+            });
+
+        });
+
+
+    </script>
+</head>
+<body>
+<!--头部导航栏-->
+<div class="public_head">
+    <ul>
+        <li class="logo"><a href="http://www.youxiake.com" target="_blank" style="background-image: url(images_W/logo_01.png);"></a></li>
+        <li><a href="sy-index.html">首页</a></li>
+        <li><a href="community_my.html">社区</a></li>
+        <li><a>目的地</a></li>
+        <li><a href="YouJi-Z.html">攻略</a></li>
+        <li><a href="video.html" style="color: orange;">视频</a></li>
+        <li><a target="_blank">领队</a></li>
+        <li><a href="photo.html">摄影</a></li>
+        <li class="mugua_box">
+            <a class="mugua_a" href="javascript:;">旅游</a>
+            <div class="mugua_ul">
+                <a target="_blank" class="mugua_li">周边游</a>
+                <a target="_blank" class="mugua_li">国内游</a>
+                <a target="_blank" class="mugua_li">出境游</a>
+                <a target="_blank" class="mugua_li">当地玩乐</a>
+                <a target="_blank" class="mugua_li">亲子游</a>
+                <a target="_blank" class="mugua_li">户外游</a>
+                <a target="_blank" class="mugua_li">定制游</a>
+            </div>
+        </li>
+        <li><a href="http://www.youxiake.com/app/" target="_blank">APP</a></li>
+        <li style="float: right;"><a href="http://www.youxiake.com/reg?refer=http://www.youxiake.com/film/" target="_blank">注册</a></li>
+        <li style="float: right;"><a href="http://www.youxiake.com/login?refer=http://www.youxiake.com/film/" target="_blank">登录</a></li>
+    </ul>
+</div>
+<div id="main">
+    <!--下方导航栏-->
+    <div class="nav_container">
+        <div class="nav_box">
+            <div class="nav_ul">
+                <a target="_blank" class="nav_li" id="allPart" @click="created">全部</a>
+                <a target="_blank" class="nav_li" id="smallVideo" @click="created2">小视频</a>
+                <a target="_blank" class="nav_li" id="travel" @click="created3">旅行</a>
+                <a target="_blank" class="nav_li" id="huoDong" @click="created4">活动</a>
+                <a target="_blank" class="nav_li" id="fanTan" @click="created5">访谈</a>
+                <a target="_blank" class="nav_li" id="hangPai" @click="created6">航拍</a>
+                <a target="_blank" class="nav_li" id="yanShi" @click="created1">延时</a>
+            </div>
+            <div class="nav_search">
+                <input type="text" class="search_input js-search_input" maxlength="20" placeholder="搜索视频">
+                <div class="search_button js-search_button"></div>
+            </div>
+        </div>
+    </div>
+    <!--主体部分-->
+    <div id="newyxk" class="newfilm" module="newfilm" child="filmSearch">
+    <!--分类搜索框导航栏-->
+        <div class="newfilm_header" >
+            <div class="newfilm_sort">
+    <!--            <span class="mugua_box">-->
+    <!--                <a class="mugua_a" id="VideoTitle">小视频</a>-->
+    <!--                <div class="mugua_ul_01">-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="allPart" >全部</a>-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="smallVideo" @click="clickSmall()">小视频</a>-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="travel" @click="clickTravel()">旅行</a>-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="huoDong">活动</a>-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="fanTan">访谈</a>-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="hangPai">航拍</a>-->
+    <!--                    <a target="_blank" class="mugua_li_01" id="yanShi">延时</a>-->
+    <!--                </div>-->
+    <!--            </span>-->
+                <span class="js-sort focus" data-sort="0" @click="lastInput">最新发布</span>
+                <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+                <span class="js-sort" data-sort="1" id="manyDiscuss">最多评论</span>
+                <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
+                <span class="js-sort" data-sort="2" id="manyView">最多观看</span>
+            </div>
+            <div class="newfilm_search">
+                共有 <span>{{Count}}</span> 个视频
+    <!--            <input class="js-search_input" type="text" maxlength="20" placeholder="搜索视频">-->
+    <!--            <div class="js-search_button"></div>-->
+            </div>
+        </div>
+    <!--视频主体-->
+        <div class="newfilm_container">
+            <div class="newfilm_box">
+                <a target="_blank" class="recommend" v-for="(item,index) in items1" @click="chooseOpen1(index)" >
+                    <img :src="item.main_id" class="recommend_pic">
+                    <div class="recommend_datetime">
+                        <div class="datetime_date">{{item.upload_time}}</div>
+                        <div class="datetime_time">{{item.video_last}}</div>
+                    </div>
+                    <div class="recommend_content">
+                        <div class="content_title"><span>原创</span>{{item.video_title}}</div>
+                        <div class="content_count">播放&nbsp;&nbsp;{{item.video_hot}}&nbsp;&nbsp;|&nbsp;&nbsp;评论&nbsp;&nbsp;{{item.discuss_id}}</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    <!--视频页数-->
+<!--        <div class="newfilm_pages">-->
+<!--            共3页/条-->
+<!--            <span class="page&#45;&#45;1 js-firstPage">首页</span>-->
+<!--            <span class="page&#45;&#45;2 js-prevPage">上一页</span>-->
+<!--            <span class="page focus">1</span><span class="page">2</span><span class="page">3</span><span class="page&#45;&#45;2 js-nextPage" style="display: inline-block;">下一页</span>-->
+<!--            <span class="page&#45;&#45;1 js-lastPage" style="display: inline-block;">末页</span>-->
+<!--        </div>-->
+        <div style="float: left;margin-left: 750px;width: 1500px  ">
+            <ul class="pagination pagination-lg">
+                <li><a href="javascript:" @click="pageup">&laquo;</a></li>
+                <li class="FColor" v-for="(Num,index) in NavigatepageNums"><a href="javascript:"  @click="pageclick(index)">{{Num.Nums}}</a></li>
+                <li><a href="javascript:" @click="pagedown">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+        <div class="newfilm_none">
+            <div class="none_img"></div>
+            <div class="none_text">..</div>
+        </div>
+        <form id="newfilm_form" action="http://www.youxiake.com/film/category" method="get">
+            <input id="newfilm_category" type="hidden" value="" name="id">
+
+            <input id="newfilm_sort" type="hidden" value="" name="sort">
+            <input id="newfilm_page" type="hidden" value="" name="page">
+
+        </form>
+    </div>
+</div>
+<!--底部-->
+<div class="b_floor">
+    <div class="l_wrapper">
+        <div class="m_unit_b2">
+            <div class="footerInfo">
+                <ul class="weima">
+                    <li>
+                        <img src="images_W/wechat01.jpg" width="77" height="77">
+                        <p>神游网公众号</p>
+                    </li>
+                    <li>
+                        <img src="images_W/wechat02.jpeg" width="78" height="79">
+                        <p>APP下单更优惠</p>
+                    </li>
+                </ul>
+                <p>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于游侠客</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">游侠客的故事</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系游侠客</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">游侠客招聘</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                </p>
+                <p>
+                    <span>浙ICP备 09011712 号-1</span>
+                    <span>浙公网安备 33010602002105号</span>
+                    <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>
+                    <span>神仙游国际旅行社有限公司</span>
+                    <span>杭州途游电子商务有限公司</span>
+                    <span>许可证编号：L-ZJ-CJ00161</span>
+                </p>
+                <p>©  2019 youxiake.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
+                <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+            </div>
+            <div class="friendLines">
+                <div class="footerImages clearfix foot-ext">
+                    <a class="footer-ext-s2" href="javascript:;" onclick="window.open('http://net.china.com.cn/index.htm')" title="不良信息举报中心"></a>
+                    <a class="footer-ext-s3" href="javascript:;" onclick="window.open('http://union.rising.com.cn/InfoManage/attestation.aspx?p0=W86D47XQRcVtTOYJMVjfRn-NIHQ6TlFupjQAkt-jEyg=')" title="瑞信安全认证"></a>
+                    <a class="footer-ext-s4" href="javascript:;" onclick="window.open('http://www.12312.gov.cn')" title="12321垃圾信息举报中心"></a>
+                    <a href="javascript:;" onclick="window.open('http://fun.alipay.com/down/index.htm?cid=shwaibusj&amp;pid=Q_ANDROID_SHWAIBUSJ')"><img width="116" height="47" src="http://static.youxiake.com/new/Public/Images/alipay201305.png" alt="支付宝"></a>
+                    <a class="footer-ext-s5" href="javascript:;" onclick="window.open('http://www.cyberpolice.cn/')" title="网络110报警服务"></a>
+                    <a class="footer-ext-s6" href="javascript:;" onclick="window.open('http://122.224.75.236/wzba/login.do?method=hdurl&amp;doamin=http://www.youxiake.com&amp;id=330106000183104&amp;SHID=1223.0AFF_NAME=com.rouger. gs.main.UserInfoAff&amp;AFF_ACTION=qyhzdetail&amp;PAGE_URL=ShowDetail')" title="网上标识信息"></a>
+                    <a class="footer-ext-s7" href="javascript:;" onclick="window.open('http://bbs.ifeng.com/special/bbs100/lty.shtml?bbsid=1912')" title="全球中文论坛100强"></a>
+                    <a href="http://www.anquan.org/authenticate/cert/?site=www.youxiake.com&amp;sn=2013121115015380199" target="_blank" style="background:none"><img src="http://static.youxiake.com/new/Public/Images/kx_124x47.png" alt="安全联盟" height="47"></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    // $(function () {
+    //     //实现选项卡功能
+    //     var titles = document.getElementsByClassName('nav_li');
+    //
+    //     var mains = document.getElementsByClassName('recommend');
+    //     // console.log(titles);
+    //     // 给每个标题安装点击事件
+    //     //
+    //     // 1.获取到每个标题在数组中的下标
+    //     // 2.先隐藏所有主题内容
+    //     // 3.根据获取到得下标 显示对应内容
+    //     for(var i = 0;i<titles.length;i++){
+    //         // 给html元素安装一个属性，属性的值就是它的下标
+    //         titles[i].setAttribute('flag',i);
+    //         titles[i].onclick = function(){
+    //             //点击之后。所有的标题变成黑色
+    //             for(var j = 0;j<titles.length;j++){
+    //                 titles[j].style.color = "black";
+    //             }
+    //             this.style.color="#ff9a00";
+    //             var myFlag = this.getAttribute('flag');
+    //             // 隐藏所有主体内容
+    //             for(var k=0;k<mains.length;k++){
+    //                 mains[k].style.display = 'none';
+    //             }
+    //             mains[myFlag].style.display = 'block';
+    //         }
+    //     }
+    // })
+</script>
+</html>

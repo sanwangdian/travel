@@ -1,0 +1,306 @@
+/*轮播图*/
+.banner_container {
+    /*position: relative;*/
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+}
+.banner_container #banner{
+    /*position: absolute;*/
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#img_Box{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+#img_Box img{
+    height: 115%;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+#img_Box-p{
+    bottom: 67px;
+    position: relative;
+    color: white;
+    left: 21px;
+}
+#img_Box-p p{
+    font-size: 20px;
+    /*color: white;*/
+    position: relative;
+    display: none;
+}
+#click{
+    /*border: 1px solid white;*/
+    position: absolute;
+    height: 20px;
+    width: 100px;
+    bottom: 10px;
+    left: 200px;
+}
+
+#click ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#click ul li{
+    /*border: 1px solid red;*/
+    height: 8px;
+    width: 8px;
+    float: left;
+    margin: 4px;
+    border-radius: 4px;
+    background-color: #7d7d7d;
+    cursor: pointer;
+
+}
+#turn{
+    position: absolute;
+    width: 100%;
+    top: 135px;
+    display: none
+}
+#leftTurn{
+    float: left;
+}
+#rightTurn{
+    float: right;
+}
+#banner:hover{
+    cursor: pointer;
+}
+a:hover{
+    cursor: pointer;
+}
+/*下方导航栏*/
+.nav_container {
+    width: 100%;
+    height: 60px;
+    -webkit-box-shadow: 0 3px 3px rgba(0,0,0,.15);
+    box-shadow: 0 3px 3px rgba(0,0,0,.15);
+    overflow: hidden;
+}
+.nav_container .nav_box {
+    position: relative;
+    margin: 0 auto;
+    width: 1200px;
+    height: 100%;
+    overflow: hidden;
+}
+.nav_container .nav_box .nav_ul {
+    width: 900px;
+    height: 100%;
+    font-size: 0;
+    overflow: hidden;
+}
+.nav_li:hover{
+    cursor: pointer;
+    color: #ff9a00;
+}
+/*.nav_container .nav_box .nav_ul .nav_li:first-child {*/
+/*    color: #ff9a00;*/
+/*}*/
+.btn-primary{
+    color: #ff9a00;
+    margin-right: 35px;
+    display: inline-block;
+    line-height: 60px;
+    font-size: 18px;
+}
+.nav_container .nav_box .nav_ul .nav_li {
+    margin-right: 35px;
+    display: inline-block;
+    line-height: 60px;
+    font-size: 18px;
+    color: #333;
+}
+.nav_container .nav_box .nav_search {
+    position: absolute;
+    right: 0;
+    top: 14px;
+    width: 280px;
+    height: 32px;
+    overflow: hidden;
+}
+.nav_container .nav_box .nav_search .search_input {
+    padding-left: 10px;
+    padding-right: 30px;
+    width: 238px;
+    height: 28px;
+    font-size: 14px;
+    color: #999;
+    border: 1px solid #e5e5e5;
+}
+.nav_container .nav_box .nav_search .search_button {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    width: 18px;
+    height: 18px;
+    background: url(../images_W/search.png) center center no-repeat;
+    background-size: 18px 18px;
+    cursor: pointer;
+}
+/*视频主体*/
+/*推荐*/
+.recommend_container {
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    width: 1200px;
+    font-size: 0;
+}
+.recommend_container .recommend_title {
+    font-size: 28px;
+    color: #333;
+}
+.recommend_container .recommend_title span {
+    margin-left: 15px;
+    font-size: 18px;
+    color: #999;
+}
+.recommend_container .recommend_box {
+    margin-top: 30px;
+    width: 1222px;
+}
+.recommend:hover{
+    box-shadow: 5px 5px 5px #888888;
+}
+.recommend {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 280px;
+    height: 246px;
+    background: #fff;
+    -webkit-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.recommend .recommend_pic {
+    width: 285px;
+    height: 160px;
+}
+.recommend .recommend_datetime {
+    position: absolute;
+    left: 0;
+    top: 122px;
+    width: 285px;
+    height: 38px;
+    background: url(../images_W/mask.png) center center no-repeat;
+    background-size: 285px 38px;
+    font-size: 12px;
+    color: #fff;
+}
+.recommend .recommend_datetime .datetime_date {
+    margin-top: 20px;
+    margin-left: 10px;
+    float: left;
+}
+.recommend .recommend_datetime .datetime_time {
+    margin-top: 20px;
+    margin-right: 10px;
+    float: right;
+}
+.recommend .recommend_content {
+    width: 283px;
+    height: 84px;
+    border: 1px solid #e5e5e5;
+    background: white;
+}
+.recommend .recommend_content .content_title {
+    margin: 15px 0;
+    margin-left: 10px;
+    width: 257px;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.recommend .recommend_content .content_title span {
+    margin-right: 9px;
+    display: inline-block;
+    width: 35px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: 1px;
+    font-size: 12px;
+    background: red;
+    color: #fff;
+    border-radius: 3px;
+}
+.recommend .recommend_content .content_count {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #999;
+}
+/*小视频*/
+.newFilm_container {
+    padding-top: 55px;
+    padding-bottom: 40px;
+    width: 100%;
+    background: #f7f7f7;
+}
+.newFilm_container .newFilm_content {
+    margin: 0 auto;
+    width: 1200px;
+    font-size: 0;
+}
+.newFilm_container .newFilm_content .newFilm_box {
+    position: relative;
+    margin-bottom: 35px;
+    width: 1200px;
+}
+ .newFilm_container .newFilm_content .newFilm_box .box_title {
+    position: relative;
+    width: 100%;
+    font-size: 28px;
+    color: #333;
+}
+.newFilm_container .newFilm_content .newFilm_box .box_title span {
+    margin-left: 15px;
+    font-size: 18px;
+    color: #999;
+}
+ .box_title a {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    color: #666;
+}
+.shortVideo{
+    width: 1200px;
+    height: 254px;
+    transition-duration: 0.5s;
+    /*background: darkseagreen;*/
+}
+
+.newFilm_box .newfilm__arrow--left {
+    left: -60px;
+    background-image: url(../images_W/arrow_left.png);
+}
+.newFilm_box .newfilm__arrow--right {
+    right: -60px;
+    background-image: url(../images_W/arrow_right.png);
+}

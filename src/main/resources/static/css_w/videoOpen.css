@@ -1,0 +1,498 @@
+.newfilm{
+    background: #f7f7f7;
+}
+video {
+    background: transparent  no-repeat 0 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#result{
+    color: white;
+    background: orange;
+    border: 1px solid orange;
+}
+.screen_toolbar{
+    width: 600px;
+    margin: 20px auto;
+    text-align: center;
+}
+.newfilm .video_container {
+    width: 100%;
+    height: 570px;
+    background: url(../images_W/detail_bg.jpg) center center no-repeat;
+    background-size: cover;
+}
+/*视频相关信息*/
+.newfilm .detail_container {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 1200px;
+    font-size: 0;
+}
+.newfilm .detail_container .container_left {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 24px;
+    margin-bottom: 40px;
+    width: 850px;
+}
+.newfilm .detail_container .container_left .left_video {
+    position: relative;
+    padding: 25px 25px 16px 25px;
+    width: 800px;
+    background: #fff;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox {
+    width: 100%;
+    color: #333;
+    font-size: 0;
+    overflow: hidden;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox .video_original {
+    margin-right: 9px;
+    display: inline-block;
+    width: 35px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    vertical-align: 1px;
+    font-size: 12px;
+    color: #fff;
+    background: red;
+    border-radius: 3px;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox .video_title {
+    margin-right: 20px;
+    display: inline-block;
+    max-width: 560px;
+    vertical-align: -5px;
+    font-size: 20px;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox .video_lightTag {
+    color: #ff9a00;
+    border-color: #ff9a00;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox .video_tag {
+    margin-right: 6px;
+    display: inline-block;
+    padding: 0 8px;
+    line-height: 16px;
+    font-size: 12px;
+    color: #999;
+    border: 1px solid #999;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox .video_copy {
+    position: relative;
+    margin-left: 11px;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+}
+.newfilm .detail_container .container_left .left_video .video_titleBox .video_copy_clicked {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    width: 100px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border: 1px solid #666;
+    color: #666;
+    font-size: 14px;
+    z-index: 9999;
+    background: #fff;
+    border-radius: 10px;
+}
+.newfilm .detail_container .container_left .left_video .video_flag {
+    margin-top: 22px;
+    font-size: 14px;
+    max-width: 76%;
+}
+.newfilm .detail_container .container_left .left_video .video_flag .flag_item {
+    display: inline-block;
+    margin-right: 20px;
+    color: #ff9e00;
+    max-width: 86px;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.newfilm .detail_container .container_left .left_video .video_msgBox {
+    margin-top: 25px;
+    font-size: 0;
+    color: #999;
+}
+.newfilm .detail_container .container_left .left_video .video_msgBox div {
+    display: inline-block;
+    font-size: 12px;
+}
+.newfilm .detail_container .container_left .left_video .video_like {
+    position: absolute;
+    right: 88px;
+    top: 66px;
+    padding-left: 54px;
+    width: 47px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background: url(../images_W/like.png) left top no-repeat;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.newfilm .detail_container .container_left .left_video .video_share {
+    position: absolute;
+    right: 28px;
+    bottom: 40px;
+    padding-left: 20px;
+    font-size: 12px;
+    color: #333;
+    cursor: pointer;
+    background: url(../images_W/share.png) left center no-repeat;
+    background-size: 14px 14px;
+}
+.newfilm .detail_container .container_left .left_video .video_share .video_shareBox {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 150px;
+    height: 65px;
+}
+.bdshare-button-style0-16 {
+    zoom: 1;
+}
+.bdsharebuttonbox {
+    float: none!important;
+}
+/*简介*/
+.newfilm .detail_container .container_left .left_description {
+    margin-bottom: 25px;
+    width: 100%;
+    background: #fff;
+}
+.newfilm .detail_container .container_left .left_description .description_content {
+    padding: 25px 35px 35px 25px;
+    border-top: 1px solid #f2f2f2;
+}
+.newfilm .detail_container .container_left .left_description .description_content * {
+    line-height: 26px!important;
+    font-size: 14px!important;
+    color: #666!important;
+    font-family: "微软雅黑"!important;
+    font-weight: 400!important;
+}
+.newfilm .detail_container .container_left .left_description .description_copyright {
+    padding-left: 26px;
+    height: 39px;
+    line-height: 39px;
+    font-size: 12px;
+    color: #999;
+    border-top: 1px solid #f2f2f2;
+}
+/*评论部分*/
+.newfilm .detail_container .container_left .comment_area {
+    position: relative;
+    padding-left: 20px;
+    padding-right: 28px;
+    padding-top: 34px;
+    padding-bottom: 25px;
+    height: 224px;
+    background: #fff;
+}
+.newfilm .detail_container .container_left .comment_area .area_header {
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: #666;
+}
+.newfilm .detail_container .container_left .comment_area .area_header .header_strong {
+    margin-right: 14px;
+    font-size: 20px;
+    color: #333;
+}
+.newfilm .detail_container .container_left .comment_area .area_header .header_light {
+    color: #ff9a00;
+}
+.newfilm .detail_container .container_left .comment_area .area_box {
+    position: relative;
+    height: 113px;
+}
+.newfilm .detail_container .container_left .comment_area .area_box .box_avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: center center no-repeat;
+    background-size: cover;
+}
+.newfilm .detail_container .container_left .comment_area .area_box .box_content {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 738px;
+    height: 111px;
+    border-radius: 3px;
+    border: 1px solid #e5e5e5;
+}
+.newfilm .detail_container .container_left .comment_area .area_box .box_content textarea {
+    padding: 10px;
+    width: 718px;
+    height: 58px;
+    resize: none;
+    border: none;
+}
+.newfilm .detail_container .container_left .comment_area .area_box .box_content .box_emoji {
+    position: relative;
+    padding-top: 3px;
+    height: 30px;
+    background: #f9f9f9;
+}
+.newfilm .detail_container .container_left .comment_area .area_box .box_content .box_emoji a {
+    margin-left: 6px;
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url(../images_W/emoji.jpg) center center no-repeat;
+    background-size: 25px 25px;
+}
+.newfilm .detail_container .container_left .comment_area .area_submit_box {
+    position: absolute;
+    right: 30px;
+    bottom: 25px;
+}
+.newfilm .detail_container .container_left .comment_area .area_submit_box .area_submit_length {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #999;
+}
+.newfilm .detail_container .container_left .comment_area .area_submit_box .area_submit_length span {
+    color: #ff9a00;
+}
+.newfilm .detail_container .container_left .comment_area .area_submit_box .area_submit {
+    display: inline-block;
+    width: 101px;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    background: #ff9a00;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.newfilm .detail_container .container_left .user_commentContainer {
+    padding-left: 20px;
+    padding-right: 30px;
+    width: 800px;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #fff;
+    font-size: 0;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment {
+    position: relative;
+    padding: 30px 0;
+    width: 100%;
+    border-bottom: 1px solid #f2f2f2;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_avatar {
+    display: block;
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: center center no-repeat;
+    background-size: cover;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content {
+    display: inline-block;
+    margin-left: 63px;
+    width: 735px;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_name {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_line {
+    margin: 0 10px;
+    display: none;
+    font-size: 12px;
+    color: #999;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_comment {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+    word-break: break-word;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_box {
+    position: relative;
+    width: 100%;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_box .content_time {
+    font-size: 12px;
+    color: #999;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_box .content_app {
+    display: inline-block;
+    margin-left: 15px;
+    font-size: 12px;
+    color: #999;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_box .content_app a {
+    position: relative;
+    margin-left: 9px;
+    display: inline-block;
+    width: 56px;
+    height: 19px;
+    vertical-align: -5px;
+    color: #ff9a00;
+    background: url(../images_W/app.png) center center;
+    cursor: pointer;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_box .content_reply {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 12px;
+    color: #ff9a00;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .content_box .content_reply span {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.newfilm .detail_container .container_left .user_commentContainer .user_comment .user_content .comment_container {
+    margin-top: 20px;
+    width: 100%;
+}
+.newfilm .detail_container .container_left .user_moreComment {
+    width: 100%;
+    height: 66px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    background: #fff;
+}
+.newfilm .detail_container .container_left .user_moreComment span {
+    height: 66px;
+    line-height: 66px;
+    display: inline-block;
+    cursor: pointer;
+}
+/*右侧相关视频*/
+.newfilm .detail_container .container_right {
+    margin-bottom: 40px;
+    display: inline-block;
+    vertical-align: top;
+    width: 325px;
+}
+.newfilm .detail_container .container_right .right_videos {
+    width: 285px;
+    padding: 0 20px;
+    padding-top: 25px;
+    padding-bottom: 15px;
+    background: #fff;
+}
+.newfilm .detail_container .container_right .right_videos .videos_title {
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+    font-size: 20px;
+    color: #333;
+}
+.newfilm .detail_container .container_right .right_videos .videos_title a {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.newfilm #confirm_container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.4);
+    z-index: 99999999;
+}
+.newfilm #confirm_container .confirm_box {
+    position: absolute;
+    top: 221px;
+    left: 50%;
+    margin-left: -209px;
+    width: 419px;
+    height: 251px;
+    background: #fff;
+    border-radius: 3px;
+}
+.newfilm #confirm_container .confirm_box #confirm_close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 20px;
+    height: 20px;
+    background: url(../images_W/confirm_close.png) center center no-repeat;
+    background-size: 10px 10px;
+    cursor: pointer;
+}
+.newfilm #confirm_container .confirm_box .confirm_icon {
+    position: absolute;
+    left: 171px;
+    top: 39px;
+    width: 79px;
+    height: 79px;
+    background: url(../images_W/confirm_icon.png) center center no-repeat;
+    background-size: 79px 79px;
+}
+.newfilm #confirm_container .confirm_box #confirm_text {
+    position: absolute;
+    left: 17px;
+    top: 135px;
+    width: 385px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.newfilm #confirm_container .confirm_box #confirm_ok {
+    left: 124px;
+    color: #fff;
+    background-color: #ff8a00;
+}
+.newfilm #confirm_container .confirm_box #confirm_cancel, .newfilm #confirm_container .confirm_box #confirm_ok {
+    position: absolute;
+    top: 189px;
+    width: 78px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.newfilm #confirm_container .confirm_box #confirm_cancel {
+    left: 220px;
+    color: #666;
+    background-color: #e9e9e9;
+}

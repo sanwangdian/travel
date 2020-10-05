@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.ArticleMapper" >
+  <resultMap id="ArticleResultMap" type="org.lanqiao.entity.Article" >
+    <id column="Article_id" property="articleId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="id_best" property="idBest" jdbcType="VARCHAR" />
+    <result column="hot" property="hot" jdbcType="VARCHAR" />
+    <result column="article_time" property="articleTime" jdbcType="DATE" />
+    <result column="article_address" property="articleAddress" jdbcType="VARCHAR" />
+    <result column="article_local" property="articleLocal" jdbcType="VARCHAR" />
+    <result column="article_img" property="articleImg" jdbcType="VARCHAR" />
+    <result column="article_face" property="articleFace" jdbcType="VARCHAR" />
+    <result column="article_content" property="articleContent" jdbcType="VARCHAR" />
+    <result column="article_title" property="articleTitle" jdbcType="VARCHAR" />
+    <association property="users" resultMap="UserResultMap"></association>
+  </resultMap>
+  <resultMap id="UserResultMap" type="org.lanqiao.entity.Users" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_rickname" property="userRickname" jdbcType="VARCHAR" />
+    <result column="user_passw" property="userPassw" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+    <result column="user_birthday" property="userBirthday" jdbcType="DATE" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_picaddress" property="userPicaddress" jdbcType="VARCHAR" />
+    <result column="user_sign" property="userSign" jdbcType="VARCHAR" />
+  </resultMap>
+
+<!--    hcy-->
+    <select id="selectAllArticle" resultMap="ArticleResultMap" parameterType="org.lanqiao.entity.Article" >
+        select a.article_face,a.article_title,a.hot,a.article_time,a.article_local,u.user_img ,u.user_sign from article a,users u where a.user_id=u.user_id=#{userId}
+    </select>
+
+
+<!--    yyp-->
+  <select id="selectByPrimaryKey" resultMap="ArticleResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from article
+    where Article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByArticleId" resultMap="ArticleResultMap" parameterType="java.lang.Integer" >
+    select *
+    from article a,users u
+    where Article_id = #{articleId,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="getAllArticles" resultMap="ArticleResultMap" >
+     select *
+    from article a,users u
+    WHERE a.user_id = u.user_id
+  </select>
+
+  <select id="selectBestArticles" resultMap="ArticleResultMap" parameterType="String">
+      select *
+    from article a,users u
+    WHERE a.user_id = u.user_id AND a.id_best LIKE #{param1}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from article
+    where Article_id = #{articleId,jdbcType=INTEGER}
+  </delete>
+
+
+
+  <insert id="insert" parameterType="org.lanqiao.entity.Article" >
+    insert into article (user_id, id_best,
+      hot, article_time, article_address, 
+      article_local, article_img, article_face, 
+      article_content, article_title)
+    values (#{userId,jdbcType=INTEGER}, #{idBest,jdbcType=VARCHAR},
+      #{hot,jdbcType=VARCHAR}, #{articleTime,jdbcType=DATE}, #{articleAddress,jdbcType=VARCHAR}, 
+      #{articleLocal,jdbcType=VARCHAR}, #{articleImg,jdbcType=VARCHAR}, #{articleFace,jdbcType=VARCHAR}, 
+      #{articleContent,jdbcType=VARCHAR}, #{articleTitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Article" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        Article_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="idBest != null" >
+        id_best,
+      </if>
+      <if test="hot != null" >
+        hot,
+      </if>
+      <if test="articleTime != null" >
+        article_time,
+      </if>
+      <if test="articleAddress != null" >
+        article_address,
+      </if>
+      <if test="articleLocal != null" >
+        article_local,
+      </if>
+      <if test="articleImg != null" >
+        article_img,
+      </if>
+      <if test="articleFace != null" >
+        article_face,
+      </if>
+      <if test="articleContent != null" >
+        article_content,
+      </if>
+      <if test="articleTitle != null" >
+        article_title,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="idBest != null" >
+        #{idBest,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null" >
+        #{hot,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTime != null" >
+        #{articleTime,jdbcType=DATE},
+      </if>
+      <if test="articleAddress != null" >
+        #{articleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="articleLocal != null" >
+        #{articleLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImg != null" >
+        #{articleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="articleFace != null" >
+        #{articleFace,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        #{articleTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Article" >
+    update article
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="idBest != null" >
+        id_best = #{idBest,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null" >
+        hot = #{hot,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTime != null" >
+        article_time = #{articleTime,jdbcType=DATE},
+      </if>
+      <if test="articleAddress != null" >
+        article_address = #{articleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="articleLocal != null" >
+        article_local = #{articleLocal,jdbcType=VARCHAR},
+      </if>
+      <if test="articleImg != null" >
+        article_img = #{articleImg,jdbcType=VARCHAR},
+      </if>
+      <if test="articleFace != null" >
+        article_face = #{articleFace,jdbcType=VARCHAR},
+      </if>
+      <if test="articleContent != null" >
+        article_content = #{articleContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleTitle != null" >
+        article_title = #{articleTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Article" >
+    update article
+    set user_id = #{userId,jdbcType=INTEGER},
+      id_best = #{idBest,jdbcType=VARCHAR},
+      hot = #{hot,jdbcType=VARCHAR},
+      article_time = #{articleTime,jdbcType=DATE},
+      article_address = #{articleAddress,jdbcType=VARCHAR},
+      article_local = #{articleLocal,jdbcType=VARCHAR},
+      article_img = #{articleImg,jdbcType=VARCHAR},
+      article_face = #{articleFace,jdbcType=VARCHAR},
+      article_content = #{articleContent,jdbcType=VARCHAR},
+      article_title = #{articleTitle,jdbcType=VARCHAR}
+    where Article_id = #{articleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateHot" parameterType="java.lang.Integer" >
+    update article
+    set
+      hot = #{param2}
+    where Article_id = #{param1}
+  </update>
+
+</mapper>

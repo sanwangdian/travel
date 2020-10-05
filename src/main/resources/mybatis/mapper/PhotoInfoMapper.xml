@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.PhotoInfoMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.PhotoInfo" >
+    <id column="photo_content_id" property="photoContentId" jdbcType="INTEGER" />
+    <result column="photo_id" property="photoId" jdbcType="INTEGER" />
+    <result column="photo_content_url" property="photoContentUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    photo_content_id, photo_id, photo_content_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from photoinfo
+    where photo_content_id = #{photoContentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from photoinfo
+    where photo_content_id = #{photoContentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.PhotoInfo" >
+    insert into photoinfo (photo_content_id, photo_id, photo_content_url
+      )
+    values (#{photoContentId,jdbcType=INTEGER}, #{photoId,jdbcType=INTEGER}, #{photoContentUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.PhotoInfo" >
+    insert into photoinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="photoContentId != null" >
+        photo_content_id,
+      </if>
+      <if test="photoId != null" >
+        photo_id,
+      </if>
+      <if test="photoContentUrl != null" >
+        photo_content_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="photoContentId != null" >
+        #{photoContentId,jdbcType=INTEGER},
+      </if>
+      <if test="photoId != null" >
+        #{photoId,jdbcType=INTEGER},
+      </if>
+      <if test="photoContentUrl != null" >
+        #{photoContentUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.PhotoInfo" >
+    update photoinfo
+    <set >
+      <if test="photoId != null" >
+        photo_id = #{photoId,jdbcType=INTEGER},
+      </if>
+      <if test="photoContentUrl != null" >
+        photo_content_url = #{photoContentUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where photo_content_id = #{photoContentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.PhotoInfo" >
+    update photoinfo
+    set photo_id = #{photoId,jdbcType=INTEGER},
+      photo_content_url = #{photoContentUrl,jdbcType=VARCHAR}
+    where photo_content_id = #{photoContentId,jdbcType=INTEGER}
+  </update>
+</mapper>

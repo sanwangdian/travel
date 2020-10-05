@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.UserMapper">
+    <resultMap id="UsersResultMap" type="org.lanqiao.entity.Users">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_rickname" property="userRickname" jdbcType="VARCHAR"/>
+        <result column="user_passw" property="userPassw" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_sex" property="userSex" jdbcType="VARCHAR"/>
+        <result column="user_birthday" property="userBirthday" jdbcType="DATE"/>
+        <result column="user_address" property="userAddress" jdbcType="VARCHAR"/>
+        <result column="user_picaddress" property="userPicaddress" jdbcType="VARCHAR"/>
+        <result column="user_sign" property="userSign" jdbcType="VARCHAR"/>
+        <result column="user_img" property="userImg" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--    hcy-->
+    <select id="selectsi" resultMap="UsersResultMap" parameterType="java.lang.Integer">
+        select user_img ,user_sign,user_rickname,user_picaddress from users where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <!--获取用户手机和密码-->
+    <select id="selectByPhonePassw" resultMap="UsersResultMap">
+        select * from users where user_phone=#{userPhone,jdbcType=VARCHAR} and user_passw=#{userPassw,jdbcType=VARCHAR}
+    </select>
+
+    <!--注册用户-->
+    <insert id="insert" parameterType="org.lanqiao.entity.Users">
+       insert into users (user_passw,
+        user_phone,user_rickname)
+        values (#{userPassw,jdbcType=VARCHAR},
+        #{userPhone,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR})
+    </insert>
+    <!--检查手机-->
+    <select id="selectByUserPhone" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT COUNT(*) FROM users WHERE user_phone=#{userPhone}
+    </select>
+    <!--  得到用户信息-->
+    <select id="selectByPrimaryKey" resultMap="UsersResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from users
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+
+    <sql id="Base_Column_List">
+    user_id, user_rickname, user_passw, user_phone, user_name, user_sex, user_birthday, 
+    user_address, user_picaddress, user_sign, user_img
+  </sql>
+    <select id="selectUserNameByPK" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select user_rickname from users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insertSelective" parameterType="org.lanqiao.entity.Users">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userRickname != null">
+                user_rickname,
+            </if>
+            <if test="userPassw != null">
+                user_passw,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userSex != null">
+                user_sex,
+            </if>
+            <if test="userBirthday != null">
+                user_birthday,
+            </if>
+            <if test="userAddress != null">
+                user_address,
+            </if>
+            <if test="userPicaddress != null">
+                user_picaddress,
+            </if>
+            <if test="userSign != null">
+                user_sign,
+            </if>
+            <if test="userImg != null">
+                user_img,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="userRickname != null">
+                #{userRickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassw != null">
+                #{userPassw,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                #{userSex,jdbcType=VARCHAR},
+            </if>
+            <if test="userBirthday != null">
+                #{userBirthday,jdbcType=DATE},
+            </if>
+            <if test="userAddress != null">
+                #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userPicaddress != null">
+                #{userPicaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userSign != null">
+                #{userSign,jdbcType=VARCHAR},
+            </if>
+            <if test="userImg != null">
+                #{userImg,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--  更新用户资料-->
+    <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Users">
+    update users
+    set user_rickname = #{userRickname,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_sex = #{userSex,jdbcType=VARCHAR},
+      user_birthday = #{userBirthday,jdbcType=DATE},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_sign = #{userSign,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Users">
+        update users
+        <set>
+            <if test="userRickname != null">
+                user_rickname = #{userRickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userPassw != null">
+                user_passw = #{userPassw,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                user_phone = #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSex != null">
+                user_sex = #{userSex,jdbcType=VARCHAR},
+            </if>
+            <if test="userBirthday != null">
+                user_birthday = #{userBirthday,jdbcType=DATE},
+            </if>
+            <if test="userAddress != null">
+                user_address = #{userAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userPicaddress != null">
+                user_picaddress = #{userPicaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userSign != null">
+                user_sign = #{userSign,jdbcType=VARCHAR},
+            </if>
+            <if test="userImg != null">
+                user_img = #{userImg,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.VideoMapper" >
+  <resultMap id="VideoResultMap" type="org.lanqiao.entity.Video" >
+    <id column="video_id" property="videoId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="upload_time" property="uploadTime" jdbcType="DATE" />
+    <result column="is_only" property="isOnly" jdbcType="TINYINT" />
+    <result column="video_hot" property="videoHot" jdbcType="VARCHAR" />
+    <result column="video_title" property="videoTitle" jdbcType="VARCHAR" />
+    <result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+    <result column="video_sort" property="videoSort" jdbcType="INTEGER" />
+    <result column="destination" property="destination" jdbcType="VARCHAR" />
+    <result column="video_last" property="videoLast" jdbcType="VARCHAR" />
+    <result column="main_id" property="mainId" jdbcType="VARCHAR" />
+    <result column="discuss_id" property="discussId" jdbcType="INTEGER" />
+    <result column="video_detail" property="videoDetail" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <select id="getVideoItem" resultMap="VideoResultMap">
+    select * from video where video_sort = #{videoSort,jdbcType=INTEGER}
+  </select>
+
+  <select id="getAllVideo" resultMap="VideoResultMap">
+    select * from video order by upload_time desc
+  </select>
+
+  <select id="getAll" resultMap="VideoResultMap">
+    select * from video order by upload_time desc
+  </select>
+  <select id="getAllLast" resultMap="VideoResultMap">
+    select * from video order by upload_time desc
+  </select>
+  <select id="getVideo" resultMap="VideoResultMap">
+    select * from video where video_sort = #{videoSort,jdbcType=INTEGER} order by upload_time desc
+  </select>
+
+  <select id="getVideoDetail" resultMap="VideoResultMap">
+    select * from video where video_id = #{videoId,jdbcType=INTEGER} order by upload_time desc
+  </select>
+
+  <select id="getVideoSortItem" resultMap="VideoResultMap">
+    select * from video where video_sort = #{videoSort,jdbcType=INTEGER}
+  </select>
+
+  <select id="getVideoSum" resultMap="VideoResultMap" parameterType="java.lang.Integer">
+    select count(*) from video where video_sort = #{videoSort,jdbcType=INTEGER}
+  </select>
+
+
+
+
+  <sql id="Base_Column_List" >
+    video_id, user_id, upload_time, is_only, video_hot, video_title, video_url, video_sort, 
+    destination, video_last, main_id, discuss_id, video_detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="VideoResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from video
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.Video" >
+    insert into video (video_id, user_id, upload_time, 
+      is_only, video_hot, video_title, 
+      video_url, video_sort, destination, 
+      video_last, main_id, discuss_id, 
+      video_detail)
+    values (#{videoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{uploadTime,jdbcType=DATE}, 
+      #{isOnly,jdbcType=TINYINT}, #{videoHot,jdbcType=VARCHAR}, #{videoTitle,jdbcType=VARCHAR}, 
+      #{videoUrl,jdbcType=VARCHAR}, #{videoSort,jdbcType=INTEGER}, #{destination,jdbcType=VARCHAR}, 
+      #{videoLast,jdbcType=VARCHAR}, #{mainId,jdbcType=VARCHAR}, #{discussId,jdbcType=INTEGER}, 
+      #{videoDetail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Video" >
+    insert into video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="isOnly != null" >
+        is_only,
+      </if>
+      <if test="videoHot != null" >
+        video_hot,
+      </if>
+      <if test="videoTitle != null" >
+        video_title,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="videoSort != null" >
+        video_sort,
+      </if>
+      <if test="destination != null" >
+        destination,
+      </if>
+      <if test="videoLast != null" >
+        video_last,
+      </if>
+      <if test="mainId != null" >
+        main_id,
+      </if>
+      <if test="discussId != null" >
+        discuss_id,
+      </if>
+      <if test="videoDetail != null" >
+        video_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="videoId != null" >
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=DATE},
+      </if>
+      <if test="isOnly != null" >
+        #{isOnly,jdbcType=TINYINT},
+      </if>
+      <if test="videoHot != null" >
+        #{videoHot,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTitle != null" >
+        #{videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSort != null" >
+        #{videoSort,jdbcType=INTEGER},
+      </if>
+      <if test="destination != null" >
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLast != null" >
+        #{videoLast,jdbcType=VARCHAR},
+      </if>
+      <if test="mainId != null" >
+        #{mainId,jdbcType=VARCHAR},
+      </if>
+      <if test="discussId != null" >
+        #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="videoDetail != null" >
+        #{videoDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Video" >
+    update video
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=DATE},
+      </if>
+      <if test="isOnly != null" >
+        is_only = #{isOnly,jdbcType=TINYINT},
+      </if>
+      <if test="videoHot != null" >
+        video_hot = #{videoHot,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTitle != null" >
+        video_title = #{videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoSort != null" >
+        video_sort = #{videoSort,jdbcType=INTEGER},
+      </if>
+      <if test="destination != null" >
+        destination = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLast != null" >
+        video_last = #{videoLast,jdbcType=VARCHAR},
+      </if>
+      <if test="mainId != null" >
+        main_id = #{mainId,jdbcType=VARCHAR},
+      </if>
+      <if test="discussId != null" >
+        discuss_id = #{discussId,jdbcType=INTEGER},
+      </if>
+      <if test="videoDetail != null" >
+        video_detail = #{videoDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Video" >
+    update video
+    set user_id = #{userId,jdbcType=INTEGER},
+      upload_time = #{uploadTime,jdbcType=DATE},
+      is_only = #{isOnly,jdbcType=TINYINT},
+      video_hot = #{videoHot,jdbcType=VARCHAR},
+      video_title = #{videoTitle,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      video_sort = #{videoSort,jdbcType=INTEGER},
+      destination = #{destination,jdbcType=VARCHAR},
+      video_last = #{videoLast,jdbcType=VARCHAR},
+      main_id = #{mainId,jdbcType=VARCHAR},
+      discuss_id = #{discussId,jdbcType=INTEGER},
+      video_detail = #{videoDetail,jdbcType=VARCHAR}
+    where video_id = #{videoId,jdbcType=INTEGER}
+  </update>
+</mapper>

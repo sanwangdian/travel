@@ -1,0 +1,276 @@
+a{
+    text-decoration: none;
+}
+div{
+    display:block;
+}
+body{
+    margin: 0;
+    background-color: #eaeaea;
+}
+
+.top_nav{
+    height: 55px;
+    background-color: #222222;
+    width: 100%;
+
+}
+.nav_content{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.top_sort li a{
+    float: left;
+    padding: 0 10px;
+    height: 55px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin: 18px 15px 0;
+}
+
+#logo{
+    height: 46px;
+    width: 160px;
+    float: left;
+    /*margin-top: 7px;*/
+
+}
+#logo img{
+
+    height: 100%;
+    width: 100%;
+}
+.fiter{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.content{
+    width: 1000px;
+    padding-top: 100px;
+    margin: auto;
+}
+.up_action{
+    margin-bottom: 20px;
+    height: 30px;
+}
+.up_action .up_btu{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #cccccc;
+    border-radius:16px ;
+    font-size: 15px;
+    float: left;
+    cursor: pointer;
+}
+.up_action .up_btu img{
+    height: 18px;
+    width: 18px;
+    padding-bottom: 2px;
+}
+.up_action .write_btu{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: orange;
+    border-radius:16px ;
+    font-size: 15px;
+    float: right;
+    color: white;
+    cursor: pointer;
+}
+
+.write_info{
+    width: 1000px;
+    border: 3px dashed #e6e6e6;
+    padding: 29px 0 10px 26px;
+    height: 770px;
+}
+
+.write_info .article{
+    width: 600px;
+    float: left;
+
+}
+
+.work{
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+.work span{
+    display: block;
+    float: left;
+}
+.work .border{
+    margin-left: 100px;
+    width: 336px;
+
+}
+.title input{
+    width: 330px;
+    height: 25px;
+    padding: 2px 6px;
+    font-size: 13px;
+}
+
+.detail textarea{
+    width: 330px;
+    padding: 2px 6px;
+    font-size: 13px;
+
+}
+
+.theme{
+    border: 1px dashed #999999;
+    height: 100px;
+    width: 336px;
+}
+.sort{
+    display:block;
+    list-style: none;
+    margin: 0;
+    padding: 22px 12px;
+}
+
+.sort li span{
+    height: 25px;
+    width: 45px;
+    text-align: center;
+    border:1px solid gray;
+    border-radius: 5px;
+    display: block;
+    padding: 0px 6px 0px 6px;
+    margin: 4px 6px 4px 0px;
+   cursor: pointer;
+    float: left;
+
+}
+
+.sort_change{
+    background-color: rgb(199, 218, 118);
+    color: black;
+}
+
+.copyright{
+    width: 356px;
+}
+.copyright select{
+    width: 350px;
+    font-size: 13px;
+    padding: 2px 6px;
+}
+.aside{
+    width: 360px;
+    float: left;
+}
+
+.place{
+    border: 1px dashed #999999;
+
+    width: 336px;
+    clear: both;
+}
+#searchBox{
+    border: 1px solid gray;
+    /*height:30px;*/
+    width: 300px;
+    margin: 10px auto;
+    border-radius: 4px;
+}
+.up_tag{
+    display: block;
+}
+.up_tag span{
+    height: 25px;
+
+    text-align: center;
+    border:1px solid gray;
+    border-radius: 5px;
+    display: block;
+    padding: 0px 1px 0px 1px;
+    margin: 1px;
+    float: left;
+}
+.select_text{
+    background: none;
+    border: none;
+    width: 80px;
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    outline: none;
+    height: 20px;
+    margin: 3px;
+}
+.tags{
+    background-color: #dddddd;
+    width: 320px;
+    height: 550px;
+    margin: 5px  auto;
+}
+.tags span{
+    clear: both;
+    margin-left: 3px;
+}
+.tags .tag-ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 300px;
+}
+.tag-ul li{
+    height: 14px;
+    font-size: 14px;
+    line-height: 15px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 2px;
+    color: #333;
+    float: left;
+    margin: 5px 0 5px 5px;
+}
+.tag-ul li:hover{
+    background-color: #101010;;
+    color: #dddddd;
+}
+.tag-ul .tag-btn{
+
+}
+
+.mod span{
+    display: block;
+    font-size: 14px;
+    margin: 3px 0;
+
+}
+.write_btu1{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #cccccc;
+    border-radius:16px ;
+    font-size: 15px;
+    float: left;
+    cursor: pointer;
+    display: none;
+}
+.write_btu2{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #cccccc;
+    border-radius:16px ;
+    font-size: 15px;
+    float: left;
+    cursor: pointer;
+    display: none;
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作品内容上传界面</title>
+    <link href="css_g/up_work_picture.css" rel="stylesheet">
+    <link rel="stylesheet" href="css_g/b_floor.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min2.js"></script>
+    <script>
+        $(function () {
+            var thisWorkId = window.sessionStorage.getItem("CreaateId");
+
+            if(thisWorkId!=null){
+                $.ajax({
+                    url:"/selectByworkId",
+                    data:{
+                        "workId":thisWorkId,
+                    },
+                    dataType:"json",
+                    type:"post",
+                    success:function (data) {
+                        var flag = 0;
+                        for (var i = 0;i<data.length;i++){
+                            vm.imgs.push({
+                                url:data[i].picUrl,
+                                is:data[i].isCover,
+                            });
+                        }
+                        vm.imgs.splice(0,1);
+                    }
+
+                })
+            }
+            var vm = new Vue({
+                el:".up_picture_img",
+                data:{
+                    imgs:[{
+
+
+                    }],
+                },
+                methods:{
+                    deleteThis:function (i) {
+                        this.imgs.splice(i,1)
+                    },
+                    cover:function (i) {
+
+                        $(".ac_cover").removeClass("thisCover");
+                        $(".ac_cover").eq(i).addClass("thisCover");
+                        for(var j = 0;j<this.imgs.length;j++){
+                            vm.imgs[j].is="n";
+                        }
+                        vm.imgs[i].is="y";
+                    }
+                }
+            });
+
+            // for(var i = 0;i<vm.imgs.length;i++){
+            //     if (vm.imgs[i].is=="y"){
+            //         vm.cover(i);
+            //     }
+            // }
+
+            var up_file = document.getElementById("up_file");
+            up_file.addEventListener("change",function(){
+                for(var i = 0;i<vm.imgs.length;i++){
+                    if (vm.imgs[i].is=="y"){
+                        vm.cover(i);
+                    }
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(up_file.files[0]);//发起异步请求
+                reader.onload = function(){
+                    //读取完成后，数据保存在对象的result属性中
+                    var url = this.result;
+                    // $(".upload_box").prev().find(".up_img_show").prop("src",url).show();
+                    // $(".upload_box").prev(".imgBox").show();
+                    // $(".upload_box").prev().find(".up_city").attr(display,"block");
+
+                    // $(".upload_box").prev().prop("display","block");
+                    $('input[type="file"]').val(null);
+                    vm.imgs.push({
+                        url:url,
+                        is:"n",
+                    });
+
+                    // var pic_clone = $(".upload_box").prev(".imgBox").clone().hide();
+                    // $(".upload_box").before(pic_clone);
+                 };
+                reader.close;
+                // $(".ac_delete").click(function () {
+                //     $(this).parent().remove();
+                // });
+                // $(".ac_cover").click(function () {
+                //     $(".ac_cover").removeClass("thisCover");
+                //     $(this).addClass("thisCover");
+                // });
+            });
+            $("#keep").click(function () {
+                var flag = false;
+                console.log($(".up_img_show"));
+                for (var i = 0;i<$(".up_img_show").length;i++){
+                    if(($(".up_img_show").eq(i).next().next().css("display")=="block")?true:false)
+                    {
+                        flag = true;
+                    }
+                }
+                if(flag){
+                    $.ajax({
+                        url:"/deteletInfo",
+                        dataType:"json",
+                        type:"post",
+                        async:true,
+                        data:{
+                            "workId":thisWorkId,
+                        }
+
+                    });
+                    for (var i = 0;i<$(".up_img_show").length;i++){
+                        $.ajax({
+                            url:"/changeUrl",
+                            dataType:"json",
+                            type:"post",
+                            async:true,
+                            data:{
+                                "workId":thisWorkId,
+                                "picUrl":$(".up_img_show").eq(i).attr("src"),
+                                "isCover":($(".up_img_show").eq(i).next().next().css("display")=="block")?"y":"n",
+                            },
+                            success:function (data) {
+                                alert(data);
+                            }
+                        })
+
+                    }
+                    alert("保存成功");
+                }else{
+                    alert("未设置封面请设置");
+                }
+            });
+
+            $(".up_btu").click(function () {
+                window.location.href="/up_photos.html";
+            })
+        })
+    </script>
+</head>
+<body>
+<div class="top_nav">
+    <div class="nav_content">
+        <div id="logo">
+            <img src="images/logo.png">
+        </div>
+        <ul class="fiter top_sort">
+            <li>
+                <a href="">首页</a>
+            </li>
+            <li>
+                <a href="">旅游网</a>
+            </li>
+            <li>
+                <a href="">摄影作品</a>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+<div class="content">
+    <div class="up_action">
+        <div class="write_btu">
+            上传摄影作品
+        </div>
+
+        <div class="up_btu">
+            <img src="images\pencil.png">
+            编辑作品信息
+        </div>
+    </div>
+    <form action="" style="float: left">
+        <div class="up_picture_img">
+            <div class="up_img_box">
+                <div class="imgBox" style="float: left;height: 110px;" v-for="(i,img) in imgs">
+                    <img :src="img.url" class="up_img_show">
+                    <span class="ac_delete" @click="deleteThis(i)">删</span>
+                    <span class="ac_cover" @click="cover(i)">封</span>
+                    <input type="text" name="city" placeholder="写入拍摄城市或国家" class="up_city">
+                </div>
+
+                <label class="upload_box">
+                    <input type="file" name="upload" hidden="hidden" id="up_file">
+                    <span >上传图片</span>
+                </label>
+
+            </div>
+
+        </div>
+    </form>
+    <div id="keep">保存修改</div>
+    <div id="browse">去浏览作品</div>
+</div>
+<div class="tip_text">
+
+        <p>
+        > 小小贴示<br>
+        - 照片数量建议在1-5张，以便获得最佳的浏览体验<br>
+        - 照片数量太多，降低体验<br>
+        - 参赛作品照片单张为佳<br>
+        - 每张照片建议20M以内<br>
+        - 拖动照片可进行排序<br>
+            <br>
+        - [ 封 ]，可设置任一照片为封面，设置为封面的照片不允许删除<br>
+        - 第一次上传图片，默认封面为第一张照片<br>
+        - [ 删 ]，删除自己不喜欢的照片，操作后记得保存修改<br>
+        </p>
+
+
+
+
+</div>
+<div class="b_floor">
+    <div class="l_wrapper">
+        <div class="m_unit_b2">
+            <div class="footerInfo">
+                <ul class="weima">
+                    <li>
+                        <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>
+                    </li>
+                    <li>
+                        <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>
+                    </li>
+                </ul>
+                <p>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                </p>
+                <p>
+                    <span>浙ICP备 09011712 号-1</span>
+                    <span>浙公网安备 33010602002105号</span>
+                    <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>
+                    <span>浙江神游网国际旅行社有限公司</span>
+                    <span>杭州途游电子商务有限公司</span>
+                    <span>许可证编号：L-ZJ-CJ00161</span>
+                </p>
+                <p>© 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
+                <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+            </div>
+            <div class="friendLines">
+                <div class="footerImages clearfix foot-ext">
+                    <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>
+                    <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>
+                    <a href="javascript:;" rel="nofollow"  title="12321垃圾信息举报中心" class="footer-ext-s4"></a>
+                    <a href="javascript:;" rel="nofollow">
+                        <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png" alt="支付宝">
+                    </a>
+                    <a href="javascript:;" rel="nofollow"  title="网络110报警服务" class="footer-ext-s5"></a>
+                    <a href="javascript:;" rel="nofollow"  title="网上标识信息" class="footer-ext-s6"></a>
+                    <a href="javascript:;" rel="nofollow"  title="全球中文论坛100强" class="footer-ext-s7"></a>
+                    <a target="cyxyv" href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">
+                        <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <a href="javascript:" name="floor">&nbsp;</a>
+    </div>
+</div>
+</body>
+</html>

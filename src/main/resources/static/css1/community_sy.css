@@ -1,0 +1,324 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #f2f2f2;
+}
+
+/*--------------------背景图片-------------------------*/
+.user_top {
+    width: 100%;
+    height: 408px;
+    background: #fff;
+}
+/*图*/
+.user_top .cover_image {
+    width: 100%;
+    height: 356px;
+    background-color: #f5e2c4;
+    background-size: auto 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+.user_top .cover_image .auto_x {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+}
+.user_top .cover_image .up_image {
+    width: 122px;
+    height: 31px;
+    background: rgba(0,0,0,.5);
+    position: absolute;
+    right: 0;
+    bottom: 18px;
+    border-radius: 3px;
+    text-align: center;
+    color: #ff9a00;
+    line-height: 31px;
+    cursor: pointer;
+}
+.user_top .cover_image .up_image i {
+    background-image: url("../images/xiazai3.png");
+    height: 17px;
+    width: 18px;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 8px;
+}
+/*小导航*/
+.user_top .user_nav {
+    width: 1000px;
+    margin: 0 auto;
+    height: 52px;
+    line-height: 52px;
+}
+.user_top .user_nav ul {
+    width: 800px;
+    margin-left: 279px;
+}
+.user_top .user_nav ul li {
+    float: left;
+    margin-left: 15px;
+    margin-right: 32px;
+    font-size: 16px;
+}
+.user_top .user_nav ul li a {
+    color: #333;
+}
+#user_nav li:hover a{
+    color: #ff9a00;
+}
+
+
+/*----------具体内容-------------------------------------------------*/
+
+/*-----------左------------------*/
+.user_left {
+    width: 258px;
+    float: left;
+    margin-top: 2px;
+    margin-left: 258px;
+    POSITION: relative;
+}
+
+/*头像*/
+.user_left .user_tx {
+    width: 142px;
+    height: 142px;
+    position: absolute;
+    left: 50%;
+    top: -152px;
+    margin-left: -76px;
+    z-index: 1;
+}
+.user_left .user_tx img {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+}
+.user_left .user_tx .change_tx {
+    display: block;
+    background: rgba(0,0,0,.3);
+    position: relative;
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    opacity: 0;
+    -webkit-transition: .3s ease-in-out 0s;
+    -moz-transition: .3s ease-in-out 0s;
+    -o-transition: .3s ease-in-out 0s;
+    transition: .3s ease-in-out 0s;
+    z-index: 1;
+}
+.user_left .user_tx .change_tx .icon_camr {
+    background-image: url("../images/xiazai4.png");
+    height: 29px;
+    width: 35px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -17px;
+    margin-top: -15px;
+}
+/*个性签名*/
+.user_other_info {
+    background: #fff;
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom: 27px;
+}
+.user_other_info h3 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+/*tu*/
+.user_other_info h3 i.icon_sex_man {
+   background-image: url("../images/xaizai5.png");
+    height: 20px;
+    width: 20px;
+}
+/*tu*/
+
+.user_other_info .user_tag {
+    margin-bottom: 6px;
+}
+.user_other_info .item_lv {
+    font-size: 14px;
+    width: 185px;
+    margin: 18px auto 0;
+    text-align: left;
+}
+.user_other_info .item_lv {
+    font-size: 14px;
+    width: 185px;
+    margin: 18px auto 0;
+    text-align: left;
+}
+.user_other_info .lv_vip1 i {
+   background-image: url("../images/xiazai6.png");
+    height: 12px;
+    width: 11px;
+    background-size: 100% auto;
+     display: inline-block;
+     margin-right: 5px;
+     vertical-align: -1px;
+ }
+.user_other_info .user_jj {
+    width: 200px;
+    margin: 0 auto;
+    padding: 20px 5px;
+    position: relative;
+    text-align: left;
+}
+
+/*粉丝*/
+.gz_fans {
+    background: #fff;
+    height: 73px;
+    margin-top: 15px;
+    padding: 14px 0;
+}
+.gz_fans li {
+    width: 128px;
+    float: left;
+    text-align: center;
+}
+.gz_fans li span.numb {
+    color: #333;
+    font-size: 18px;
+}
+.gz_fans li span.xx {
+    color: #666;
+    font-size: 14px;
+}
+.gz_fans li a, .gz_fans li span {
+    display: block;
+}
+
+/*谁看过我*/
+.who_look {
+    padding: 16px 7px;
+    background: #fff;
+    margin-top: 15px;
+    height: 270px;
+}
+.who_look h3 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+    padding-left: 8px;
+}
+.who_look p {
+    text-align: center;
+    margin-top: 21px;
+    font-size: 12px;
+}
+.who_look ul {
+    padding: 21px 0 10px;
+}
+.who_look ul li {
+    width: 60px;
+    height: 90px;
+    overflow: hidden;
+    float: left;
+    margin: 0 10px 15px;
+}
+.who_look ul li img {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.who_look ul li span {
+    display: block;
+    margin-top: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+}
+/*右边*/
+.user_right {
+    width: 722px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.user_zp {
+    background: #fff;
+    padding: 17px 15px;
+    min-height: 500px;
+    position: relative;
+}
+.zp_tit_top .btn_link {
+    float: right;
+}
+.zp_tit_top .btn_link .updata_zp {
+    display: inline-block;
+    width: 94px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background: #ff9a00;
+    color: #fff;
+    border-radius: 3px;
+}
+.user_zp h3.tit {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 6px;
+    padding-top: 8px;
+}
+.user_zp h3.tit em {
+    color: #ff9a00;
+    font-style: normal;
+    padding: 0 5px;
+}
+.none_data {
+    width: 624px;
+    height: 311px;
+    margin: 0 auto;
+    text-align: center;
+}
+.user_article .item_article .artic_tit span.ziNumb {
+    width: 595px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #333;
+    font-size: 18px;
+    display: inline-block;
+    vertical-align: -5px;
+}
+.user_article .item_article .artic_tit {
+    margin: 16px 0 20px;
+}
+
+
+.article_info {
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+.user_article .item_article .pic {
+    width: 692px;
+    height: 389px;
+    overflow: hidden;
+    position: relative;
+}
+.article_info span {
+    padding-right: 30px;
+    width: 30px;
+    height: 30px;
+
+}

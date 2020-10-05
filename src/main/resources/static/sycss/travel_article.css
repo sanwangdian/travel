@@ -1,0 +1,775 @@
+/*全局设置*/
+*{margin: 0px;padding: 0px;}
+body{font-family: "Microsoft YaHei UI";font-size: 14px;line-height: 1.6;color: #636b6f;}
+ul,li,a{text-decoration: none;list-style: none;background-color: transparent;}
+/*主体头图*/
+.l_set_pic {
+    background-image: url("../images/ttBg.jpg");
+    height: 635px;
+    width: 100%;
+    background-size: 100% auto;
+    background-size: 100% 100%!important;
+    position: relative;
+}
+.l_set_pic dl {
+    width: 750px;
+    height: auto;
+    padding: 260px 0 0 164px;
+    margin: 0 auto;
+    color: #fff;
+}
+.l_set_pic dl dt {
+    background: url("../images/下载 (4).png") no-repeat;
+    height: 65px;
+    width: 65px;
+    background-size: 100% auto;
+    float: left;
+    cursor: pointer;
+    font-weight: 700;
+}
+.l_set_pic dl dd {
+    padding-left: 81px;
+}
+.l_set_pic dl dd h2 {
+    font-size: 22px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+.m_set_title {
+    width: 1160px;
+    position: absolute;
+    left: 50%;
+    bottom: 63px;
+    padding: 15px 20px;
+    line-height: 50px;
+    background: #fff;
+    z-index: 7;
+    margin-left: -600px;
+    box-shadow: inset 0 2px 2px #f0f0f0;
+    transition: .2s linear 0s;
+}
+.m_set_title input {
+    width: 1000px;
+    height: 22px;
+    line-height: 22px;
+    text-align: left;
+    font-size: 18px;
+    border: 0;
+    color: #666;
+    float: left;
+    outline: none;
+}
+.m_set_title span {
+    float: right;
+    color: #999;
+    line-height: 20px;
+    font-size: 12px;
+}
+.m_set_title span strong {
+    color: #ff2424;
+    font-weight: 700;
+}
+.m_set_title .st_pop {
+    position: absolute;
+    left: 0;
+    top: 53px;
+    width: 1200px;
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    max-height: 128px;
+    box-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+/*主体文章左部*/
+.l_set_article {
+    min-height: 500px;
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+.b_content_list {
+    min-height: 500px;
+    margin-top: 40px;
+}
+.m_view_main {
+    background: white;
+    width: 880px;
+    float: left;
+    min-height: 500px;
+
+}
+.m_view_sider {
+    position: relative;
+    width: 280px;
+    float: right;
+}
+.hoverBtn {
+    border: 1px dashed #fff;
+    position: relative;
+    height: 40px;
+    opacity: 0;
+}
+.hoverBtn:hover {
+    border: 1px dashed #ff7200;
+    position: relative;
+    height: 40px;
+    opacity: 1;
+}
+.hoverBtn .btnList {
+    width: 100%;
+    opacity: 100;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+}
+.hoverBtn .btnList li {
+    display: inline-block;
+    margin: 0 16px;
+    color: #666666;
+    cursor: pointer;
+}
+.hoverBtn .btnList li:hover{
+    color: #ff7200;
+}
+.hoverBtn .btnList li i{
+    height: 18px;
+    width: 19px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+.hoverBtn .btnList li i.icon_picH {
+    background: url("../images/下载 (5).png") no-repeat;
+}
+.hoverBtn .btnList li i.icon_picH:hover{
+    background: url("../images/下载 (8).png") no-repeat;
+}
+.hoverBtn .btnList li i.icon_titleH {
+    vertical-align: -5px;
+    background: url("../images/下载 (6).png") no-repeat;
+}
+.hoverBtn .btnList li i.icon_titleH:hover{
+    background: url("../images/下载 (9).png") no-repeat;
+}
+.hoverBtn .btnList li i.icon_videoH {
+    vertical-align: -6px;
+    background: url("../images/下载 (7).png") no-repeat;
+}
+.hoverBtn .btnList li i.icon_videoH:hover{
+    background: url("../images/下载 (10).png") no-repeat;
+}
+.hoverBtn .btnList li i.icon_wordH {
+    background: url("../images/下载 (16).png") no-repeat;
+    height: 16px;
+    width: 18px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+.m_view_main .m_unit_word {
+    width: 880px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    position: relative;
+}
+/*输入文本model*/
+.layui-textarea {
+    min-height: 150px;
+    display: block;
+    line-height: 32px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+    color: #5a5e66;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    resize: none;
+    outline: none;
+    overflow-y: hidden;
+    border-color: white;
+    margin: 0px 0px 20px;
+}
+.layui-textarea:focus{
+    box-shadow: 0px 0px 5px 1px #ff7200;
+}
+/*主题文章右部*/
+.m_edit_object {
+    position: relative;
+    width: 187px;
+}
+.m_edit_object li {
+    line-height: 45px;
+    border-top: none;
+    height: 45px;
+}
+.m_edit_object li.s_unit_pic {
+    position: relative;
+}
+.m_edit_object li a {
+    display: inline-block;
+    line-height: 28px;
+    font-size: 16px;
+    color: #666;
+    transform: perspective(1px) translateZ(0);
+}
+[role=button] {
+    cursor: pointer;
+}
+.m_edit_object ul li a:hover{
+    text-decoration: none;
+    color: #ff7200;
+}
+.m_edit_object li.s_unit_pic .tip {
+    position: absolute;
+    left: 100px;
+    font-size: 12px;
+    color: #666;
+    width: 160px;
+    height: 22px;
+    line-height: 22px;
+    background: #f4f4f4;
+    text-align: center;
+    top: 10px;
+    display: none;
+}
+i.icon_pic, i.icon_pic:after, i.icon_title, i.icon_title:after {
+    width: 19px;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+i.icon_pic, i.icon_pic:after, i.icon_title, i.icon_title:after {
+    width: 19px;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+i.icon_pic, i.icon_pic:after {
+    background: url("../images/下载 (8).png") no-repeat;
+    height: 18px;
+    background-size: 100% auto;
+}
+i.icon_pic, i.icon_pic:after, i.icon_title, i.icon_title:after {
+    width: 19px;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+i.icon_title, i.icon_title:after {
+    background: url("../images/下载 (9).png") no-repeat;
+    height: 15px;
+    background-size: 100% auto;
+}
+i.icon_video, i.icon_video:after {
+    background: url("../images/下载 (10).png") no-repeat;
+    height: 15px;
+    width: 21px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+i.icon_music, i.icon_music:after {
+    background: url("../images/下载 (11).png") no-repeat;
+    vertical-align: -7px;
+    height: 22px;
+    width: 20px;
+    background-size: 100% auto;
+    display: inline-block;
+    margin-right: 11px;
+}
+i.icon_quanzi, i.icon_quanzi:after {
+    background: url("../images/下载 (12).png") no-repeat;
+    height: 21px;
+    width: 21px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 11px;
+}
+.s_unit_quanzi i.new {
+    background: url("../images/下载 (13).png") no-repeat;
+    height: 10px;
+    width: 23px;
+    background-size: 100% auto;
+    display: inline-block;
+    vertical-align: 1px;
+    margin-left: 6px;
+}
+.s_unit_save {
+    margin-top: 20px;
+}
+.s_unit_save .s_save_btn {
+    padding-right: 30px;
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: underline!important;
+    color: #ff9a00;
+}
+.draftTipsbtn {
+    background: #ff9a00;
+    height: 35px;
+    line-height: 35px;
+    color: #fff;
+    text-align: center;
+    border-radius: 18px;
+    width: 100px;
+    margin-top: 40px;
+}
+.draftTipsbtn a {
+    color: #ffffff;
+}
+.draftTipsbtn:hover{
+    background: #ff6e6e;
+}
+.draftTipsbtn a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+.draftTipsbtn a:focus{
+    color: #ffffff;
+    text-decoration: none;
+}
+.m_view_sider h3 {
+    font-size: 18px;
+    color: #666666;
+    margin-top: 45px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+}
+/*目录*/
+.wrapper {
+    margin-top: 15px;
+    min-height: 20px;
+    overflow-y: hidden;
+    outline: none;
+}
+.mune li {
+    height: 26px;
+    line-height: 26px;
+    margin-bottom: 10px;
+    padding-left: 35px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.mune li .s_catalog_num {
+    color: #cccccc;
+    height: 26px;
+    float: left;
+    margin-left: -35px;
+}
+.mune li .s_text {
+    height: 26px;
+    line-height: 26px;
+    color: #999999;
+    word-break: break-all;
+}
+/*发布*/
+.b_unit_save {
+    width: 880px;
+    margin: 100px 0 30px;
+    position: relative;
+    left: 700px;
+    bottom: -10px;
+}
+.b_unit_save .m_btn_publish {
+    width: 168px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    background: #ff9a00;
+    display: inline-block;
+    color: #fff;
+}
+/*模态框*/
+/*照片*/
+.modal-content{
+    width: 1200px;
+    height: 650px;
+    position: absolute;
+    left: -300px;
+}
+.modal-footer{
+    position: absolute;
+    bottom: 10px;
+    left: 550px;
+}
+.selectAll{
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: auto;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    min-width: 49px!important;
+    padding: 0 5px;
+    border: 1px solid #ff9a00;
+    border-radius: 3px;
+    color: #ff9a00;
+}
+.selectAll:hover{
+    color: #ff9a00;
+    text-decoration: none;
+}
+.selectAll:focus{
+    color: #ff9a00;
+    text-decoration: none;
+}
+.images_px {
+    margin-right: -20px;
+    margin-top: 30px;
+}
+.images_px li.add_pic_muti {
+    border: 1px dashed #ff9a00;
+    background: url("../images/下载 (14).png") no-repeat center;
+    width: 150px!important;
+    height: 110px!important;
+    background-size: auto!important;
+    cursor: pointer;
+    vertical-align: center;
+}
+/*目录*/
+.modal-content1{
+    width: 716px;
+    height: 456px;
+    position: absolute;
+    top:100px;
+    left:-100px;
+}
+#myModal1 dl{
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+    min-height: 20px;
+    margin-top: 5px;
+    color: #666666;
+}
+#myModal1 dl dt{
+    width: 75px;
+    float: left;
+    font-weight: 400;
+    line-height: 41px;
+    padding-left: 3px;
+}
+#myModal1 dl dd{
+    width: 575px;
+    float: right;
+}
+#myModal1 dl dd input{
+    width: 100%;
+    height: 41px;
+    line-height: 41px;
+    text-align: left;
+    border: 1px solid #d2d2d2;
+    padding: 0 10px;
+    transition: .2s linear 0s;
+}
+#myModal1 dl dd p {
+    color: #999999;
+    margin-top: 5px;
+}
+#myModal1 dl dd p span{
+    font-size: 12px;
+    padding-left: 10px;
+}
+#myModal1 dl dd p span em{
+    font-style: normal;
+    color: red;
+}
+#myModal1 dl dd ul{
+    margin-right: -10px;
+}
+#myModal1 dl dd ul li{
+    width: 183px;
+    height: 69px;
+    text-align: center;
+    border: 1px solid #d2d2d2;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.pagination{
+    position: relative;
+    left:600px;
+    top:-35px;
+}
+#myModal1 .modal-footer{
+    position: absolute;
+    bottom: 10px;
+    left: 300px;
+}
+/*视频+音乐*/
+ .active1{
+    display: inline-block;
+    width: 120px;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #ff7200;
+}
+ .active1 .icon_up{
+    width: 24px;
+    display: inline-block;
+    vertical-align: -5px;
+    margin-right: 11px;
+    background: url("../images/下载 (15).png") -33px 0 ;
+    height: 25px;
+}
+#myModal2 .modal-header{
+    border: none;
+}
+#myModal3 .modal-header{
+    border: none;
+}
+.modal-content2{
+    width: 716px;
+    height: 406px;
+    position: absolute;
+    top:120px;
+    left:-50px;
+}
+.s_upload{
+    padding: 125px 35px 45px;
+    text-align: center;
+}
+.s_upload .btn_big {
+    border: 1px solid #ff9a00;
+    color: #ff9a00;
+    width: 355px;
+    height: 68px;
+    line-height: 68px;
+    text-align: center;
+    font-size: 20px;
+    display: inline-block;
+    border-radius: 35px;
+}
+.s_upload .btn_big:hover{
+    text-decoration: none;
+}
+.s_upload p {
+    margin-top: 25px;
+    color: #666;
+}
+/*元素样式添加*/
+/*目录样式*/
+.m_unit_section {
+    margin: 10px 0;
+}
+.m_unit_section .paragraphBg.title10 {
+    background: url("../images/下载 (17).png") no-repeat;
+    height: 76px;
+    width: 773px;
+    background-size: 100% auto;
+    display: block;
+    font-weight: 500;
+    background-position: bottom!important;
+    line-height: 76px;
+    padding-top: 10px;
+    text-align: center;
+}
+.m_unit_section .paragraphBg.title10 span{
+    font-size: 18px;
+    text-align: center;
+    line-height: 76px;
+    font-weight: 500;
+    font-family: inherit;
+    color: #636b6f;
+}
+.s_edit_again {
+    background: url("../images/下载 (18).png") no-repeat;
+    height: 18px;
+    width: 19px;
+    display: inline-block;
+    background-size: auto;
+    cursor: pointer;
+    vertical-align: -2px;
+    margin-left: 10px;
+    transition: background .3s ease-in-out 0s;
+}
+.s_delete_again {
+    background: url("../images/下载 (19).png") no-repeat;
+    height: 16px;
+    width: 15px;
+    display: inline-block;
+    background-size: auto;
+    cursor: pointer;
+    vertical-align: -2px;
+    margin-left: 15px;
+    transition: background .3s ease-in-out 0s;
+}
+/*照片样式*/
+.m_unit_photo {
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+.images_px{
+    float: left;
+}
+.images_px li{
+    margin-right: 20px;
+    float: left;
+    margin-bottom: 20px;
+
+}
+.modal-body{
+    overflow: hidden;
+}
+.m_unit_photo .images {
+    width: auto;
+    background: #f5e2c4;
+    position: relative;
+}
+.s_edit_set {
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,.7);
+    color: #fff;
+    padding: 0 18px;
+    z-index: 5;
+    display: none;
+}
+.m_unit_photo img {
+    max-width: 100%;
+    vertical-align: middle;
+}
+.m_unit_photo .pic_tag {
+    margin: 8px 0 0;
+    line-height: 24px;
+    display: inline-block;
+}
+.m_unit_photo .pic_tag .mdd, .m_unit_photo .pic_tag em {
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.m_unit_photo .pic_tag .mdd{
+    background: url("../images/下载 (20).png") no-repeat;
+    width: 22px;
+    background-size: 100% auto;
+}
+
+.m_unit_photo .pic_tag .adr {
+    padding-left: 10px;
+    color: #ff7200;
+}
+.s_edit_again {
+    background: url("../images/下载 (18).png") no-repeat;
+    height: 18px;
+    width: 19px;
+    display: inline-block;
+    background-size: auto;
+    cursor: pointer;
+    vertical-align: -2px;
+    margin-left: 10px;
+    transition: background .3s ease-in-out 0s;
+}
+.s_delete_again {
+    background: url("../images/下载 (19).png") no-repeat;
+    height: 16px;
+    width: 15px;
+    display: inline-block;
+    background-size: auto;
+    cursor: pointer;
+    vertical-align: -2px;
+    margin-left: 15px;
+    transition: background .3s ease-in-out 0s;
+}
+.s_edit_set .s_delete_pic {
+    float: right;
+}
+.s_delete_pic:hover{
+    color: #ff7200;
+}
+.s_set_first:hover{
+    color: #ff7200;
+}
+.s_edit_set span {
+    cursor: pointer;
+}
+.s_edit_set .s_delete_pic i {
+    background: url("../images/下载 (21).png") no-repeat;
+    height: 16px;
+    width: 15px;
+    display: inline-block;
+    vertical-align: -2px;
+    background-size: auto;
+    margin-right: 8px;
+    transition: background .3s ease-in-out 0s;
+}
+.s_set_first {
+    font-size: 12px;
+}
+.s_edit_set .s_set_first i {
+    background: url("../images/下载 (22).png") no-repeat;
+    height: 16px;
+    width: 15px;
+    display: inline-block;
+    vertical-align: -2px;
+    background-size: auto;
+    margin-right: 8px;
+    transition: background .3s ease-in-out 0s;
+}
+/*照片缩略图*/
+.edit_top_pic {
+    position: relative;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+}
+.images_px li img {
+    width: 100%;
+    height:100%;
+    vertical-align: center;
+}
+.images_px li .edit_adrss_pic {
+    margin-top: 5px;
+}
+.images_px li .edit_delede_pic {
+    background: url("../images/下载 (23).png") no-repeat;
+    min-height: 20px;
+    min-width: 20px;
+    position: absolute;
+    top: -10px;
+    left: 135px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

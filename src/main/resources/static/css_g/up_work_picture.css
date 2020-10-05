@@ -1,0 +1,213 @@
+a{
+    text-decoration: none;
+}
+div{
+    display:block;
+}
+span{
+    display: block;
+}
+body{
+    margin: 0;
+    background-color: #eaeaea;
+}
+
+.top_nav{
+    height: 55px;
+    background-color: #222222;
+    width: 100%;
+
+}
+.nav_content{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.top_sort li a{
+    float: left;
+    padding: 0 10px;
+    height: 55px;
+    line-height: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin: 18px 15px 0;
+}
+
+#logo{
+    height: 46px;
+    width: 160px;
+    float: left;
+    /*margin-top: 7px;*/
+
+}
+#logo img{
+
+    height: 100%;
+    width: 100%;
+}
+.fiter{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.content{
+    width: 1000px;
+    padding-top: 100px;
+    margin: auto;
+    /*background-color: #323232;*/
+}
+
+.up_action{
+    margin-bottom: 20px;
+    height: 30px;
+}
+.up_action .up_btu{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #cccccc;
+    border-radius:16px ;
+    font-size: 15px;
+    float: left;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.up_action .up_btu img{
+    height: 18px;
+    width: 18px;
+    padding-bottom: 2px;
+}
+.up_action .write_btu{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #cccccc;
+    border-radius:16px ;
+    font-size: 15px;
+    float: left;
+    cursor: pointer;
+}
+.up_picture_img{
+    width: 1000px;
+    border: 3px dashed #cccccc;
+    padding: 29px 0 40px 26px;
+    float: left;
+}
+.up_img_box{
+    /*width: 140px;*/
+    margin:  0 10px;
+    height: 110px;
+    float: left;
+}
+.up_city{
+    margin-top: 5px;
+
+    height: 20px;
+    width: 122px;
+    display: none;
+    clear: both;
+}
+
+.upload_box{
+    background: url("../images/image.png") center 15px no-repeat;
+    height: 110px;
+    width: 110px;
+    display: block;
+    float: left;
+
+}
+.upload_box span{
+    position: relative;
+    top: 10px;
+    left: 22px;
+    display: none;
+
+}
+.upload_box:hover{
+    background-image: none;
+    background-color: #00b7ee;
+}
+.upload_box:hover span{
+   display: block;
+}
+#keep{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 80px;
+    float: left;
+    background-color: #dead0d;
+    border-radius: 14px;
+    color: white;
+    margin-left: 400px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+#browse{
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 100px;
+    float: left;
+    background-color: #00b7ee;
+    border-radius: 14px;
+    color: white;
+    margin-left: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+
+}
+.tip_text{
+    display: block;
+    clear: both;
+    font-size: 14px;
+}
+.tip_text p{
+    display: block;
+    margin-left: 270px;
+    color: #666;
+}
+.up_img_show{
+    height: 100%;
+    width: 110px;
+    /*display: none;*/
+    float: left;
+    margin: 0 2px;
+}
+
+
+.ac_delete{
+    position: relative;
+    bottom: 107px;
+    left: 33px;
+    display: none;
+    color: #dead0d;
+    cursor: pointer;
+}
+.ac_cover{
+    position: relative;
+    bottom: 129px;
+    left: 70px;
+    display: none;
+    color: #dead0d;
+    cursor: pointer;
+}
+.imgBox{
+
+}
+.imgBox:hover .ac_cover{
+    display: block;
+}
+.imgBox:hover .ac_delete{
+     display: block;
+ }
+.thisCover{
+    display: block;
+    color: navy;
+
+}

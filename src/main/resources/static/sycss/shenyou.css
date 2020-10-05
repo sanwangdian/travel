@@ -1,0 +1,352 @@
+
+a {
+    font-size: 14px;
+}
+
+.dropbtn {
+    background-color: #222;
+    color: #fdd000;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 80px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 6px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color:#222;
+}
+#mynav{
+    background-color: #1F1F1F;
+    height: 50px;
+    width: 100%;
+}
+#myhead{
+    height: 120px;
+    background-color: #222222;
+}
+#mybody{
+    background-color: #f9f9f9;
+    padding: 25px;
+}
+#myfoo{
+    margin: 10px;
+    height: 185px;
+    background-color: #FFFFFF;
+    padding: 25px;
+}
+.foottext{
+    width: 25%;
+    padding-top: 90px;
+    padding-bottom: 40px;
+    background-color: #FFFFFF;
+    float: left;
+    text-align: center;
+}
+
+#leftlogo{
+    width: 28%;
+    padding: 5px;
+    float: left;
+}
+#leftlogo img{
+    height: 110px;
+    padding-left: 50px;
+    margin-bottom: 10px;
+}
+#rightlogo{
+    float: left;
+    padding-top: 45px;
+    padding-left: 45px;
+}
+
+.textstyle{
+    color: #fdd000;
+    font-size: 16px;
+    float: left;
+
+}
+.infostyle{
+    color: #fdd000;
+    font-size: 16px;
+    float: left;
+    font-weight: 700;
+    padding-left: 90px;
+}
+/*搜索栏开始*/
+#search{
+    float: left;
+    padding-left: 20px;
+}
+#search .form {
+    width: 480px;
+    height: 36px;
+}
+/*客户端输入样式*/
+
+#search .text {
+    float: left;
+    width: 370px;
+    height: 36px;
+    border-width: 2px 0 2px 2px;
+    border-color: #fdd000;
+    border-style: solid;
+    font-size: 14px;
+    font-family: "microsoft yahei";
+    background-color: #222;
+    color: #FFF;
+}
+#search .button {
+    float: left;
+    width: 110px;
+    height: 36px;
+    background: #FDD000;
+    color: #666;
+    font-size: 16px;
+    padding: 0 8px;
+
+
+}
+/*搜索栏结束*/
+
+.titleleft{
+    float: left;
+}
+.titleright{
+    float: right;
+    padding-top: 20px;
+    font-size: larger;
+    padding-right: 60px;
+}
+
+.ulbody{
+    width: 100%;
+    height: 397px;
+}
+.ulbody .imgbutton{
+    width: 360px;
+    height: 124px;
+}
+#div1{
+    width: 100%;
+    height: 63px;
+}
+#div2{
+    width: 100%;
+    height: 440px;
+}
+.divtop{
+    width: 100%;
+    height: 78px;
+}
+.divbottom2{
+    width: 100%;
+}
+.box2{
+    width: 360px;
+    height: 124px;
+    color: #666666;
+    background-color: #fff;
+    float: left;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+.content2{
+    float: right;
+    width: 160px;
+    height: 124px;
+}
+.title2{
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 22px;
+    overflow: hidden;
+    height: 36px;
+    margin-bottom: 23px;
+
+}
+.title2 a{
+    color: #666;
+}
+.info2{  width: 187px;
+}
+.info2 a{
+    color: #ff9d00;
+    font-size: 12px;
+}
+#div3{
+    width: 1183px;
+    height: 480px;
+}
+#div4{
+    width: 100%;
+    height: 670px;
+}
+.divbottom4{
+    width: 1170px;
+    height: 612px;
+    overflow: hidden;
+}
+.img1{
+    width: 294px;
+    height: 401px;
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+.img2{
+    width: 294px;
+    height: 197px;
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+.img3{
+    width: 559px;
+    height: 197px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    float: right;
+    overflow: hidden;
+}
+.img4{
+    width: 294px;
+    height: 197px;
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+.img5{
+    width: 559px;
+    height: 401px;
+    float: right;
+
+    margin-right: 7px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+.img6{
+    width: 294px;
+    height: 197px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    float: left;
+    overflow: hidden;
+}
+.img7{
+    width: 294px;
+    height: 197px;
+    float: left;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    overflow: hidden;
+}
+#div5{
+    width: 1200px;
+    height: 281px;
+}
+.divbottom5{
+    width: 1160px;
+    height: 218px;
+}
+.video1{
+    width: 280px;
+    height: 229px;
+    background-color: #fff;
+    float: left;
+    margin-right: 9px;
+}
+.content5{
+    width: 280px;
+    height: 169px;
+    position: relative
+}
+.content5 .icon_play{
+    width: 23%;
+    height: 30%;
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 100px;
+    top: 0;
+    opacity: .8;
+}
+.title5{
+    padding: 0 1em;
+    height: 60px;
+    line-height: 60px;
+}
+.title5 a{
+    color: #666666;
+    font-size: 13px;
+}
+.sideMenu {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 35px;
+    background-color: #333;
+    z-index: 10000;
+}
+.sideMenuTop {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    width: 100%;
+}
+.sideMenuShop {
+    width: 100%;
+    height: 160px;
+    position: relative;
+}
+.sideMenuItem {
+    background: url(http://static.youxiake.com/new/public/assets/img/20160105/zj-css.png) no-repeat;
+    width: 100%;
+    height: 38px;
+    border-top: 1px #444 solid;
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+.sideMenuItem-photo {
+    background-position: 5px -715px;
+}
+.sideMenuItem-write {
+    background-position: 5px -363px;
+}
+.sideMenuItem-imageupload {
+    background-position: 7px -183px;
+}
+.sideMenuItem-top {
+    background-position: 7px -426px;
+    height: 70px;
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.PhotoMapper" >
+    <resultMap id="PhotoResultMap" type="org.lanqiao.entity.Photo" >
+        <id column="photo_id" property="photoId" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="photo_name" property="photoName" jdbcType="VARCHAR" />
+        <result column="photo_power" property="photoPower" jdbcType="VARCHAR" />
+        <result column="photo_time" property="photoTime" jdbcType="DATE" />
+    </resultMap>
+
+    <select id="selectAllPhoto" resultMap="PhotoResultMap" parameterType="org.lanqiao.entity.Photo" >
+    select * from photo
+    where user_id = #{userId,jdbcType=INTEGER}
+</select>
+
+
+    <select id="selectPhoto" resultMap="PhotoResultMap" parameterType="java.lang.Integer" >
+    select * from photo
+    where user_id = #{userId,jdbcType=INTEGER}
+</select>
+
+    <sql id="Base_Column_List" >
+    photo_id, user_id, photo_name, photo_power, photo_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="PhotoResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from photo
+        where photo_id = #{photoId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from photo
+    where photo_id = #{photoId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="org.lanqiao.entity.Photo" >
+    insert into photo (photo_id, user_id, photo_name,
+      photo_power, photo_time)
+    values (#{photoId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{photoName,jdbcType=VARCHAR},
+      #{photoPower,jdbcType=VARCHAR}, #{photoTime,jdbcType=DATE})
+  </insert>
+    <insert id="insertSelective" parameterType="org.lanqiao.entity.Photo" >
+        insert into photo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="photoId != null" >
+                photo_id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="photoName != null" >
+                photo_name,
+            </if>
+            <if test="photoPower != null" >
+                photo_power,
+            </if>
+            <if test="photoTime != null" >
+                photo_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="photoId != null" >
+                #{photoId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="photoName != null" >
+                #{photoName,jdbcType=VARCHAR},
+            </if>
+            <if test="photoPower != null" >
+                #{photoPower,jdbcType=VARCHAR},
+            </if>
+            <if test="photoTime != null" >
+                #{photoTime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Photo" >
+        update photo
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="photoName != null" >
+                photo_name = #{photoName,jdbcType=VARCHAR},
+            </if>
+            <if test="photoPower != null" >
+                photo_power = #{photoPower,jdbcType=VARCHAR},
+            </if>
+            <if test="photoTime != null" >
+                photo_time = #{photoTime,jdbcType=DATE},
+            </if>
+        </set>
+        where photo_id = #{photoId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Photo" >
+    update photo
+    set user_id = #{userId,jdbcType=INTEGER},
+      photo_name = #{photoName,jdbcType=VARCHAR},
+      photo_power = #{photoPower,jdbcType=VARCHAR},
+      photo_time = #{photoTime,jdbcType=DATE}
+    where photo_id = #{photoId,jdbcType=INTEGER}
+  </update>
+</mapper>

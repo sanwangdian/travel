@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页</title>
+    <link  rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/jquery.slider.css"/>
+    <script  src="js/jquery-3.4.1.js" type="text/javascript"></script>
+    <script src="js/jquery.validate.js" type="application/javascript"></script>
+    <script src="js/jquery.validate.regex.js" type="application/javascript"></script>
+<!--    <script src="js/jquery.min.js" type="application/javascript"></script>-->
+    <script type="text/javascript" src="js/jquery.slider.min.js"></script>
+
+    <script>
+// 1、构造手机验证码，生成一个6位的随机数字串；
+// 2、使用接口向短信平台发送手机号和验证码，然后短信平台再把验证码发送到制定手机号上
+// 3、将手机号验证码、操作时间存入Session中，作为后面验证使用；
+// 4、接收用户填写的验证码、手机号及其他注册数据；
+// 5、对比提交的验证码与Session中的验证码是否一致，同时判断提交动作是否在有效期内；
+// 6、验证码正确且在有效期内，请求通过，处理相应的业务。
+        $(function () {
+            // 滑动按钮, 验证通过才能提交表单
+            $("#slider1").slider({
+                callback: function (result) {
+                    $("#result1").text(result);
+                    if (result==true) {
+                         $("#submit").attr("disabled",false);
+                    }else {
+                        $("#submit").attr("disabled",true);
+                        $("#slider1").slider("restore");
+                    }
+
+                }
+            });
+            //表单验证
+            $("#regFormStep1").validate({
+                rules: {
+                    logonId: {
+                        required: true,
+                        regex: /^1[0-9]{10}$/,
+                        remote: {
+                            // 验证该手机号是否已注册过
+                            type:"post",
+                            url:"/check",
+                            data: {
+                                userPhone: function () {
+                                    return $("#logonId").val();
+                                }
+                            },
+                            dataType:"text",
+                            dataFilter:function (data,type) {
+                                if (data==="1"){
+                                    return true;
+                                }else
+                                    return false;
+                            }
+                        }
+                    },
+                    password:{
+                        required:true,
+                        regex: /^\w{6,20}$/
+                        // 不能为纯数字，不能为纯小写字母，不能为纯大写字母，不能为纯特殊符号，至少八位。
+                    }
+                },
+                messages:{
+                    logonId:{
+                        required:"请输入手机号码",
+                        regex:"请输入正确的手机号码格式"
+                    },
+                    password:{
+                        required:"请输入密码",
+                        regex:"密码至六位"
+                    }
+                },
+                submitHandler:function (form) {
+                    $.ajax({
+                        url:"/register",
+                        type:"post",
+                        data:{
+                            "userPhone":$("input[name='logonId']").val(),
+                            "userPassw":$("input[name='password']").val(),
+                            "authcode":$("input[name='authcode']").val(),
+                        },
+                        dataType:"text",
+                        success:function (data) {
+                            //alert(data);
+                          //  alert("注册成功！");
+
+                            location.href="login.html";
+                        }
+
+                    })
+                }
+            });
+
+            //获得短信验证码
+            $("#activation").click(function (){
+                var userPhone= $("input[name='logonId']").val();
+                $.ajax({
+                   url:"/sendSms",
+                    async : true,
+                    type: "post",
+                    dataType: "json",
+                    data:{"userPhone":userPhone},
+                    success:function (data) {
+                        if (data=='fail'){
+                            alert("发送验证码失败")
+                            return;
+                        }
+                    }
+
+                })
+            });
+        })
+    function getBasePath(){
+        return '<%=basePath%>';
+    }
+    </script>
+</head>
+<body class="register">
+<!--S header-->
+<header class="header">
+    <div class="container">
+        <a class="logo" href="sy-index.html"><img src="imagesL/logotrp.png">神游网</a>
+    </div>
+</header>
+<!--E header-->
+<section class="g-body" style="background:url(http://static.youxiake.com/new/Public/assets/img/reglogin/reg_bg.png) center center no-repeat;background-size: cover;height: 656px;">
+    <div class="container" style="width: 360px;height: 580px;">
+        <!--S 注册-->
+        <div class="g-layout border_right_left">
+           <form name="regFormStep1" id="regFormStep1" action="/register" method="post">
+                <div class="form-title">注册神游网账号</div>
+               <div class="u-form-item">
+                   <div class="attachment">
+                       <a href="login.html">账号登录</a>
+<!--                       或<a href="#">短信登录</a>-->
+                   </div>
+               </div>
+               <div class="u-form-item foreign-tel" style="padding: 0 30px 8px 30px">
+                    <input class="u-input" id="logonId" name="logonId" type="text" autocomplete="off"
+                    onkeydown="if (event.keyCode==32) return false" placeholder="请输入手机号码" tabindex="1"
+                           datatype="/^1[3456789]{1}\d{9}$/" nullmsg="请输入手机号码" errormsg="手机号码格式不正确">
+                    <div class="u-form-explain"></div>
+               </div>
+                <div class="ui-form-item" style="padding: 0 0 3px 30px;height:53px;">
+                    <div class="clearfix" style="height: 54px;width: 300px;">
+                        <div id="slider1" class="slider"></div><span id="result1"></span>
+                    </div>
+                </div>
+                <div class="u-form-item foreign-act" style="padding: 0 30px 8px 30px;">
+                    <input onkeydown="if(event.keyCode==32) return false" name="authcode" id="authcode" class="u-input u-authcode" type="text" autocomplete="off"
+                           style="float: left;margin-right: 10px;width: 160px;height: 26px;" maxlength="6" placeholder="请输入短信验证码" tabindex="6" datatype="n6-6" nullmsg="请填写短信验证码" errormsg="短信码格式错误" >
+               <div class="m-act" style="margin: 5px 0 0 0;">
+                   <a class="m-act-btn" id="activation" href="javascript:;">
+                       <span>获取验证码</span>
+                   </a>
+               </div>
+                <span class="fr authcode-help" style="padding: 4px 14px 0 0;">
+                    <a class="font-alpha" href="#" target="_blank">收不到验证码？</a>
+                </span>
+                </div>
+               <div class="u-form-item">
+                   <input onkeydown="if(event.keyCode==32) return false" name="password" id="password" class="u-input u-ipwd" type="password" maxlength="20"
+                          plugin="passwordStrength" oncontextmenu="return false" onpaste="return false" oncopy="return false"
+                          oncut="return false" autocomplete="new-password"
+                          tabindex="4" placeholder="请输入6~20位密码"
+                          style="width: 286px;" datatype="*6-20"
+                          nullmsg="请填写密码"
+                          errormsg="密码范围在6~20位之间的英文字母、数字和英文输入状态下的符号">
+                   <div class="u-form-explain"></div>
+               </div>
+               <div class="u-form-item">
+                   <div class="u-form-explain Validform_checktip Validform_wrong" id="activation-exolain"></div>
+               </div>
+               <div class="u-form-item">
+                   <input onkeydown="if(event.keyCode==32) return false" type="submit" class="u-btn-reg" id="submit" value="立即注册" tabindex="6">
+               </div>
+            <div class="u-form-item">
+                <div class="attachment" style="text-align: center;">
+                    <a href="http://www.youxiake.com/reg?email=1">非大陆手机号注册</a>
+                </div>
+            </div>
+           </form>
+        </div>
+        <!--E 注册 -->
+    </div>
+</section>
+<section class="main" role="main">
+    <div class="container">
+        <article class="intro_item">
+            <h2 class="i_title it_0">爱旅游 爱摄影</h2>
+<!--            <p class="i_cont">你就是神游客</p>-->
+            <ul class="i_info">
+                <li>·你就是神游客</li>
+                <li>·你就是神游客</li>
+                <li>·你就是神游客</li>
+                <li>·分享精彩的旅途生活、照片、游记</li>
+            </ul>
+        </article>
+        <article class="intro_item">
+            <h2 class="i_title it_1">你知道吗？</h2>
+            <ul class="i_info">
+                <li>·神游客是旅行者的社交网络</li>
+                <li>·神游客的线路都是精心策划的</li>
+                <li>·加入神游客多参加户外运动</li>
+                <li>·你可能会增加5年寿命,多交18个旅伴</li>
+            </ul>
+        </article>
+        <article class="intro_item intro_item_last">
+            <h2 class="i_title it_2">加入神游客</h2>
+            <ul class="i_info">
+                <li>·结识各种旅游狂人、户外大侠、摄影专家、自驾高手</li>
+                <li>·与朋友、同学、同事、家人保持密切的联络</li>
+                <li>·结伴出游，参加各种精彩的活动</li>
+                <li>·分享精彩的旅途生活、照片、游记</li>
+            </ul>
+        </article>
+    </div>
+
+</section>
+<!--footer-->
+<footer class="footer">
+    <div class="container">
+        <div class="sitemap clearfix"></div>
+        <div class="copyright">
+            <span>ICP经营许可证<a href="#" target="_blank">神游ICP备09011512-1号</a></span>
+            <b>|</b>
+            <span><a href="#" target="_blank">营业执照</a></span>
+            <b>|</b>
+            <span>&nbsp;&nbsp;&nbsp;神游游有限公司&nbsp;&nbsp;&nbsp;神游游有限公司</span>
+            <p class="text">
+                <span>© 2019 神仙制作组版权所有</span>
+                <span>法律顾问：我们&nbsp;&nbsp;&nbsp;我们</span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

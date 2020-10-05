@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        摄影展示页面
+    </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css_g/photo.css">
+    <link rel="stylesheet" href="css_g/b_floor.css">
+    <!-- <link rel="stylesheet" type="text/css_g" href="css_g\bootstrap.css_g"> -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min2.js"></script>
+    <script>
+    $(function () {
+
+        $.ajax({
+            url:"/selectBydefault",
+            type:"post",
+            dataType:"json",
+            success:function (data){
+                console.log(data);
+                var len = data.length;
+                $(".img_box").remove();
+                for (var i = 0 ;i < len; i++){
+                    vm.imgCover.push({
+                        id: data[i].workId,
+                        name:data[i].workTitle,
+                        cover:data[i].workCover,
+                        userId:data[i].users.userId,
+                    });
+
+                }
+                console.log(vm.imgCover);
+
+            }
+        });
+
+        var vm =  new Vue({
+            el:"#body",
+            data:{
+                imgCover:[{
+
+                }]
+            },
+            methods:{
+                comment:function () {
+                    $(".cf li").removeClass("active");
+                    $("#comment").addClass("active");
+                    vm.imgCover=[];
+                    $.ajax({
+                        url:"/selectBydefault",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data){
+                            var len = data.length;
+                            for (var i = 0 ;i < len; i++){
+                                vm.imgCover.push({
+                                    id: data[i].workId,
+                                    name:data[i].workTitle,
+                                    cover:data[i].workCover,
+                                    userId:data[i].users.userId,
+                                });
+                            }
+
+                        }
+                    })
+                },
+                newTime:function () {
+                    $(".cf li").removeClass("active");
+                    $("#newTime").addClass("active");
+                    vm.imgCover=[];
+                    $.ajax({
+                        url:"/selectBydTime",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data){
+                            var len = data.length;
+                            for (var i = 0 ;i < len; i++){
+                                vm.imgCover.push({
+                                    id: data[i].workId,
+                                    name:data[i].workTitle,
+                                    cover:data[i].workCover,
+                                    userId:data[i].users.userId,
+                                });
+                            }
+                        }
+                    })
+
+                },
+                hot:function () {
+                    $(".cf li").removeClass("active");
+                    $("#hot").addClass("active");
+                    vm.imgCover=[];
+                    $.ajax({
+                        url:"/selectByHot",
+                        type:"post",
+                        dataType:"json",
+                        success:function (data){
+                            var len = data.length;
+
+                            for (var i = 0 ;i < len; i++){
+                                vm.imgCover.push({
+                                    id: data[i].workId,
+                                    name:data[i].workTitle,
+                                    cover:data[i].workCover,
+                                    userId:data[i].users.userId,
+                                });
+                            }
+                        }
+                    })
+                },
+                jumpToContent:function (cover) {
+                   window.sessionStorage.setItem("workId",cover.id);
+                   window.sessionStorage.setItem("userId",cover.userId);
+                   window.location.href="/show_picture.html";
+                },
+            }
+        });
+        $(".subRight li").click(function () {
+            vm.imgCover=[];
+            $.ajax({
+                url:"/selectByTag",
+                data:{
+                    "tag":$(this).children().text()
+                },
+                dataType:"json",
+                type:"post",
+                success:function (data) {
+                    vm.imgCover=[];
+
+                    var len = data.length;
+
+                    for (var i = 0 ;i < len; i++){
+                        vm.imgCover.push({
+                            id: data[i].workId,
+                            name:data[i].workTitle,
+                            cover:data[i].workCover,
+                            userId:data[i].users.userId,
+                        });
+                    }
+                    console.log(vm.imgCover);
+                    console.log(data);
+
+                }
+            })
+        });
+        $(".subLeft li").click(function () {
+            vm.imgCover=[];
+            $.ajax({
+                url:"/selectByTag",
+                data:{
+                    "tag":$(this).children().text()
+                },
+                dataType:"json",
+                type:"post",
+                success:function (data) {
+                    vm.imgCover=[];
+
+                    var len = data.length;
+
+                    for (var i = 0 ;i < len; i++){
+                        vm.imgCover.push({
+                            id: data[i].workId,
+                            name:data[i].workTitle,
+                            cover:data[i].workCover,
+                            userId:data[i].users.userId,
+                        });
+                    }
+                    console.log(vm.imgCover);
+                    console.log(data);
+
+                }
+            })
+        });
+
+
+
+    })
+
+    </script>
+</head>
+<body id="body">
+<div class="top_nav">
+    <div id="logo">
+        <img src="images/logo.png">
+    </div>
+    <ul class="fiter top_sort">
+        <li>
+            <a href="sy-index.html">首页</a>
+        </li>
+        <li>
+            <a href="sy-index.html">旅游网</a>
+        </li>
+        <li>
+            <a href="photo.html">摄影作品</a>
+        </li>
+        <li>
+            <a href="community_my.html">社区</a>
+        </li>
+    </ul>
+
+    <div id="up_img">
+        <a href="up_photos.html">上传作品</a>
+    </div>
+
+    <div id="login">
+        <a href="login.html">登录</a>
+    </div>
+
+</div>
+
+<div class="nav_bar">
+    <div class="hd">
+        <ul class="fiter cf">
+            <li class="active" @click ="comment" id="comment">
+                <span>推荐</span>
+            </li>
+            <li @click="newTime" id="newTime">
+                <span>最新</span>
+            </li>
+            <li @click="hot" id="hot">
+                <span>热门</span>
+            </li>
+        </ul>
+
+        <div class="subject">
+            <div class="subHead">
+                <b>热门：</b>
+            </div>
+            <ul class="fiter subRight">
+                <li>
+                    <a href="#" >花事</a>
+                </li>
+
+                <li>
+                    <a href="#">风光</a>
+                </li>
+
+                <li>
+                    <a href="#">旅行</a>
+                </li>
+            </ul>
+
+            <div class="subHead">
+                <b>主题：</b>
+            </div>
+
+            <ul class="fiter subLeft">
+                <li>
+                    <a href="#">旅行</a>
+                </li>
+                <li>
+                    <a href="#">风光</a>
+                </li>
+                <li>
+                    <a href="#">人像</a>
+                </li>
+                <li>
+                    <a href="#">航拍</a>
+                </li>
+                <li>
+                    <a href="#">纪实</a>
+                </li>
+                <li>
+                    <a href="#">生态</a>
+                </li>
+                <li>
+                    <a href="#">其他</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+<div id="show_img">
+    <div class="img_line"   v-for="(i,cover) in imgCover" >
+        <div class="img_box" @click="jumpToContent(cover)">
+            <a>
+                <img :src="cover.cover">
+                <span>{{cover.name}}</span>
+            </a>
+        </div>
+<!--        <div class="img_box" >-->
+<!--            <a href=""><img src="images/1.jpg">-->
+<!--                <span>八月再见，九月你好，不负流年，不负你。</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="img_box" >-->
+<!--            <a href=""><img src="images/1.png">-->
+<!--                <span>远行</span>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="img_box" >-->
+<!--            <a href=""><img src="images/2.jpg">-->
+<!--                <span>冰与火之歌</span>-->
+<!--            </a>-->
+<!--        </div>-->
+    </div>
+</div>
+<!--<div class="b_floor">-->
+<!--    <div class="l_wrapper">-->
+<!--        <div class="m_unit_b2">-->
+<!--            <div class="footerInfo">-->
+<!--                <ul class="weima">-->
+<!--                    <li>-->
+<!--                        <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <p>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>-->
+<!--                    <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    <span>浙ICP备 09011712 号-1</span>-->
+<!--                    <span>浙公网安备 33010602002105号</span>-->
+<!--                    <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>-->
+<!--                    <span>浙江神游网国际旅行社有限公司</span>-->
+<!--                    <span>杭州途游电子商务有限公司</span>-->
+<!--                    <span>许可证编号：L-ZJ-CJ00161</span>-->
+<!--                </p>-->
+<!--                <p>© 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>-->
+<!--                <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>-->
+<!--            </div>-->
+<!--            <div class="friendLines">-->
+<!--                <div class="footerImages clearfix foot-ext">-->
+<!--                    <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>-->
+<!--                    <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>-->
+<!--                    <a href="javascript:;" rel="nofollow"  title="12321垃圾信息举报中心" class="footer-ext-s4"></a>-->
+<!--                    <a href="javascript:;" rel="nofollow">-->
+<!--                        <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png" alt="支付宝">-->
+<!--                    </a>-->
+<!--                    <a href="javascript:;" rel="nofollow"  title="网络110报警服务" class="footer-ext-s5"></a>-->
+<!--                    <a href="javascript:;" rel="nofollow"  title="网上标识信息" class="footer-ext-s6"></a>-->
+<!--                    <a href="javascript:;" rel="nofollow"  title="全球中文论坛100强" class="footer-ext-s7"></a>-->
+<!--                    <a target="cyxyv" href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">-->
+<!--                        <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--        <a href="javascript:" name="floor">&nbsp;</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+</body>
+</html>

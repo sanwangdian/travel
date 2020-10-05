@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.lanqiao.mapper.WorkinfoMapper" >
+  <resultMap id="BaseResultMap" type="org.lanqiao.entity.Workinfo" >
+    <id column="pic_id" property="picId" jdbcType="INTEGER" />
+    <result column="work_id" property="workId" jdbcType="INTEGER" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="is_cover" property="isCover" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="WorkResultMap" type="org.lanqiao.entity.Work" >
+    <id column="work_id" property="workId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="work_title" property="workTitle" jdbcType="VARCHAR" />
+    <result column="work_detaile" property="workDetaile" jdbcType="VARCHAR" />
+    <result column="work_theme" property="workTheme" jdbcType="VARCHAR" />
+    <result column="copyright" property="copyright" jdbcType="VARCHAR" />
+    <result column="work_tag" property="workTag" jdbcType="VARCHAR" />
+    <result column="work_time" property="workTime" jdbcType="DATE" />
+    <result column="work_hot" property="workHot" jdbcType="INTEGER" />
+    <result column="work_cover" property="workCover" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    pic_id, work_id, pic_url, is_cover, city
+  </sql>
+
+  <select id="selectByWorkId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from workinfo where work_id = #{workId}
+  </select>
+
+  <update id="updateWorkCover" parameterType="org.lanqiao.entity.Workinfo">
+    update work set work_cover=#{picUrl} where work_id = #{workId}
+  </update>
+
+  <select id="selectWorkContent" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from workinfo where work_id=#{workId} order by is_cover desc;
+  </select>
+  <insert id="insertOne" parameterType="org.lanqiao.entity.Workinfo">
+    insert into workinfo(work_id,pic_url,is_cover) values (#{workId},#{picUrl},#{isCover})
+  </insert>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from workinfo
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from workinfo
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.lanqiao.entity.Workinfo" >
+    insert into workinfo (pic_id, work_id, pic_url, 
+      is_cover, city)
+    values (#{picId,jdbcType=INTEGER}, #{workId,jdbcType=INTEGER}, #{picUrl,jdbcType=VARCHAR}, 
+      #{isCover,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.lanqiao.entity.Workinfo" >
+    insert into workinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="isCover != null" >
+        is_cover,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="picId != null" >
+        #{picId,jdbcType=INTEGER},
+      </if>
+      <if test="workId != null" >
+        #{workId,jdbcType=INTEGER},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isCover != null" >
+        #{isCover,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.lanqiao.entity.Workinfo" >
+    update workinfo
+    <set >
+
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="isCover != null" >
+        is_cover = #{isCover,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.lanqiao.entity.Workinfo" >
+    update workinfo
+    set work_id = #{workId,jdbcType=INTEGER},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      is_cover = #{isCover,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR}
+    where pic_id = #{picId,jdbcType=INTEGER}
+  </update>
+</mapper>

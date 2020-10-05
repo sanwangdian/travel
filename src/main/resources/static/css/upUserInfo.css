@@ -1,0 +1,232 @@
+body, button, input, select, textarea {
+    font: 12px/1.5 arial,"\5b8b\4f53","\5FAE\8F6F\96C5\9ED1";
+    color: #333;
+}
+a, a:focus, input, textarea {
+    outline: none;
+    resize: none;
+}
+.content {
+    background: #f4f4f4;
+    margin-bottom: 25px;
+}
+.content_middle {
+    padding-top: 0px;
+    width: 1200px;
+     height: 800px;
+    margin: auto;
+    font-size: 16px;
+    overflow: hidden;
+    background: #fff;
+}
+ul {
+    list-style: none;
+}
+a {
+    color: #666;
+    text-decoration: none;
+    font-size: 12px;
+}
+i {
+    font-size: 12px;
+    color: #666;
+}
+/*个人资料显示*/
+.middle_content {
+    width: 1010px;
+    float: left;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-left: 25px;
+    background: #fff;
+    padding-top: 10px;
+}
+.content_grzl, .content_grzlxg {
+    position: relative;
+    font-family: 微软雅黑;
+}
+.middle_content_title {
+    margin-top: 10px;
+    display: block;
+    /*font-size: 18px;*/
+    font-size: 25px;
+    line-height: 25px;
+    height: 55px;
+    width: 100%;
+    border-bottom: 1px solid rgb(233, 150, 5);
+}
+.middle_content_title {
+    font-size: 18px;
+}
+.content form {
+    margin-top: 40px;
+}
+#grzl {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+#grzl p {
+    margin-bottom: 15px;
+}
+.content label {
+    color: rgb(68, 68, 68);
+    display: inline-block;
+    width: 80px;
+}
+#grzl label {
+    width: auto;
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+}
+#grzl label span {
+    color: #ff9c00;
+}
+.content input {
+    margin-left: 20px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(191, 191, 191);
+    font-size: 12px;
+}
+#grzl input {
+    margin-left: 15px;
+}
+#grzl .gereninput, #grzl #birthday, #grzl .profession, #grzl .education, #grzl .income {
+    padding-left: 15px;
+    width: 471px;
+    height: 38px;
+    font-size: 14px;
+    border: 1px solid #d3d3d3;
+}
+.waringicon {
+    display: none;
+    margin-left: 10px;
+    margin-right: 5px;
+    width: 17px;
+    height: 17px;
+    background: url(../imagesL/waring_icon.jpg) center center no-repeat;
+    background-size: 17px 17px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.waring {
+    vertical-align: middle;
+    font-size: 14px;
+    color: #666;
+}
+.radio_p {
+    height: 32px;
+    line-height: 32px;
+}
+.radio1 {
+    margin-left: 20px;
+    line-height: 32px;
+    font-size: 14px;
+    color: rgb(150, 150, 150);
+}
+.cssradio {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin-right: 10px;
+}
+.cssradio .shxin {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    /* background: #ffa800; */
+    border: 1px solid #ffa800;
+}
+#grzl .shxin {
+    border-color: #b4b4b4;
+}
+.cssradio span .dian {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 1px solid #ffa800;
+    background: #ffa800;
+}
+.sheng {
+    margin-left: 20px;
+    height: 32px;
+    width: 85px;
+    box-sizing: border-box;
+    border: 1px solid rgb(191, 191, 191);
+}
+#grzl .sheng {
+    margin-left: 15px;
+    margin-right: 46px;
+}
+#grzl .sheng, #grzl .shi {
+    padding-left: 15px;
+    width: 207px;
+    height: 38px;
+    font-size: 14px;
+    border: 1px solid #d3d3d3;
+}
+#sign {
+    margin-left: 105px;
+    width: 470px;
+    height: 175px;
+    outline: none;
+    box-sizing: border-box;
+    padding-left: 5px;
+    padding-top: 5px;
+    resize: none;
+}
+#grzl #sign {
+    margin-left: 98px;
+    padding-left: 15px;
+    width: 471px;
+    height: 144px;
+    font-size: 14px;
+    border: 1px solid #d3d3d3;
+    color: #999;
+}
+#grzl #subbut, #grzl #cancel {
+    margin-top: 35px;
+    display: inline-block;
+    width: 113px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+#grzl #subbut {
+    margin-left: 98px;
+    background: #ff9d00;
+    border: 1px solid #ff9d00;
+    color: #fff;
+}
+#grzl #subbut, #grzl #cancel {
+    margin-top: 35px;
+    display: inline-block;
+    width: 113px;
+    height: 37px;
+    line-height: 37px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+#grzl #cancel {
+    margin-left: 40px;
+    background: #fff;
+    border: 1px solid #d3d3d3;
+    color: #666;
+}
+
+
+

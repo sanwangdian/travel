@@ -1,0 +1,108 @@
+/*全局设置*/
+*{margin: 0px;padding: 0px;}
+body{font-family: "Microsoft YaHei UI";font-size: 14px;line-height: 1.6;color: #636b6f;}
+ul,li,a{text-decoration: none;list-style: none;background-color: transparent;}
+/*底部*/
+.b_floor {
+    width: 100%;
+    height: auto;
+    background-color: #242424;
+    position: relative;
+    font-size: 12px;
+    margin-top: 30px;
+}
+.b_floor .l_wrapper {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: transparent;
+    position: relative;
+}
+.b_floor .m_unit_b2 {
+    padding-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    color: #999;
+    background-color: #242424;
+}
+.b_floor .m_unit_b2 .footerInfo {
+    line-height: 1;
+    position: relative;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid #575a5b;
+}
+.b_floor .m_unit_b2 .friendLines {
+    padding-top: 5px;
+}
+.b_floor .m_unit_b2 .footerInfo .weima {
+    position: absolute;
+    z-index: 100;
+    right: -26px;
+    top: 0;
+    z-index: 2;
+}
+.b_floor .m_unit_b2 .footerInfo .weima li {
+    float: left;
+    margin: 30px;
+    text-align: center;
+}
+.b_floor .m_unit_b2 .footerInfo p {
+    margin-bottom: 15px;
+}
+.b_floor .m_unit_b2 a {
+    color: #b0b0b0;
+    margin: 0 3px;
+}
+.b_floor .m_unit_b2 span {
+    margin: 0 1px;
+}
+.b_floor .m_unit_b2 .friendLines .footerImages {
+    padding-top: 36px;
+    clear: both;
+}
+.foot-ext {
+    width: 985px;
+    margin: 0 auto;
+    padding: 12px 0;
+}
+.b_floor .m_unit_b2 .friendLines .footerImages a {
+    display: block;
+    height: 47px;
+    background-color: #ccc;
+    float: left;
+}
+.foot-ext .footer-ext-s2 {
+    width: 116px;
+    background-position: -133px 0;
+}
+.foot-ext .footer-ext-s3 {
+    width: 116px;
+    background-position: -253px 0;
+}
+.foot-ext .footer-ext-s4 {
+    width: 116px;
+    background-position: -375px 0;
+}
+img {
+    vertical-align: middle;
+}
+.foot-ext .footer-ext-s5 {
+    width: 116px;
+    background-position: -495px 0;
+}
+.foot-ext .footer-ext-s6 {
+    width: 43px;
+    background-position: -617px 0;
+}
+.foot-ext .footer-ext-s7 {
+    width: 56px;
+    background-position: -665px 0;
+}
+.b_floor .m_unit_b2 .friendLines a {
+    margin-bottom: 5px;
+}
+.foot-ext a {
+    background: url(https://img3.youxiake.com/static/images/ext.jpg) no-repeat;
+}

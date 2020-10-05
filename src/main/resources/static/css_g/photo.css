@@ -1,0 +1,172 @@
+
+body{
+	background-color: #eaeaea;
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	color: #666; 
+	text-decoration: none;
+}
+
+.top_nav{
+	height: 65px;
+	background-color: #222222;
+	position: fixed;
+	width: 100%;
+	top:0;
+}
+
+.top_sort li a{
+	float: left;
+	padding: 0 10px;
+	height: 65px;
+	line-height: 30px;
+	font-size: 17px;
+	font-weight: 500;
+	color: white;
+	margin: 18px 15px 0;
+}
+#login{
+	display: block;
+	float: right;
+	line-height: 65px;
+}
+#login a{
+	padding: 0 10px;
+	height: 65px;
+	line-height: 30px;
+	font-size: 17px;
+	font-weight: 500;
+	color: white;
+	margin: 18px 15px 0;
+
+}
+#logo{
+	height: 56px;
+	width: 160px;
+	float: left;
+	margin-left: 50px;
+	/*margin-top: 7px;*/
+
+}
+#logo img{
+
+	height: 100%;
+	width: 100%;
+}
+#up_img{
+	float: right;
+	line-height: 30px;
+	font-size: 16px;
+
+	margin: 18px 8px 0;
+	background: rgb(255,156,0);
+	padding: 0 10px;
+	display: none;
+}
+#up_img a{
+	color: white;
+}
+.nav_bar{
+	height:70px;
+	width: 1400px;
+
+	margin: 0 auto;
+	margin-top: 115px;
+	margin-bottom: 20px;
+}
+.hd{
+	height: 50px;
+	width: 100%;
+	border-bottom: 1px #999999 solid;
+}
+.fiter{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.cf li{
+	display: block;
+	margin-top: 10px;
+	margin-right: 40px;
+	padding-bottom: 5px;
+	float: left; 
+	font-weight: 500;
+	font-size: 23px;
+}
+
+.active{
+	border-bottom: 3px solid yellow;
+}
+.cf li:hover{
+	border-bottom: 3px solid yellow;
+	cursor: pointer;
+}
+
+
+.subject{
+	float: right;
+	width: 550px;
+	margin-top: 20px;
+}
+
+.subject b{
+	color: #333;
+	float: left;
+	padding-left: 10px;
+}
+
+.subRight li{
+	display: block;
+	float: left;
+	padding-bottom: 5px;
+
+}
+.subject a{
+	padding:2px 5px;
+}
+
+
+.subRight li a:hover{
+	background-color: black;
+	color: white;
+}
+
+
+.subLeft li{
+	display: block;
+	float: left;
+}
+
+.subLeft li a:hover{
+	background-color: black;
+	color: white;
+}
+
+#show_img{
+	width: 1400px;
+	margin: 0 auto;
+}
+.img_line{
+	float: left;
+}
+.img_box{
+	padding: 5px;
+	height: 250px;
+	width: 340px;
+}
+.img_box img{
+	width: 100%;
+	height: 100%;
+}
+.img_box span{
+	display: block;
+	position: relative;
+	bottom: 40px;
+	left: 10px;
+	color: wheat;
+
+}

@@ -1,0 +1,88 @@
+body, html {
+    height: 100%;
+}
+body {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+    background-color: transparent;
+    font-family: "微软雅黑","宋体";
+    letter-spacing: .5px;
+}
+body, button, input, select, textarea {
+    font: 12px/1.5 arial,"\5b8b\4f53","\5FAE\8F6F\96C5\9ED1";
+    color: #333;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0;
+}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    -webkit-tap-highlight-color: transparent;
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+}
+.middle_content .grzl_rate, .middle_content .grzl_desc, .middle_content .grzl_msg, .middle_content .grzl_changeAvatar, .banding, .zhp, .upMiaoshu, #xgmm input {
+    font-size: 12px;
+}
+
+.middle_content {
+    width: 880px;
+    float: left;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-left: 45px;
+}
+.content_grzl, .content_grzlxg {
+    position: relative;
+    font-family: 微软雅黑;
+}
+.middle_content {
+    width: 1010px;
+    background: #fff;
+    padding-top: 10px;
+    padding-left: 25px;
+}
+.middle_content_title {
+    display: block;
+    font-size: 25px;
+    line-height: 25px;
+    height: 55px;
+    width: 100%;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+.middle_content_title {
+    font-size: 18px;
+    margin-top: 10px;
+    height: 30px;
+    border-bottom: 1px solid #e99605;
+}
+.content_grzl .grzl_msg {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #333;
+    white-space:nowrap;
+}
+.content_grzl .grzl_msg .sp {
+    margin-left: 25px;
+    color: #999;
+}
+a, a:focus, input, textarea {
+    outline: none;
+    resize: none;
+    text-decoration:none;
+}
+.content_grzl #grzl_edit {
+    display: block;
+    margin-top: 30px;
+    width: 115px;
+    height: 39px;
+    text-align: center;
+    line-height: 39px;
+    font-size: 18px;
+    color: #fff;
+    background: #ff9c00;
+}

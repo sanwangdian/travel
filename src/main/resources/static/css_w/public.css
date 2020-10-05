@@ -1,0 +1,244 @@
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    -webkit-tap-highlight-color: transparent;
+    font-family: "\5FAE\8F6F\96C5\9ED1";
+}
+/*全局设置*/
+/**{margin: 0px;padding: 0px;}*/
+/*body{font-family: "Microsoft YaHei UI";font-size: 14px;line-height: 1.6;color: #636b6f;}*/
+ul,li,a{text-decoration: none;list-style: none;background-color: transparent;}
+img {
+    display: block;
+}
+.up_hover{
+    color: orange;
+}
+
+
+/*头部*/
+.public_head {
+    font-family: " Microsoft YaHei";
+    width: 100%;
+    height: 70px;
+    background: rgba(0,0,0,1);
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+}
+.public_head ul {
+    display: block;
+    width: 1200px;
+    height: 70px;
+    margin: auto;
+}
+.public_head .logo {
+    width: 120px;
+    height: 50px;
+    margin-top: 10px;
+    margin-right: 35px;
+    margin-left: 0;
+}
+.public_head li {
+    display: inline-block;
+    position: relative;
+    margin: 0 15px;
+    vertical-align: top;
+    height: 70px;
+}
+.public_head li a {
+    display: inline-block;
+    height: 70px;
+    line-height: 70px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    font-family: Microsoft YaHei;
+}
+.public_head .logo a {
+    width: 120px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.public_head .userinfo, .public_head .userinfo:hover {
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+}
+.public_head .right {
+    float: right;
+}
+.public_head .userinfo {
+    width: 51px;
+    padding-right: 16px;
+    background-position: 50px 26px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.public_head .userinfo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-top: 11.5px;
+}
+.mugua_box, .mugua_a{
+    position: relative !important;
+}
+.mugua_box:hover .mugua_ul{
+    display: block !important;
+}
+.mugua_a{
+    padding-right: 15px;
+}
+.mugua_a::after{
+    content: '';
+    display: block !important;
+    position: absolute !important;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 70px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAFCAYAAAB8ZH1oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA25pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMjBGMjYwOUJEQTdFNjExQjc2M0FBRDYwQjE4NzdDMSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDowNzhENTQ5N0VDNzExMUU3OTZGRkQzOTE1MDREMjc4NCIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDowNzhENTQ5NkVDNzExMUU3OTZGRkQzOTE1MDREMjc4NCIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyMGQxOTYyMy1jOGQwLTQ1NDctYjY1Yi0zMGEyMzQ4MGY5OTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjIwRjI2MDlCREE3RTYxMUI3NjNBQUQ2MEIxODc3QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5TrKZ5AAAAXElEQVR42mL4//9/ERAbADEDDqwBxNlMDAwMb4B4JxBbMWCCICDeD8R/YbqcgPgVEAcimdQGxHeB2BjER7bCEIgfAXEhEG8G4l1AzAeTR3ePDBCfB+IWdLcCBBgAZNqELgY++ZAAAAAASUVORK5CYII=);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 10px 5px;
+}
+.mugua_a:hover::after{
+    /*background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAFCAYAAAB8ZH1oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA25pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMjBGMjYwOUJEQTdFNjExQjc2M0FBRDYwQjE4NzdDMSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoxODlGQTgxNkVDNzExMUU3QjFBMkM1MkY0MEZCOEQyNSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoxODlGQTgxNUVDNzExMUU3QjFBMkM1MkY0MEZCOEQyNSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNyAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoyMGQxOTYyMy1jOGQwLTQ1NDctYjY1Yi0zMGEyMzQ4MGY5OTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjIwRjI2MDlCREE3RTYxMUI3NjNBQUQ2MEIxODc3QzEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7C0STJAAAAc0lEQVR42mL8P4uhiIGBYR9D6v8LDNjAbEYNIOnMBCTeAPFOoIAVFkVBQHI/EP9l+P//PwPQVCcgfgXEgWA+RKwNiO8CsTGIzwgioLoNgeRGIO4HYicgZgfiEKCTPoGkEQohimWA5GYg3gpUUIPsCoAAAwATMDLGG9q9dgAAAABJRU5ErkJggg==);*/
+}
+.mugua_ul{
+    display: none !important;
+    position: absolute !important;
+    left:-35px !important;
+    top:70px !important;
+    width: 120px !important;
+    background: #393939 !important;
+}
+.mugua_li{
+    display: block !important;
+    margin-left: 32px !important;
+    width: 88px !important;
+    height:39px !important;
+    line-height: 39px !important;
+    font-size: 14px !important;
+    color: #fff !important;
+}
+.mugua_li:hover{
+    color:#ff9a00 !important;
+}
+
+/*底部*/
+.b_floor {
+    width: 100%;
+    height: auto;
+    background-color: #3c3c3c;
+    position: relative;
+    font-size: 12px;
+    margin-top: 30px;
+}
+.b_floor .l_wrapper {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: transparent;
+    position: relative;
+}
+.b_floor .m_unit_b2 {
+    padding-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    height: auto;
+    color: #999;
+    background-color: #3c3c3c;
+}
+.b_floor .m_unit_b2 .footerInfo {
+    line-height: 1;
+    position: relative;
+    padding: 30px 0 20px;
+    border-bottom: 1px solid #575a5b;
+}
+.b_floor .m_unit_b2 .friendLines {
+    padding-top: 5px;
+}
+.b_floor .m_unit_b2 .footerInfo .weima {
+    position: absolute;
+    z-index: 100;
+    right: -26px;
+    top: 0;
+    z-index: 2;
+}
+.b_floor .m_unit_b2 .footerInfo .weima li {
+    float: left;
+    margin: 30px;
+    text-align: center;
+}
+.b_floor .m_unit_b2 .footerInfo p {
+    margin-bottom: 15px;
+}
+.weima li p {
+    margin-top: 8px;
+    color: #ff8900;
+}
+.b_floor .m_unit_b2 a {
+    color: #b0b0b0;
+    margin: 0 3px;
+}
+.b_floor .m_unit_b2 span {
+    margin: 0 1px;
+}
+.b_floor .m_unit_b2 .friendLines .footerImages {
+    padding-top: 36px;
+    clear: both;
+}
+.foot-ext {
+    width: 985px;
+    margin: 0 auto;
+    padding: 12px 0;
+}
+.b_floor .m_unit_b2 .friendLines .footerImages a {
+    display: block;
+    height: 47px;
+    background-color: #ccc;
+    float: left;
+}
+.foot-ext .footer-ext-s2 {
+    width: 116px;
+    background-position: -133px 0;
+}
+.foot-ext .footer-ext-s3 {
+    width: 116px;
+    background-position: -253px 0;
+}
+.foot-ext .footer-ext-s4 {
+    width: 116px;
+    background-position: -375px 0;
+}
+img {
+    vertical-align: middle;
+}
+.foot-ext .footer-ext-s5 {
+    width: 116px;
+    background-position: -495px 0;
+}
+.foot-ext .footer-ext-s6 {
+    width: 43px;
+    background-position: -617px 0;
+}
+.foot-ext .footer-ext-s7 {
+    width: 56px;
+    background-position: -665px 0;
+}
+.b_floor .m_unit_b2 .friendLines a {
+    margin-bottom: 5px;
+}
+.foot-ext a {
+    margin-right: 6px;
+    background-repeat: no-repeat;
+    background-image: url("../images_W/ext.jpg");
+    height: 47px;
+    float: left;
+}

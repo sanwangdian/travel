@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css1/community_xc.css">
+    <link rel="stylesheet" href="css1/tou.css">
+    <link rel="stylesheet" href="css1/B_floor.css">
+    <link rel="stylesheet" href="css1/Tool_bar.css">
+    <link rel="stylesheet" href="css1/bootstrap1.css">
+    <link rel="stylesheet" href="css1/Travel_article.css">
+    <script src="js/vue.min1.js"></script>
+    <script src="js/jquery-3.4.1.min1.js"></script>
+    <script src="js/bootstrap.js"></script>
+<script>
+    $(function () {
+        var userId = sessionStorage.getItem("USERID");
+        //获取时间
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+
+
+            var vm = new Vue({
+                el: "#app",
+                data: {
+                    photos:[],
+                    users:[],
+                    pagenum: 1,
+                    pagesize: 2,
+                    Count: 0,
+                    NavigatepageNums: [],
+                    UserImg: "",
+                    UserSign: "",
+                },
+                methods: {
+
+                    Photo: function () {
+                        vm.photos=[];
+                        vm.NavigatepageNums=[];
+                        $.ajax({
+                            url: "/getphoto",
+                            type: "post",
+                            data: {
+                                "userId": userId,
+                                "photoName": $("input[name='pname']").val(),
+                                "photoTime": currentdate,
+                                "photoPower": $("#power").val(),
+                                "pageNum":vm.pagenum,
+                                "pageSize":vm.pagesize,
+                            },
+                            datatype: "json",
+                            success: function (data) {
+                                for (var i = 0; i < data.size; i++) {
+                                    vm.photos.push({PhotoName:data.list[i].photoName,PhotoTime:data.list[i].photoTime,
+                                        PhotoPower:data.list[i].photoPower,PhotoId:data.list[i].photoId});
+                                }
+                                for (var i = 0; i < data.navigatepageNums.length; i++) {
+                                    vm.NavigatepageNums.push({Nums:data.navigatepageNums[i]});
+                                }
+                                vm.Count=data.total;
+                            }
+                        })
+
+                    },
+                    //删除
+                    deletePhoto:function (index) {
+                        confirm("确定删除该相册吗？")
+                        var pId = vm.photos[index].PhotoId;
+                        $.ajax({
+                            url:"/deletePhotoArray",
+                            data:{
+                                pid:pId
+                            },
+                            type:"post",
+                            success:function () {
+                                confirm("删除成功！");
+                                vm.Photo();
+
+                            }
+                        })
+
+                    },
+                    //分页------------------------
+                    pagedown: function () {
+                        if(vm.pagenum<Math.ceil(vm.Count/vm.pagesize)){
+                            $(".item_article").remove();
+                            vm.pagenum++;
+                            vm.Photo();
+                        }else{
+                            confirm("最后一页")
+                        }
+                    },
+                    pageup: function () {
+                        if(vm.pagenum>1){
+                            $(".item_article").remove();
+                            vm.pagenum--;
+                            vm.Photo();
+                        }else{
+                            confirm("第一页");
+                        }
+
+                    },
+                    pageclick:function (index) {
+                        vm.pagenum=index+1;
+                        $(".item_article").remove();
+                        vm.Photo();
+
+                    }
+
+                }
+
+
+            })
+        vm.Photo();
+        $.ajax({
+            url: "/getusersi",
+            type: "post",
+            data:{
+                "userId":userId,
+
+            },
+            datatype: "json",
+            success: function (data) {
+                vm.users.push({UserName:data[0].userRickname,UserImg:data[0].userImg,
+                    UserSign:data[0].userSign,userPicaddress:data[0].user_picaddress
+                })
+
+
+
+                // vm.UserImg=data[0].userImg;
+                // vm.UserSign=data[0].userSign;
+            }
+        })
+
+
+        })
+
+
+
+</script>
+
+
+    <!--        静态页面-->
+    <script>
+
+       // $(function () {
+       //
+       //
+       //
+       //     //克隆 添加相册
+       //     // var $mould=$(".item_album").detach();
+       //     // var $node =$mould.clone(true);
+       //     // $(".modal-footer").children().eq(1).click(function () {
+       //     //     $node.find(".album_h3").children().eq(1).text($("input[name='pname']").val());
+       //     //     // $node.find(".time").text(currentdate);
+       //     //     $("#chuangjian").before($node);
+       //     //     $node =$mould.clone(true);
+       //     //
+       //     // })
+       // })
+    </script>
+</head>
+<body>
+<div id="app">
+    <div class="public_head">
+        <div class="public_head_auto">
+            <ul class="public_head_nav">
+                <li class="logo"><a href="" target="_blank"></a></li>
+                <li><a href="sy-index.html">首页</a></li>
+                <li><a href="community_my.html" id="shequ"  class="active" >社区</a></li>
+                <li><a href="" id="quanzi" >圈子</a></li>
+                <li><a href="" id="forum" >目的地</a></li>
+                <li><a href="" id="wenda" >问答</a></li>
+                <li><a href="YouJi-Z.html">攻略</a></li>
+                <li><a href="video.html" target="_blank">视频</a></li>
+                <li><a href="" target="_blank">领队</a></li>
+                <li><a href="photo.html" target="_blank">摄影</a></li>
+                <li class="yaoyao_box">
+                    <a class="yaoyao_a" href="javascript:;">旅游</a>
+                    <div class="yaoyao_ul">
+                        <a href="" target="_blank" class="yaoyao_li">周边游</a>
+                        <a href="" target="_blank" class="yaoyao_li">国内游</a>
+                        <a href="" target="_blank" class="yaoyao_li">出境游</a>
+                        <a href="" target="_blank" class="yaoyao_li">当地玩乐</a>
+                        <a href="" target="_blank" class="yaoyao_li">亲子游</a>
+                        <a href="" target="_blank" class="yaoyao_li">户外游</a>
+                        <a href="" target="_blank" class="yaoyao_li">定制游</a>
+                        <a href="" target="_blank" class="yaoyao_li">活动赛事</a>
+                    </div>
+                </li>
+                <input type="hidden" value="" id="yxklogin">
+                <li style="float: right;"><a href="register.html ">注册</a></li>
+                <li style="float: right;"><a href="login.html">登录</a></li>
+                <li class="xc_message right mouse_up">
+                    <div class="xx"><i></i><span></span>消息 <span class="down"></span></div>
+                    <!--                    <ul class=" mouse_wrapper">-->
+                    <!--                        <li><a href="" target="_blank">订单消息</a></li>-->
+                    <!--                        <li><a href="" target="_blank">互动消息</a></li>-->
+                    <!--                        <li><a href="" target="_blank">系统通知</a></li>-->
+                    <!--                        <li><a href="" target="_blank">私信</a></li>-->
+                    <!--                    </ul>-->
+                </li>
+                <li class="userinfo right mouse_up">
+                    <div class="xx">
+                        <a href="" target="_blank">
+                            <img src="https://img3.youxiake.com/static/images/defaultAvatar.png?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90" alt="">
+                        </a>
+                        <span class="down"></span>
+                    </div>
+                    <!--                    <ul class="userinfo_wrapper mouse_wrapper">-->
+                    <!--                        <li class="color"><a href="" target="_blank">积分 1</a> / <a href="" target="_blank">游侠币 0.00</a></li>-->
+                    <!--                        <li><span class="bg bg1"></span> <input type="hidden" value="11002928" id="yxkuid"> <a href="" target="_blank">我的等级</a></li>-->
+                    <!--                        <li><span class="bg bg2"></span> <a href="" target="_blank">我的领地</a></li>-->
+                    <!--                        <li><span class="bg bg3"></span> <a href="" target="_blank">我的订单</a></li>-->
+                    <!--                        <li><span class="bg bg9"></span> <a href="" target="_blank">我的收藏</a></li>-->
+                    <!--                        <li><span class="bg bg4"></span> <a href="" target="_blank">我的游记/攻略</a></li>-->
+                    <!--                        <li><span class="bg bg5"></span> <a href="" target="_blank">我的草稿箱</a></li>-->
+                    <!--                        <li><span class="bg bg6"></span> <a href="" target="_blank">摄影作品</a></li>-->
+                    <!--                        <li><span class="bg bg7"></span> <a href="" target="_blank">个人设置</a></li>-->
+                    <!--                        <li><span class="bg bg8"></span><a href="">退出登录</a></li>-->
+                    <!--                    </ul>-->
+                </li>
+
+            </ul>
+        </div>
+    </div>
+<!--------------------------------图片+导航栏------------------------------>
+    <div class="user_top">
+<!----------------------------------背景图片------------------>
+    <div class="cover_image" style="background-image: url(https://img3.youxiake.com/static/images/homeDefaultTop.png?imageslim);">
+        <div class="auto_x">
+            <div class="up_image">
+                <i></i>上传封面图</div>
+        </div>  <!---->
+<!---------------------------------小导航栏--------------------->
+        <nav id="user_nav" class="user_nav">
+            <ul>
+                <li class=""><a href="community_my.html">我的领地</a></li>
+                <li class=""><a href="community_youji.html">我的游记/攻略</a></li>
+                <li class=""><a href="community_xc.html">我的相册</a></li>
+                <li class=""><a href="community_sy.html">我的摄影作品</a></li>
+                <li class=""><a href="userInfo.html">我的详细信息</a></li>
+            </ul>
+        </nav>
+
+
+
+
+
+
+    </div>
+
+
+</div>
+<!--    具体内容-->
+    <div class="user_center">
+        <div class="user_left">
+<!--            头像------->
+            <div class="user_tx">
+                <img :src=users[0].userPicaddress>
+                <a href="" target="_blank" class="change_tx"><i class="icon_camr"></i></a>
+                <!----></div>
+<!--            个性签名               -->
+            <div class="user_other_info">
+                <h3>{{users[0].UserName}}<i class="icon_sex_man"></i> <!----></h3>
+                <div class="user_tag"></div>
+                <div class="item_lv"><span class="name">社区等级：</span>
+                    <a href="/user/lv.html" target="_blank">Lv.1 普陀山</a>
+                </div>
+                <div class="item_lv"><span class="name">消费等级：</span>
+                    <a href="/user/cost.html" target="_blank">
+                        <span class="lv_vip lv_vip1"><i></i>普通会员</span></a>
+                </div> <!----> <div class="user_jj">
+                {{users[0].UserSign}}
+        </div>
+            </div>
+<!--            粉丝   关注-->
+            <ul class="gz_fans">
+                <li><a href=""><span class="numb">0</span> <span class="xx">关注</span></a></li>
+                <li><a href=""><span class="numb">0</span> <span class="xx">粉丝</span></a></li>
+            </ul> <!---->
+<!--            谁看过我-->
+            <div class="who_look">
+                <h3>谁看过我</h3> <p><!----></p>
+                <ul>
+                    <li><a href="" target="_blank">
+                        <img src="https://img2.youxiake.com/000/00/00/16_avatar_big.jpg?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90">
+                        <span>懒人TONY</span></a></li>
+                    <li><a href="" target="_blank">
+                        <img src="https://img2.youxiake.com/000/01/25/58_avatar_big.jpg?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90">
+                        <span>孟小雅</span></a></li>
+                    <li><a href="" target="_blank">
+                        <img src="https://img2.youxiake.com/000/01/81/29_avatar_big.jpg?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90">
+                        <span>雅洁</span></a></li>
+                    <li><a href="" target="_blank">
+                        <img src="https://img2.youxiake.com/avatar23625_89LfeZ9tC8Li.jpg?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90">
+                        <span>曾豪_真好</span></a></li>
+                    <li><a href="" target="_blank">
+                        <img src="https://img2.youxiake.com/000/05/16/32_avatar_big.jpg?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90">
+                        <span>张力视觉</span></a></li>
+                    <li><a href="" target="_blank">
+                        <img src="https://img2.youxiake.com/001/12/27/20_avatar_big.jpg?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90">
+                        <span>江湖雁</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="user_right">
+            <div class="user_album">
+                <div class="album_tit_top">
+                    <div class="btn_link">
+                        <a role="button"  class="updata_album"  data-toggle="modal" data-target="#myModal">创建相册</a>
+<!--                        <button class="updata_album" data-toggle="modal" data-target="#myModal">创建相册</button>-->
+                    </div>
+                    <h3 class="tit">我的相册<em>{{Count}}</em></h3>
+                </div> <!---->
+<!--                <div class="none_data">-->
+<!--                    <img src="https://img3.youxiake.com/static/images/homeNoPic.png">-->
+<!--                </div>-->
+                <ul class="album_list">
+                    <div id="chuangjian"></div>
+                    <li class="item_album" v-for="(photo,index) in photos">
+                        <a href="https://bbs.youxiake.com/album/11002928/3153682.html" target="_blank">
+                            <div class="pic">
+                                <img src="https://img3.youxiake.com/static/images/defaultCover.jpg?imageMogr2/auto-orient/thumbnail/!302x170r/gravity/Center/crop/!302x170/quality/90">
+                                <span class="h_nb">共0张</span>
+                            </div>
+                            <div class="album_h3">
+                                <span class="time">{{photo.PhotoTime}}</span>
+                                <a href="https://bbs.youxiake.com/album/11002928/3153682.html" target="_blank">{{photo.PhotoName}}</a>
+                            </div>
+                        </a>
+                        <div class="album_edit">
+                            <div class="edit_btn">
+                                <span>编辑</span>
+                                <span @click="deletePhoto(index)">删除</span>
+                            </div>
+                            <a href="https://bbs.youxiake.com/album/11002928/3153682/upload" class="up_link">上传照片</a>
+                        </div>
+                    </li>
+                </ul> <!---->
+<!--                创建相册模态框-->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel" style="color:#ff9a00">创建相册</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="power">
+                                    <span class="pname_p">相册名称：</span><input type="text" class="pname" name="pname">
+                                </div>
+
+                                <div class="powerd">
+                                    <label for="power">权限:</label>
+                                    <select id="power" >
+                                        <option value="仅自己可见">仅自己可见</option>
+                                        <option value="所有人可见">所有人可见</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="submit" class="btn btn btn-warning" data-dismiss="modal" id="cjxc" @click="Photo">创建相册</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+
+<!--               上传图片 模态框-->
+
+
+            </div>
+
+        </div>
+        <div style="float: left;margin-left: 750px;width: 1500px  ">
+            <ul class="pagination pagination-lg">
+                <li><a href="javascript:" @click="pageup">&laquo;</a></li>
+                <li class="FColor" v-for="(Num,index) in NavigatepageNums"><a href="javascript:"  @click="pageclick(index)">{{Num.Nums}}</a></li>
+                <li><a href="javascript:" @click="pagedown">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div  style="position: relative;top: 1300px">
+        <!--底部-->
+        <div class="b_floor">
+            <div class="l_wrapper">
+                <div class="m_unit_b2">
+                    <div class="footerInfo">
+                        <ul class="weima">
+                            <li>
+                                <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>
+                            </li>
+                            <li>
+                                <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>
+                            </li>
+                        </ul>
+                        <p>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
+                            <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                        </p>
+                        <p>
+                            <span>浙ICP备 09011712 号-1</span>
+                            <span>浙公网安备 33010602002105号</span>
+                            <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>
+                            <span>浙江神游网国际旅行社有限公司</span>
+                            <span>杭州途游电子商务有限公司</span>
+                            <span>许可证编号：L-ZJ-CJ00161</span>
+                        </p>
+                        <p>? 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
+                        <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+                    </div>
+                    <div class="friendLines">
+                        <div class="footerImages clearfix foot-ext">
+                            <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>
+                            <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>
+                            <a href="javascript:;" rel="nofollow"  title="12321垃圾信息举报中心" class="footer-ext-s4"></a>
+                            <a href="javascript:;" rel="nofollow">
+                                <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png" alt="支付宝">
+                            </a>
+                            <a href="javascript:;" rel="nofollow"  title="网络110报警服务" class="footer-ext-s5"></a>
+                            <a href="javascript:;" rel="nofollow"  title="网上标识信息" class="footer-ext-s6"></a>
+                            <a href="javascript:;" rel="nofollow"  title="全球中文论坛100强" class="footer-ext-s7"></a>
+                            <a target="cyxyv" href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">
+                                <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <a href="javascript:" name="floor">&nbsp;</a>
+            </div>
+        </div>
+        <!--右侧页面工具-->
+        <div class="tool_bar">
+            <ul>
+                <li class="backBot">
+                    <i class="icon">
+                        <a href="#floor"><img src="./images/下载%20(2).png" alt=""></a>
+                    </i>
+                    <span class="name">页面底部</span>
+                </li>
+                <li class="backTop">
+                    <i class="icon">
+                        <a href="#"><img src="./images/下载%20(3).png" alt=""></a>
+                    </i>
+                    <span class="name">返回顶部</span>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

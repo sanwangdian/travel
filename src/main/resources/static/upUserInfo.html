@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link  rel="stylesheet" href="css/upUserInfo.css">
+
+    <link  rel="stylesheet" href="easyuii/themes/default/easyui.css">
+    <link  rel="stylesheet" href="easyuii/themes/icon.css">
+    <script type="text/javascript" src="easyuii/jquery.min.js"></script>
+    <script type="text/javascript" src="easyuii/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="easyuii/locale/easyui-lang-zh_CN.js"></script>
+<!--    <script  src="js/jquery-3.4.1.js" type="text/javascript"></script>-->
+<!--    <script src="js/jquery.validate.js" type="application/javascript"></script>-->
+<!--    <script src="js/jquery.validate.regex.js" type="application/javascript"></script>-->
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <title>个人资料修改</title>
+    <script>
+        // 当鼠标点击哪个按钮时，给那个按钮添加样式dian
+        // radio1
+        $(function () {
+            var userId =  $.cookie('userId');
+            $('#userBirthday').datebox({
+                required:true
+            });
+
+            $('#subbut').click(function () {
+                var address=$("select[name='resideprovince']").find("option:selected").text()
+                    +$("select[name='residecity']").find("option:selected").text();
+                    $.ajax({
+                        url:"/updateUserInfo",
+                        type:"post",
+                        data:{
+                            userId:userId,
+                            userRickname:$("#userRickname").val(),
+                            userName:$("#userName").val(),
+                            userSex:$("input[name='userSex'][checked]").val(),
+                            userBirthday:$('#userBirthday').datebox('getValue'),
+                            userAddress:address,
+                            userSign:$('#sign').val()
+                        },
+                        dataType:"json",
+                        success:function (data){
+                            location.href="userInfo.html";
+                        }
+
+                })
+            });
+            $('#cancel').click(function () {
+                location.href="sy-index.html";
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="content">
+        <div class="content_middle">
+            <div class="middle_content content_grzlxg content_content">
+               <span class="middle_content_title">个人资料</span>
+                <form id="grzl">
+                    <p>
+                        <label for="userRickname">
+                            <span>* </span>
+                            神游昵称：
+                        </label>
+                        <input type="text" id="userRickname" name="userRickname" value="" placeholder="昵称要求为4-16个字符，支持中文、英文、数字" class="gereninput">
+                        <span class="waringicon" style=""></span>
+                        <span class="waring"></span>
+                    </p>
+                    <p>
+                        <label for="userName"><span>* </span>真实姓名 :</label>
+                        &nbsp;
+                        <input type="text" id="userName"
+                               name="userName" value="" placeholder="姓名要求为2-40位英文或2-20位中文，支持空格，“·”，不能中英混搭"
+                               class="gereninput">
+                        <span class="waringicon" style=""></span>
+                        <span class="waring"></span>
+                    </p>
+                    <p>
+                        <label class="radio_p"><span>* </span><font>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</font>：</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="radio" name="userSex" value="女" checked>女
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="userSex" value="男">男
+                    </p>
+                    <p>
+                        <label for="userBirthday">
+                            <span>* </span>出生日期 :
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input  type="text" class="text laydate-icon" name="userBirthday"
+                               id="userBirthday" value=" 1970-01-01 " placeholder="完善生日信息有可能获得生日大礼噢~" lay-key="1">
+                        <span class="waringicon"></span>
+                        <span class="waring"></span>
+                    </p>
+                    <p>
+                        <label>
+                            <span>* </span>
+                            <font style="letter-spacing: 7px">常驻地</font>:
+                        </label>
+                        <span id="province">
+                           <select name="resideprovince" onchange="search_city(this,'city');" class="sheng">
+                                  <option value="">省份</option>
+                                  <option value="上海">上海</option>
+                                  <option value="北京">北京</option>
+                                  <option value="安徽">安徽</option>
+                                  <option value="山东">山东</option>
+                                  <option value="广东">广东</option>
+                                  <option value="福建" selected="">福建</option>
+                           </select>
+                        </span>
+                        <span id="city">
+<!--                                <select name="residecity" class="shi">-->
+<!--                                    <option value="">城市</option>-->
+<!--                                    <option value="上海">上海</option>-->
+<!--                            </select>-->
+<!--                             <select name="residecity" class="shi">-->
+<!--                                    <option value="">城市</option>-->
+<!--                                    <option value="北京">北京</option>-->
+<!--                            </select>-->
+<!--                            <select name="residecity" class="shi">-->
+<!--                                    <option value="">城市</option>-->
+<!--                                    <option value="合肥">合肥</option>-->
+<!--                                    <option value="芜湖">芜湖</option>-->
+<!--                                    <option value="淮南">淮南</option>-->
+<!--                                    <option value="淮北">淮北</option>-->
+<!--                            </select>-->
+<!--                             <select name="residecity" class="shi">-->
+<!--                                    <option value="">城市</option>-->
+<!--                                    <option value="济南">济南</option>-->
+<!--                                    <option value="青岛">青岛</option>-->
+<!--                                    <option value="烟台">烟台</option>-->
+<!--                                    <option value="威海">威海</option>-->
+<!--                                    <option value="日照">日照</option>-->
+<!--                            </select>-->
+<!--                                <select name="residecity" class="shi">-->
+<!--                                    <option value="">城市</option>-->
+<!--                                    <option value="广州">广州</option>-->
+<!--                                    <option value="佛山">佛山</option>-->
+<!--                                    <option value="深圳">深圳</option>-->
+<!--                                    <option value="汕头">汕头</option>-->
+<!--                                    <option value="湛江">湛江</option>-->
+<!--                            </select>-->
+                            <select name="residecity" class="shi">
+                                    <option value="">城市</option>
+                                    <option value="三明">三明</option>
+                                    <option value="南平">南平</option>
+                                    <option value="厦门">厦门</option>
+                                    <option value="宁德">宁德</option>
+                                    <option value="泉州">泉州</option>
+                                    <option value="漳州">漳州</option>
+                                    <option value="福州">福州</option>
+                                    <option value="莆田">莆田</option>
+                                    <option value="龙岩">龙岩</option>
+                            </select>
+                        </span>
+                    </p>
+                    <p style="position: relative;">
+                        <span id="textareaNumber" style="position: absolute;left: 545px;bottom: 0;color: #d3d3d3;">32</span>
+                        <label style="position: absolute">
+                            <span style="color: rgba(0,0,0,0);">* </span>
+                            个性签名 :
+                        </label>
+                        <textarea maxlength="32" name="Intro" id="sign" cols="30" rows="10" placeholder="快给自己取一个吊炸天际的签名吧~"></textarea>
+                        <span class="waringicon"></span>
+                        <span class="waring"></span>
+                    </p>
+                    <div id="subbut">保存</div>
+                    <div id="cancel">取消</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

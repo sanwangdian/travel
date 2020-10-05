@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>记录旅游的点点滴滴</title>
+    <link rel="stylesheet" href="sycss/b_floor.css">
+    <link rel="stylesheet" href="sycss/Tou.css">
+    <link rel="stylesheet" href="sycss/travel_article.css">
+    <link rel="stylesheet" href="sycss/tool_bar.css">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/vue.min.js"></script>
+    <link rel="stylesheet" href="sycss/bootstrap.css">
+    <script>
+        $(function () {
+            $("#top").mouseenter(function () {
+                $("#top").parent().next().show();
+            });
+            $("#top").mouseleave(function () {
+                $("#top").parent().next().hide();
+            });
+            $("#bot").mouseenter(function () {
+                $("#bot").parent().next().show();
+            });
+            $("#bot").mouseleave(function () {
+                $("#bot").parent().next().hide();
+            });
+            $("div[title='pic'] img").click(function (){
+                $(".s_edit_set").hide();
+                $(this).prev().show();
+            });
+        })
+    </script>
+    <script>
+        $(function () {
+            var t = 0;
+            $(".edit_delede_pic").click(function () {
+                console.log("删除");
+                $(this).parents(".add_pic_muti").remove();
+            });
+            $(".edit_top_pic img").click(function () {
+
+               if(t==0){
+                   $(this).css("opacity","0.5");
+                   t = 1;
+               }
+               else{
+                   $(this).css("opacity","1");
+                   t=0;
+               }
+            });
+
+            //添加地点
+            $("#myModal4 .modal-footer button").click(function () {
+               var local = $("#myModal4").find("input").val()+ " ";
+               $(".adr").text(local);
+            });
+            // 文本实时保存功能
+            $(".layui-textarea").blur(function () {
+                var msg =  $(this).val();
+                $(this).text(msg);
+            });
+          //  照片样式方法（删除+设为封面）
+            $(".s_delete_pic").click(function () {
+               var url =  $(this).parent().next()[0].src;
+               $(this).parents("div[title='pic']").remove();
+               $.ajax({
+                   url:"/deletePic",
+                   data:{
+                       url:url
+                   },
+                   type:"post",
+                   success:function (){
+                       confirm("图片已删除！点击确定继续编辑！")
+                   }
+               })
+            });
+            $("span[title='choice']").click(function () {
+                // $(this).parent().next().css("src");
+                if(confirm("一旦设置封面将不能更改，确定将该图设置成封面吗？")==true){
+                    $(this).next().show();
+                    $(this).next().attr("title","check");
+                    $("span[title='choice']").remove();
+                }
+
+
+
+            });
+
+            //缩略图样式节点
+          var pic_model = $(".edit_top_pic").parent().detach();
+          //目录样式节点
+           var menu_model = $("div[title='menu_title']").detach();
+           // 展示图片副本
+           var main_pic = $(".m_unit_photo").parent().detach();
+           //文本样式节点
+           var text = $("div[title='word']").detach();
+
+
+           //文本样式添加
+            $(".icon_wordH").parent().click(function () {
+                // console.log($(this).parents(".hoverBtn").prev().html());
+                // console.log(text.html());
+                if($(this).parents(".hoverBtn").prev().html()!=text.html()){
+                    var text_clone = text.clone(true);
+                    $(".m_view_main div:last").prev().after(text_clone);
+                }
+            });
+          //照片缩略图预览
+          $(".add_pic_muti").click(function (){
+              var pic_clone = pic_model.clone(true);
+              $(this).before(pic_clone);
+              console.log("添加");
+              var inputBox = document.getElementById("inputObj");
+              inputBox.addEventListener("change",function(){
+                  var reader = new FileReader();
+                  reader.readAsDataURL(inputBox.files[0]);//发起异步请求
+                  reader.onload = function(){
+                      //读取完成后，数据保存在对象的result属性中
+                      var url = this.result;
+                      $("#add_pic").prev().find("img").attr("src",url);
+                      $('input[type="file"]').val(null);
+                  };
+                  reader.close;
+              });
+              $(this).prev().show();
+              });
+           // 头图预览
+            $("#inputT").click(function () {
+                var reader = new FileReader();
+                var inputT = document.getElementById("inputT");
+                inputT.addEventListener("change",function () {
+                    reader.readAsDataURL(inputT.files[0]);
+                    reader.onload = function (){
+                        var url = "url(" + this.result + ")";
+                        $("#head_photo").css("background",url);
+                        // var head_pic = $("#head_photo").css("backgroundImage");
+                        // head_pic = head_pic.split("(")[1].split(")")[0];
+                        // console.log(head_pic);
+                    }
+                });
+          });
+
+            // 添加目录样式
+            $("#myModal1 #menu_btn").click(function (){
+                var menu_clone = menu_model.clone(true);
+                var message =  $("#myModal1 input").val();
+                if(message!=''){
+                    $(".m_view_main div:last").prev().after(menu_clone);// 获取当前编辑文本最后一个位置
+                    $("div[title='menu_title'] span:last").text(message);
+                    $("#myModal1 input").val('');
+                }
+            });
+            //添加图片样式
+            $("#myModal .modal-footer").children().eq(1).click(function () {
+                var urlList = null;
+                var max = $(".images_px").children().length;
+                for (var i=0;i < (max-1);i++){
+                    if($(".images_px").children().eq(i).find("img").css("opacity") == "0.5"){
+                        urlList = $(".images_px").children().eq(i).find("img")[0].src;
+                        $.ajax({
+                            url:"/uploadPic",
+                            data:{
+                                imageFile:urlList
+                            },
+                            type:'post',
+                            success:function (data){
+                                var mainPic_clone = main_pic.clone(true);
+                                $(".m_view_main div:last").prev().after(mainPic_clone);// 获取当前编辑文本最后一个位置并添加节点
+                                $("div[title='pic'] img:last").attr("src",data);
+                            }
+                        });
+                    }
+                }
+
+            })
+
+
+        })
+
+    </script>
+
+</head>
+<body style="position: relative;top:-10px;">
+<div id="app">
+    <!--顶部导航栏-->
+    <div class="public_head">
+        <div class="public_head_auto">
+            <ul class="public_head_nav">
+                <li class="logo"><a href="" target="_blank">
+                    <img src="./images/logo_y.png" alt="">
+                </a></li>
+                <li><a href="sy-index.html">首页</a></li>
+                <li><a href="community_my.html" id="shequ"  class="active" >社区</a></li>
+                <li><a href="" id="quanzi" >圈子</a></li>
+                <li><a href="" id="forum" >目的地</a></li>
+                <li><a href="" id="wenda" >问答</a></li>
+                <li><a href="YouJi-Z.html">攻略</a></li>
+                <li><a href="video.html" >视频</a></li>
+                <li><a href="" >领队</a></li>
+                <li><a href="photo.html" >摄影</a></li>
+                <li class="yaoyao_box">
+                    <a class="yaoyao_a" href="javascript:;">旅游</a>
+                    <div class="yaoyao_ul">
+                        <a href="" target="_blank" class="yaoyao_li">周边游</a>
+                        <a href="" target="_blank" class="yaoyao_li">国内游</a>
+                        <a href="" target="_blank" class="yaoyao_li">出境游</a>
+                        <a href="" target="_blank" class="yaoyao_li">当地玩乐</a>
+                        <a href="" target="_blank" class="yaoyao_li">亲子游</a>
+                        <a href="" target="_blank" class="yaoyao_li">户外游</a>
+                        <a href="" target="_blank" class="yaoyao_li">定制游</a>
+                        <a href="" target="_blank" class="yaoyao_li">活动赛事</a>
+                    </div>
+                </li>
+                <input type="hidden" value="" id="yxklogin">
+                <li style="float: right;"><a href="register.html">注册</a></li>
+                <li style="float: right;"><a href="login.html">登录</a></li>
+                <li class="xc_message right mouse_up">
+                    <div class="xx"><i></i><span></span>消息<span class="down"></span></div>
+                    <!--                    <ul class=" mouse_wrapper">-->
+                    <!--                        <li><a href="" target="_blank">订单消息</a></li>-->
+                    <!--                        <li><a href="" target="_blank">互动消息</a></li>-->
+                    <!--                        <li><a href="" target="_blank">系统通知</a></li>-->
+                    <!--                        <li><a href="" target="_blank">私信</a></li>-->
+                    <!--                    </ul>-->
+                </li>
+                <li class="userinfo right mouse_up">
+                    <div class="xx">
+                        <a href="" target="_blank">
+                            <img src="https://img3.youxiake.com/static/images/defaultAvatar.png?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90" alt="">
+                        </a>
+                        <span class="down"></span>
+                    </div>
+                    <!--                    <ul class="userinfo_wrapper mouse_wrapper">-->
+                    <!--                        <li class="color"><a href="" target="_blank">积分 1</a> / <a href="" target="_blank">游侠币 0.00</a></li>-->
+                    <!--                        <li><span class="bg bg1"></span> <input type="hidden" value="11002928" id="yxkuid"> <a href="" target="_blank">我的等级</a></li>-->
+                    <!--                        <li><span class="bg bg2"></span> <a href="" target="_blank">我的领地</a></li>-->
+                    <!--                        <li><span class="bg bg3"></span> <a href="" target="_blank">我的订单</a></li>-->
+                    <!--                        <li><span class="bg bg9"></span> <a href="" target="_blank">我的收藏</a></li>-->
+                    <!--                        <li><span class="bg bg4"></span> <a href="" target="_blank">我的游记/攻略</a></li>-->
+                    <!--                        <li><span class="bg bg5"></span> <a href="" target="_blank">我的草稿箱</a></li>-->
+                    <!--                        <li><span class="bg bg6"></span> <a href="" target="_blank">摄影作品</a></li>-->
+                    <!--                        <li><span class="bg bg7"></span> <a href="" target="_blank">个人设置</a></li>-->
+                    <!--                        <li><span class="bg bg8"></span><a href="">退出登录</a></li>-->
+                    <!--                    </ul>-->
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <!--主体头部-->
+    <div class="main">
+        <div id="head_photo" class="l_set_pic">
+            <dl>
+                <dt><input id="inputT" type="file" style="opacity: 0;width: 100%;height: 100%"></dt>
+                <dd><h2>设置游记头图</h2></dd>
+                <dd>图片建议选择尺寸1920 * 635PX以上的高清大图，如相机原图</dd>
+            </dl>
+            <div class="m_set_title">
+                <input type="text" placeholder="请输入标题" maxlength="80">
+                <span style="display: none;">还可输入<strong>80</strong>个字符</span>
+                <div class="st_pop"></div>
+            </div>
+
+        </div>
+    </div>
+<!--    主体文章-->
+    <div class="l_set_article">
+        <div class="b_content_list">
+
+            <div class="m_view_main" style="z-index: 1;">
+<!--                顶部工具-->
+                <div class="hoverBtn">
+                    <ul class="btnList">
+                        <li role="button" data-toggle="modal" data-target="#myModal"><i class="icon_picH"></i>添加照片</li>
+                        <li role="button" data-toggle="modal" data-target="#myModal1"><i class="icon_titleH"></i>添加目录</li>
+                        <li role="button" data-toggle="modal" data-target="#myModal2"><i class="icon_videoH"></i>添加视频</li>
+                    </ul>
+                </div>
+
+<!--                游记内容添加区-->
+                <div data-index="0" class="m_edit_module" id="details">
+                <div class="m_unit_word">
+                    <div class="auto-textarea-wrapper">
+                        <textarea placeholder="在这儿添加游记文字......" class="layui-textarea" style="padding: 15px;" onpaste="return true;"></textarea>
+                    </div>
+                </div></div>
+<!--                末端工具-->
+                <!---->
+                <div class="hoverBtn">
+                    <ul class="btnList">
+                        <li role="button">
+                            <i class="icon_wordH"></i>添加文字</li>
+                        <li data-tool="section" role="button" data-toggle="modal" data-target="#myModal">
+                            <i class="icon_picH"></i>添加照片</li>
+                        <li data-tool="section" role="button" data-toggle="modal" data-target="#myModal1">
+                            <i class="icon_titleH" ></i>添加目录</li>
+                        <li data-tool="section" role="button"data-toggle="modal" data-target="#myModal2">
+                            <i class="icon_videoH"></i>添加视频</li>
+                    </ul>
+                </div>
+
+            </div>
+<!--            目录显示区以及功能点击区-->
+            <div class="m_view_sider">
+                <div>
+                    <div class="m_edit_object">
+                        <ul>
+                            <li class="s_unit_pic">
+                                <a role="button" data-toggle="modal" data-target="#myModal"><i class="icon_pic"></i><span>添加照片</span></a>
+                                <div class="tip">*建议一次最多上传60张图片</div>
+                            </li>
+                            <li id="paragraph_title" class="s_unit_title"><a role="button" data-toggle="modal" data-target="#myModal1"><i class="icon_title"></i><span>添加目录</span></a></li>
+                            <li class="s_unit_video"><a role="button"data-toggle="modal" data-target="#myModal2"><i class="icon_video"></i><span>添加视频</span></a></li>
+                            <li id="music" class="s_unit_music">
+                                <div class="music-content">
+                                    <a role="button" data-toggle="modal" data-target="#myModal3">
+                                        <i class="icon_music"></i><span>添加音乐</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="s_unit_quanzi"><a role="button"><i class="icon_quanzi"></i><span>圈子标签</span><i class="new"></i></a></li>
+                            <div class="s_unit_save">
+                                <a class="s_save_btn">保存草稿</a>
+                            </div>
+                            <div class="draftTipsbtn"><a href="javascript:" target="_blank" >我的草稿箱</a></div>
+                            <h3>游记目录</h3>
+                            <div id="wrapper" class="wrapper wrapperfiexd" tabindex="5000" style="overflow-y: hidden; outline: none;">
+                                <ul class="mune">
+                                    <li>
+                                        <span class="s_catalog_num">01 /</span>
+                                        <span class="s_text">默认目录</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!--        发布-->
+        <div class="b_unit_save">
+            <span class="span_pub"><a role="button" title="发表游记" class="m_btn_publish" id="UP">确认发布</a>
+                <div class="ui-tip tip-left"></div>
+                <div></div></span>
+        </div>
+    </div>
+
+
+
+
+
+
+
+<!--照片 模态框-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel" style="color:#ff9a00">添加照片</h4>
+                </div>
+                <div class="modal-body">
+                    <a href="javascript:void(0)" class="selectAll">全选</a>
+                    <ul class="images_px">
+<!--                        照片缩略图-->
+                        <li class="add_pic_muti" id="add_pic"><input type="file" id="inputObj" style="opacity: 0;width: 100%;height: 100%"></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn btn-warning" data-dismiss="modal">插入到文本</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<!--目录 模态框-->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content1">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel1" style="color:#636b6f">添加目录</h4>
+                </div>
+                <div class="modal-body">
+                    <dl>
+                        <dt>目录名称</dt>
+                        <dd>
+                            <input type="text" maxlength="20" class="paragraph_title_input">
+                            <p>添加段落标题可使游记更加层次分明<span>(最多可输入<em>20</em>个字符)</span></p>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>选择样式</dt>
+                        <dd>
+                            <ul>
+                                <li>
+                                    <a href="javascript:"><img src="./images/mul10.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:"><img src="./images/mul10.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:"><img src="./images/mul10.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:"><img src="./images/mul10.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:"><img src="./images/mul10.png" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:"><img src="./images/mul10.png" alt=""></a>
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                    <ul class="pagination pagination-sm">
+                        <li><a href="javascript:">1</a></li>
+                        <li><a href="javascript:">2</a></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="menu_btn" class="btn btn btn-warning" data-dismiss="modal">&nbsp;&nbsp;完&nbsp;&nbsp;&nbsp;&nbsp;成&nbsp;&nbsp;</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<!--视频 模态框-->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content2">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <li class="active1"><i class="icon_up"></i>本地上传</li>
+                </div>
+                <div class="modal-body">
+                    <div class="s_upload">
+                        <div class="yxk_video">
+                            <a role="button" class="btn_big">+ 上传视频</a>
+                            <p>请上传300M以内的视频（暂只支持MP4格式）</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<!--音乐 模态框-->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content2">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <li class="active1"><i class="icon_up"></i>添加音乐</li>
+                </div>
+                <div class="modal-body">
+                    <div class="s_upload">
+                        <div class="yxk_video">
+                            <a role="button" class="btn_big">+ &nbsp; 浏&nbsp;&nbsp;&nbsp;览</a>
+                            <p>背景音乐请选择后缀为.mp3的音乐文件</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<!--更改地点模态框-->
+    <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content modal-content2">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <li class="active1"><i class="icon_up"></i>更改地点</li>
+                </div>
+                <div class="modal-body">
+                    <dl>
+                        <dt>更改地点</dt>
+                        <dd>
+                            <input type="text" maxlength="20" class="paragraph_title_input" placeholder="请精确到市">
+                        </dd>
+                    </dl>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button"  class="btn btn btn-warning" data-dismiss="modal">&nbsp;&nbsp;完&nbsp;&nbsp;&nbsp;&nbsp;成&nbsp;&nbsp;</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--底部-->
+    <div class="b_floor">
+        <div class="l_wrapper">
+            <div class="m_unit_b2">
+                <div class="footerInfo">
+                    <ul class="weima">
+                        <li>
+                            <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>
+                        </li>
+                        <li>
+                            <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>
+                        </li>
+                    </ul>
+                    <p>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                    </p>
+                    <p>
+                        <span>浙ICP备 09011712 号-1</span>
+                        <span>浙公网安备 33010602002105号</span>
+                        <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>
+                        <span>浙江神游网国际旅行社有限公司</span>
+                        <span>杭州途游电子商务有限公司</span>
+                        <span>许可证编号：L-ZJ-CJ00161</span>
+                    </p>
+                    <p>© 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
+                    <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+                </div>
+                <div class="friendLines">
+                    <div class="footerImages clearfix foot-ext">
+                        <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>
+                        <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>
+                        <a href="javascript:;" rel="nofollow"  title="12321垃圾信息举报中心" class="footer-ext-s4"></a>
+                        <a href="javascript:;" rel="nofollow">
+                            <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png" alt="支付宝">
+                        </a>
+                        <a href="javascript:;" rel="nofollow"  title="网络110报警服务" class="footer-ext-s5"></a>
+                        <a href="javascript:;" rel="nofollow"  title="网上标识信息" class="footer-ext-s6"></a>
+                        <a href="javascript:;" rel="nofollow"  title="全球中文论坛100强" class="footer-ext-s7"></a>
+                        <a target="cyxyv" href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">
+                            <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:" name="floor">&nbsp;</a>
+        </div>
+    </div>
+    <!--右侧页面工具-->
+    <div class="tool_bar">
+        <ul>
+            <li class="backBot">
+                <i class="icon">
+                    <a href="#floor" id="bot"><img src="./images/下载%20(2).png" alt=""></a>
+                </i>
+                <span class="name">页面底部</span>
+            </li>
+            <li class="backTop">
+                <i class="icon">
+                    <a href="#" id="top"><img src="./images/下载%20(3).png" alt=""></a>
+                </i>
+                <span class="name">返回顶部</span>
+            </li>
+        </ul>
+    </div>
+<!--工具元素样式添加-->
+
+    <!--目录样式添加-->
+    <div data-index="0" title="menu_title" class="m_edit_module"><!----> <!---->
+        <div class="m_unit_section">
+            <h2 class="paragraphBg title10">
+                <span></span>
+                <a title="编辑" class="s_edit_again"></a>
+                <a title="删除" class="s_delete_again"></a>
+            </h2>
+        </div>
+    </div>
+    <!--照片样式添加-->
+    <div data-index="1" title="pic" class="m_edit_module">
+        <!---->
+        <div class="m_unit_photo" style="width: auto;">
+            <div class="images" style="background-color: white">
+                    <div class="s_edit_set">
+                        <span class="s_delete_pic"><i></i>删除</span>
+                        <span class="s_set_first" title="choice" ><i></i>设为封面</span>
+                        <span class="s_set_first" style="display: none"><i></i>已经设为封面</span>
+                        <!---->
+                    </div>
+                    <img src="" alt="photo">
+            </div>
+            <!---->
+            <span class="pic_tag"><i class="mdd"></i>
+                <span class="adr"></span>
+                <a title="编辑" class="s_edit_again" role="button" data-toggle="modal" data-target="#myModal4"></a>
+                <a title="删除" class="s_delete_again"></a>
+            </span>
+        </div>
+
+    </div>
+    <!--照片缩略图-->
+    <li data-index="0" class="add_pic_muti">
+        <div class="edit_top_pic">
+            <!---->
+            <i class="edit_delede_pic"></i>
+            <img src="">
+        </div>
+    </li>
+    <!--文本样式添加-->
+    <div data-index="0" title="word" class="m_edit_module">
+        <div class="m_unit_word">
+            <div class="auto-textarea-wrapper">
+                <textarea placeholder="在这儿添加游记文字......" id="example1" class="layui-textarea" style="min-height: 150px; height: 64px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!--富文本编辑器-->
+<script type="text/javascript">
+    var userId = sessionStorage.getItem("USERID");
+    document.getElementById('UP').addEventListener('click', function () {
+        // 读取 html
+        // console.log(editor.txt.html());
+        var article = $(".m_view_main").html();//发起异步请求
+        var head_pic = $("#head_photo").css("backgroundImage");
+        head_pic = head_pic.split("(\"")[1].split("\")")[0];
+
+        //获取当前日期
+        var date = new Date();
+        var seperator1 = "-";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate;
+        console.log(currentdate);
+
+        var content =  $(".layui-textarea:first").val();
+        console.log(content);
+
+        var face = $("span[title='check']").parent().next()[0].src;
+        face = face.replace("","");
+        console.log(face);
+
+         var local = $(".adr").text();
+         local = local.split(" ")[0];
+         console.log(local);
+
+         var title = $(".m_set_title input").val();
+         console.log(title);
+
+            $.ajax({
+                url:"/uploadArticles",
+                type:"post",
+                data: {
+                    articles:article,
+                    head:head_pic,
+                    userId:userId,
+                    idBest:"false",
+                    hot:1,
+                    articleTime:currentdate,
+                    articleContent:content,
+                    articleFace:face,
+                    articleLocal:local,
+                    articleTitle:title,
+                },
+                dataType:"json",
+                success:function (data) {
+                    if(data){
+                        confirm("提交成功，我们将尽快进行审核！");
+                        location.href="YouJi-Z.html";
+                    }
+                }
+            })
+    }, false);
+</script>
+
+</body>
+</html>

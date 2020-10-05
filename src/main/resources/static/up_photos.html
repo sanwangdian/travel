@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作品上传页</title>
+    <link href="css_g/up_photo.css" rel="stylesheet"/>
+<!--    <link rel="stylesheet" type="text/css" href="css_g/bootstrap.css"/>-->
+    <link rel="stylesheet" href="css_g/b_floor.css">
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/vue.min2.js"></script>
+    <script>
+        $(function () {
+            var userId = sessionStorage.getItem("USERID");
+            if(window.sessionStorage.getItem("CreaateId")!=null){
+                $(".write_btu").hide();
+                $(".write_btu1").show();
+                $(".write_btu2").show();
+                $.ajax({
+                    url:"/selectByPrimaryKey",
+                    data:{
+                        "workId":window.sessionStorage.getItem("CreaateId"),
+                    },
+                    dataType:"json",
+                    type:"post",
+                    success:function (data) {
+                        $("input[name='workTitle']").val(data.workTitle);
+                        $("textArea[name='workDetaile']").val(data.workDetaile);
+                        for(var i =0;i< $(".sort li span").length;i++){
+                            if(data.workTheme==$(".sort li span").eq(i).text()){
+                                $(".sort li span").eq(i).addClass("sort_change");
+                                break;
+                            }
+                        }
+                        for(var i =0;i< $("option").length;i++){
+                            if(data.copyright==$("option").eq(i).text()){
+                                $("option").eq(i).attr("selected","selected");
+                            }
+                        }
+
+                         var tagList = data.workTag.split(" ");
+                        vm.tags=[];
+                        for(var i = 0 ;i < tagList.length;i++){
+                            vm.tags.push({
+                                tag:tagList[i],
+                            });
+
+                        }
+                    }
+                });
+
+            }
+
+
+            $(".write_btu1").click(function () {
+                var listTag="";
+
+                for (var i = 0; i<$(".up_tag span").length;i++)
+                {
+                    listTag += $(".up_tag span").eq(i).text() + " ";
+                }
+                listTag+=$(".select_text").val();
+                $.ajax({
+                    url:"/updateTheWork",
+                    data:{
+                        "workId":window.sessionStorage.getItem("CreaateId"),
+                        "userId":userId,
+                        "workTitle":$("input[name='workTitle']").val(),
+                        "workDetaile":$("textarea[name='workDetaile']").val(),
+                        "workTheme":$(".sort_change").text(),
+                        "copyright":$("option").eq($("select").val()-1).text(),
+                        "workTag":listTag,
+
+                    },
+                    type:"post",
+                    dataType:"json",
+                    success:function (data) {
+                        if(data > 0){
+                            alert("success");
+                        }
+                    }
+                });
+
+                window.location.href="/up_work_picture.html";
+            });
+
+            $(".write_btu2").click(function () {
+                if(confirm("是否删除？")){
+                    $.ajax({
+                        url:"/deletWorkAndInfo",
+                        data:{
+                            "workId":window.sessionStorage.getItem("CreaateId"),
+                        },
+                        dataType:"json",
+                        type:"post",
+                        success:function (data) {
+                            if(data>0){
+                                alert("删除成功");
+                            }
+                            window.sessionStorage.removeItem("CreaateId");
+                            window.location.reload();
+                        }
+                    })
+                }
+
+            });
+            var vm = new Vue({
+                el:".aside",
+                data:{
+                    tags:[{
+
+                    }]
+                },
+                methods:{
+                    delete:function (i) {
+                        this.tags.splice(i,1);
+                    }
+                },
+
+            });
+            $(".sort li span").click(function () {
+                $(".sort li span").removeClass("sort_change");
+                $(this).addClass("sort_change");
+            });
+
+            $(".tag-ul li").click(function () {
+                // $(".up_tag").append("<span>"+$(this).find(".tag-btn").text()+"</span>")
+                vm.tags.push({
+                    tag:$(this).find(".tag-btn").text(),
+                });
+            });
+
+            $(".up_tag span").click(function () {
+                $(this).remove();
+            });
+            $(".write_btu").click(function () {
+                var listTag="";
+
+                for (var i = 0; i<$(".up_tag span").length;i++)
+                {
+                    listTag += $(".up_tag span").eq(i).text() + " ";
+                }
+                listTag +=$(".select_text").val();
+
+                var time = new Date();
+
+
+                if( $("input[name='workTitle']").val()!="" && $(".sort_change").text()!="" && listTag!=""){
+
+                    $.ajax({
+                        url:"/insertWork",
+                        type:"post",
+                        dateType:"json",
+                        data:{
+                            "userId":userId,
+                            "workTitle":$("input[name='workTitle']").val(),
+                            "workDetaile":$("textarea[name='workDetaile']").val(),
+                            "workTheme":$(".sort_change").text(),
+                            "copyright":$("option").eq($("select").val()-1).text(),
+                            "workTag":listTag,
+                            "workTime": time,
+                            "workHot":0,
+                        },
+                        success:function (data) {
+                            window.sessionStorage.setItem("CreaateId",data);
+                            window.location.href="/up_work_picture.html";
+                        }
+                    });
+                }else{
+                    alert("信息填写不完整");
+
+                }
+
+                // $.ajax({
+                //     url:"/selectWorkId",
+                //     type:"post",
+                //     dateType:"json",
+                //     async:true,
+                //     data:{
+                //         "userId":1,
+                //         "workTime": time,
+                //     },
+                //     success:function (data) {
+                //         window.sessionStorage.setItem("CreaateId",data);
+                //         window.location.href="/up_work_picture.html";
+                //     }
+                // })
+            });
+        })
+
+    </script>
+</head>
+<body>
+<div class="top_nav">
+    <div class="nav_content">
+
+
+        <div id="logo">
+            <img src="images/logo.png">
+        </div>
+        <ul class="fiter top_sort">
+            <li>
+                <a href="sy-index.html">首页</a>
+            </li>
+            <li>
+                <a href="sy-index.html">旅游网</a>
+            </li>
+            <li>
+                <a href="photo.html">摄影作品</a>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+<div class="content">
+    <div class="up_action">
+        <div class="write_btu">
+            创建摄影作品
+        </div>
+
+        <div class="up_btu">
+            <img src="images\pencil.png">
+                编辑作品信息
+        </div>
+
+        <div class="write_btu1">
+            上传摄影作品
+        </div>
+        <div class="write_btu2">
+            删除摄影作品
+        </div>
+    </div>
+    <div class="write_info">
+        <form action="" method="post">
+            <div class="article">
+                <div class="work work_title">
+                    <span>作品标题</span>
+                    <span style="color: red">*</span>
+                    <div class="border title">
+                        <input type="text" name="workTitle" placeholder="作品标题">
+                    </div>
+
+                </div>
+                <div class="work work_detail">
+                    <span>作品简介</span>
+                    <div class="border detail">
+                        <textarea name="workDetaile" placeholder="说说这个作品表达的内容吧"></textarea>
+                    </div>
+                </div>
+                <div class="work work_theme">
+                    <span>主题</span>
+                    <span style="color: red">*</span>
+                    <div class="border theme">
+                        <ul class="sort">
+                            <li>
+                                <span>旅行</span>
+                            </li>
+                            <li>
+                                <span>风光</span>
+                            </li>
+                            <li>
+                                <span>人像</span>
+                            </li>
+                            <li>
+                                <span>航拍</span>
+                            </li>
+                            <li>
+                                <span>纪实</span>
+                            </li>
+                            <li>
+                                <span>生态</span>
+                            </li>
+                            <li>
+                                <span>其他</span>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="work work_copyright">
+                    <span>版权</span>
+                    <span style="color: red">*</span>
+                    <div class="border copyright">
+                        <select autocomplete="off" name="copyright">
+                            <option value="1" selected="selected">原创，CC协议共享（署名）</option>
+                            <option value="2">原创，CC协议共享（署名-非商业使用）</option>
+                            <option value="3">原创，CC协议共享（署名-禁止演绎）</option>
+                            <option value="4">原创，CC协议共享（署名-相同方式共享）</option>
+                            <option value="5">原创，CC协议共享（署名-非商业使用-禁止演绎）</option>
+                            <option value="6">原创，CC协议共享（署名-非商业使用-相同方式共享）</option>
+                            <option value="7">原创，CC协议共享（非署名）</option>
+                            <option value="8">非原创</option>
+                        </select>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="aside">
+                <div class="work work_place">
+                    <span>目的地</span><span style="color: red">*</span>
+                    <div class="place">
+                        <div class="tag_box">
+                            <div id="searchBox">
+                                <span class="up_tag" v-for="(tag,i) in tags")>
+                                    <span @click="delete(tag)">{{i.tag}}</span>
+                                </span>
+                                <input class="select_text" type="text" placeholder="照片的拍摄地，搜索添加目的地。" autocomplete="off" style="width: 250px">
+                            </div>
+                        </div>
+                        <div class="tags">
+                            <span>常用目的地标签：</span>
+                            <span>国内</span>
+                            <ul class="tag-ul">
+                                <li style="clear: left">
+                                    <span class="tag-btn">西湖</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">上海</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">40冰川</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">额济纳旗</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">北京</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">天山天池</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">喀纳斯</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">伊犁杏花沟</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">帕米尔高原</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">布尔津五彩滩</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">稻城亚丁</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">巴音布鲁克</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">黄山风景区</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">阳朔</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">拙政园</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">故宫</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">中山陵园风景区</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">宏村</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">外滩</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">九寨沟</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">乌尔禾魔鬼城</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">西安城墙</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">库车天山大峡谷</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">漓江</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">狮子林</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">明孝陵</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">八达岭古长城</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">色达佛学院</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">赛里木湖</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">龙脊梯田</span>
+                                </li>
+                            </ul>
+                            <span>国外</span>
+
+                            <ul class="tag-ul">
+                                <li style="clear: left">
+                                    <span class="tag-btn">纳米比亚死亡谷</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">清迈古城</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">红沙漠</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">埃托沙国家公园</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">东京</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">下龙湾</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">箭袋树庄园</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">茵莱湖</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">珍珠岛游乐园</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">乌本桥</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">斯米兰群岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">范五老街</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">仰光大金塔</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">普吉岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">象岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">富士山</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">粉色沙滩</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">甲米</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">帕达尔岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">林卡岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">华欣</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">泰国</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">苏梅岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">新加坡</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">日本</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">清迈</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">冲绳</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">丹老群岛</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">斯里兰卡</span>
+                                </li>
+                                <li style="">
+                                    <span class="tag-btn">巴厘岛</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span style="font-size: 12px"> >> 目的地是更好的描述、检索作品，让作品更易展示</span>
+                </div>
+                <div class="mod">
+                    <span>小提示</span>
+                    <span style="color: #c9302c">- *为必填项</span>
+                    <span>- 完善相册信息，更有助于展示以及和摄友的交流学习</span>
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+</div>
+<div class="b_floor">
+    <div class="l_wrapper">
+        <div class="m_unit_b2">
+            <div class="footerInfo">
+                <ul class="weima">
+                    <li>
+                        <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>
+                    </li>
+                    <li>
+                        <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>
+                    </li>
+                </ul>
+                <p>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                </p>
+                <p>
+                    <span>浙ICP备 09011712 号-1</span>
+                    <span>浙公网安备 33010602002105号</span>
+                    <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>
+                    <span>浙江神游网国际旅行社有限公司</span>
+                    <span>杭州途游电子商务有限公司</span>
+                    <span>许可证编号：L-ZJ-CJ00161</span>
+                </p>
+                <p>© 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
+                <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+            </div>
+            <div class="friendLines">
+                <div class="footerImages clearfix foot-ext">
+                    <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>
+                    <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>
+                    <a href="javascript:;" rel="nofollow"  title="12321垃圾信息举报中心" class="footer-ext-s4"></a>
+                    <a href="javascript:;" rel="nofollow">
+                        <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png" alt="支付宝">
+                    </a>
+                    <a href="javascript:;" rel="nofollow"  title="网络110报警服务" class="footer-ext-s5"></a>
+                    <a href="javascript:;" rel="nofollow"  title="网上标识信息" class="footer-ext-s6"></a>
+                    <a href="javascript:;" rel="nofollow"  title="全球中文论坛100强" class="footer-ext-s7"></a>
+                    <a target="cyxyv" href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">
+                        <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <a href="javascript:" name="floor">&nbsp;</a>
+    </div>
+</div>
+
+</body>
+</html>

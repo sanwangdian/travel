@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作品内容展示</title>
+    <link rel="stylesheet" href="css_g/show_picture.css">
+    <link rel="stylesheet" href="css_g/b_floor.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/vue.min2.js"></script>
+    <script>
+        $(function () {
+            var lastname = sessionStorage.getItem("workId");
+            var lastname1 = sessionStorage.getItem("userId");
+            // if(window.location.href!="/show_picture.html"||)
+            // sessionStorage.removeItem("workId");
+            $.ajax({
+                url:"/selectWorkContent",
+                data:{
+                   "workId":lastname,
+                },
+                dataType:"json",
+                Type:"post",
+                success:function (data) {
+                    $(".index_img_box").remove();
+                    for (var i = 0;i<data.length;i++){
+                        vm.imgs.push({
+                            id:data[i].picId,
+                            img:data[i].picUrl,
+                        })
+                    }
+
+                    if($(".pic").width > "1200px")
+                    {
+                        $(".pic").attr("width","1200px");
+                    }
+                }
+
+
+            });
+
+            var vm = new Vue({
+                el:"#body",
+                data:{
+                    imgs:[{
+
+                    }],
+                    works:[{
+
+                    }],
+                    thisWork:[{
+
+
+                    }]
+                },
+                methods:{
+                    showThis:function (img) {
+                        $(".pic").attr("src",img.img);
+                        // $(this).attr("background","3px solid white");
+                    },
+                    rightMove:function () {
+                        var a = $(".pic").attr("src");
+                        console.log(a);
+                        var flag = 0;
+                        for(var i = 0;i<this.imgs.length;i++){
+                            if(this.imgs[i].img == a){
+                                flag = i;
+                                break;
+                            }
+                        }
+                        if(i==1){
+                            flag=this.imgs.length-1;
+                        }else{
+                            flag--;
+                        }
+                        $(".pic").attr("src",this.imgs[flag].img);
+
+                    },
+                    leftMove:function () {
+                        var a = $(".pic").attr("src");
+                        var flag = 0;
+                        for(var i = 0;i<this.imgs.length;i++){
+                            if(this.imgs[i].img == a){
+                                flag = i;
+                                break;
+                            }
+                        }
+                        if(i==this.imgs.length-1){
+                            flag=1;
+                        }else{
+                            flag++;
+                        }
+                        $(".pic").attr("src",this.imgs[flag].img);
+
+                    },
+                    jumpAnther:function (work) {
+                        window.sessionStorage.setItem("workId",work.id);
+                        window.location.reload();
+                    }
+
+                }
+            });
+
+            $.ajax({
+                url:"/selectHisWork",
+                data:{
+                    "userId":lastname1,
+                },
+                dataType:"json",
+                type:"post",
+                success:function (data) {
+                    for(var i = 0 ;i<data.length;i++){
+                        $(".work_img_box1").remove();
+                        vm.works.push({
+                            id:data[i].workId,
+                            img:data[i].workCover,
+                            title:data[i].workTitle,
+                            userId:data[i].userId,
+                        })
+                    }
+                }
+            });
+            $.ajax({
+                url:"/selectThisWork",
+                data:{
+                    "workId":lastname,
+                },
+                dataType:"json",
+                type:"post",
+                success:function (data) {
+                    vm.thisWork.push({
+                        id:data.workId,
+                        img:data.workCover,
+                        title:data.workTitle,
+                        copyright:data.copyright,
+                        userId:data.userId,
+                        time:data.workTime.toString().substr(0,10),
+                        workTag:data.workTag.toString().split(" "),
+                        uName:data.users.userName,
+                        uFace:data.users.userPicaddress,
+                    });
+                 console.log(vm.thisWork);
+                }
+            });
+
+        })
+    </script>
+</head>
+<body id="body">
+<div class="top_nav">
+    <div class="nav_content">
+        <div id="logo">
+            <img src="images/logo.png">
+        </div>
+        <ul class="fiter top_sort">
+            <li>
+                <a href="sy-index.html">首页</a>
+            </li>
+            <li>
+                <a href="sy-index.html">旅游网</a>
+            </li>
+            <li>
+                <a href="photo.html">摄影作品</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="main_content">
+        <div class="point right_head">
+            <img src="images/right.png" @click="rightMove()">
+        </div>
+        <div class="point left_head" @click="leftMove()">
+            <img  src="images/left.png">
+        </div>
+        <div class="pic_box">
+            <img :src="imgs[1].img" class="pic">
+        </div>
+        <div class="index_img_line" v-for="img in imgs">
+            <div class="index_img_box" @click="showThis(img)">
+                <img :src="img.img" class="index_pic">
+            </div>
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content2.png" class="index_pic">-->
+<!--            </div>-->
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content2.png" class="index_pic">-->
+<!--            </div>-->
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content2.png" class="index_pic">-->
+<!--            </div>-->
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content2.png" class="index_pic">-->
+<!--            </div>-->
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content2.png" class="index_pic">-->
+<!--            </div>-->
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content2.png" class="index_pic">-->
+<!--            </div>-->
+<!--            <div class="index_img_box">-->
+<!--                <img src="images/content_1.png" class="index_pic">-->
+<!--            </div>-->
+        </div>
+    </div>
+    <div class="user_content">
+        <div class="user_head_info">
+            <div class="head_img_box">
+                <img :src="thisWork[1].uFace">
+            </div>
+            <span class="user_name">{{thisWork[1].uName}}</span>
+            <div class="care_it">
+                <span>+关注</span>
+            </div>
+            <div class="create_time">
+                <span>{{thisWork[1].time}}</span>
+            </div>
+
+        </div>
+        <div class="user_title_info">
+            <div class="user_work_title">
+                {{thisWork[1].title}}
+            </div>
+            <div class="user_share">
+                <span class="share_to">发布于：</span>
+                <div class="share_place">
+                    <span> 网站</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="user_work_tag">
+            <div class="user_tag_content">
+                <div class="copyRight">
+                    版权：{{thisWork[1].copyright}}
+                </div>
+                <div class="tag">
+                    <span class="tag_name">标签:</span>
+                    <div class="tag_list" v-for="wo in thisWork[1].workTag">
+                        <span>{{wo}}</span>
+<!--                        <span>旅行</span>-->
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+<!--    <div class="index_img_line">-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content2.png" class="index_pic">-->
+<!--        </div>-->
+<!--        <div class="index_img_box">-->
+<!--            <img src="images/content_1.png" class="index_pic">-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+</div>
+<div class="his_work">
+    <span class="his_work_text">TA的作品</span>
+    <a href="community_sy.html"><span class="more_work">+更多</span></a>
+    <div class="his_work_img">
+        <div class="work_img_box" v-for="work in works">
+            <div class="work_img_box1" @click="jumpAnther(work)">
+                <img :src="work.img" class="work_img_show">
+                <div class="hide_work_info">
+                <span class="work_name">
+                    {{work.title}}
+                </span>
+            </div>
+
+<!--                <span class="work_content_num">-->
+<!--                    12张-->
+<!--                </span>-->
+<!--                <span class="work_by_who">-->
+<!--                    by ZGB-->
+<!--                </span>-->
+
+            </div>
+        </div>
+<!--        <div class="work_img_box">-->
+<!--            <img src="images/1.jpg" class="work_img_show">-->
+<!--        </div>-->
+<!--        <div class="work_img_box">-->
+<!--            <img src="images/1.png " class="work_img_show">-->
+<!--        </div>-->
+    </div>
+</div>
+<div class="b_floor">
+    <div class="l_wrapper">
+        <div class="m_unit_b2">
+            <div class="footerInfo">
+                <ul class="weima">
+                    <li>
+                        <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>
+                    </li>
+                    <li>
+                        <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>
+                    </li>
+                </ul>
+                <p>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
+                    <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                </p>
+                <p>
+                    <span>浙ICP备 09011712 号-1</span>
+                    <span>浙公网安备 33010602002105号</span>
+                    <span><a href="javascript:void (0)" rel="nofollow" target="_blank">营业执照</a></span>
+                    <span>浙江神游网国际旅行社有限公司</span>
+                    <span>杭州途游电子商务有限公司</span>
+                    <span>许可证编号：L-ZJ-CJ00161</span>
+                </p>
+                <p>© 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
+                <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+            </div>
+            <div class="friendLines">
+                <div class="footerImages clearfix foot-ext">
+                    <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>
+                    <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>
+                    <a href="javascript:;" rel="nofollow"  title="12321垃圾信息举报中心" class="footer-ext-s4"></a>
+                    <a href="javascript:;" rel="nofollow">
+                        <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png" alt="支付宝">
+                    </a>
+                    <a href="javascript:;" rel="nofollow"  title="网络110报警服务" class="footer-ext-s5"></a>
+                    <a href="javascript:;" rel="nofollow"  title="网上标识信息" class="footer-ext-s6"></a>
+                    <a href="javascript:;" rel="nofollow"  title="全球中文论坛100强" class="footer-ext-s7"></a>
+                    <a target="cyxyv" href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">
+                        <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <a href="javascript:" name="floor">&nbsp;</a>
+    </div>
+</div>
+</body>
+</html>

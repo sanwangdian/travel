@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!--    <link  rel="stylesheet" href="easyuii/themes/default/easyui.css">-->
+    <!--    <link  rel="stylesheet" href="easyuii/themes/icon.css">-->
+    <!--    <script type="text/javascript" src="easyuii/jquery.min.js"></script>-->
+    <!--    <script type="text/javascript" src="easyuii/jquery.easyui.min.js"></script>-->
+    <!--    <script type="text/javascript" src="easyuii/locale/easyui-lang-zh_CN.js"></script>-->
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.validate.js" type="application/javascript"></script>
+    <script src="js/jquery.validate.regex.js" type="application/javascript"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
+    <script>
+        $(function () {
+            //cookie判断
+            var userId = $.cookie('userId');
+            if (userId != null) {
+                // $.messager.alert("操作提示","已经登录!","info");
+                // alert("已经登录");
+            }
+
+            $("#loginForm").validate({
+                rules: {
+                    logonId: {
+                        required: true,
+                        regex: /^1[0-9]{10}$/
+                        ,
+                        remote: {
+                            type: "post",
+                            url: "/check",
+                            data: {
+                                logonId: function () {
+                                    return $("#logonId").val();
+                                }
+                            },
+                            dataType: "text",
+                            dataFilter: function (data, type) {
+                                if (data === "1") {
+                                    return true;
+                                } else
+                                    return false;
+                            }
+                        }
+                    },
+                    password_input: {
+                        required: true,
+                        regex: /^\w{6,20}$/
+                        // /^(?![0-9]+$){6,20}$/
+                        // 不能为纯数字，不能为纯小写字母，不能为纯大写字母，不能为纯特殊符号，至少八位。
+                    }
+                },
+                messages: {
+                    logonId: {
+                        required: "请输入手机号码",
+                        regex: "请输入正确的手机号码格式"
+                    },
+                    password_input: {
+                        required: "请输入密码",
+                        regex: "请输入正确的密码格式"
+                    }
+                }
+            });
+
+            $("#btn-submit").click(function () {
+                if ($('#loginForm').valid() == true) {
+                    $.ajax({
+                        async: false,
+                        url: "/login",
+                        type: "post",
+                        data: {
+                            "userPhone": $("input[name='logonId']").val(),
+                            "userPassw": $("input[name='password_input']").val()
+                        },
+                        dataType: "text",
+                        success: function (data) {
+                            $.cookie('userId');
+                            window.location.href = data;
+                            return false;
+                        }
+                    })
+                }
+            });
+
+        })
+    </script>
+</head>
+<body>
+<!--S header-->
+<header class="header">
+    <div class="container">
+        <a class="logo" href="sy-index.html">神游网</a>
+    </div>
+</header>
+<!--E header-->
+<div class="major-box">
+    <div class="major" role="banner">
+        <div class="login-box">
+            <div class="ui-login-aside">
+                <form name="loginForm" id="loginForm"
+                      class="ui-form" autocomplete="off">
+                    <div class="ui-form-title">
+                        <div class="login-tab account active">神游客账号登录</div>
+                        <div class="login-tab message"><a href="#">短信快捷登录</a></div>
+                    </div>
+                    <div class="login-form-cnt login-account">
+                        <input type="hidden" name="loginType" value="1">
+                        <div class="ui-form-item">
+                            <input class="ui-input" id="logonId" name="logonId" value="" type="text" autocomplete="off"
+                                   maxlength="100" placeholder="&nbsp;&nbsp;手机号码" tabindex="1">
+                        </div>
+                        <div class="ui-form-item">
+                            <input type="password" id="password_input" name="password_input" class="i-text ui-input"
+                                   autocomplete="off" tabindex="2" placeholder="&nbsp;&nbsp;密码">
+                        </div>
+                        <div class="error-box ui-form-hide" id="error-box"></div>
+                        <div class="ui-form-item ui-btn-cnt">
+                            <!--                            <input  id="btn-submit" type="submit" class="btn-login" value="登录">-->
+                            <a id="btn-submit" class="btn-login"
+                               href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;登录</a>
+                        </div>
+                        <div class="ui-form-item">
+                            <span class="fl">还没有账号？
+                                <a title="去注册" class="font-alpha" id="il-link" href="register.html"
+                                   style="color: #ff9a00;">去注册</a></span>
+                            <span class="fr authcode-help">
+                                <a class="font-alpha" href="http://www.youxiake.com/forget/passwrod" target="_blank">忘记密码？</a>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--页脚-->
+<section class="main" role="main">
+    <div class="container">
+        <article class="intro_item">
+            <h2 class="i_title it_0">爱旅游 爱摄影</h2>
+            <ul class="i_info">
+                <li>·你就是神游客</li>
+                <li>·你就是神游客</li>
+                <li>·你就是神游客</li>
+                <li>·分享精彩的旅途生活、照片、游记</li>
+            </ul>
+        </article>
+        <article class="intro_item">
+            <h2 class="i_title it_1">你知道吗？</h2>
+            <ul class="i_info">
+                <li>·神游客是旅行者的社交网络</li>
+                <li>·神游客的线路都是精心策划的</li>
+                <li>·加入神游客多参加户外运动</li>
+                <li>·你可能会增加5年寿命,多交18个旅伴</li>
+            </ul>
+        </article>
+        <article class="intro_item intro_item_last">
+            <h2 class="i_title it_2">加入神游客</h2>
+            <ul class="i_info">
+                <li>·结识各种旅游狂人、户外大侠、摄影专家、自驾高手</li>
+                <li>·与朋友、同学、同事、家人保持密切的联络</li>
+                <li>·结伴出游，参加各种精彩的活动</li>
+                <li>·分享精彩的旅途生活、照片、游记</li>
+            </ul>
+        </article>
+    </div>
+
+</section>
+<!--footer-->
+<footer class="footer">
+    <div class="container">
+        <div class="sitemap clearfix"></div>
+        <div class="copyright">
+            <span>ICP经营许可证<a href="#" target="_blank">神游ICP备09011512-1号</a></span>
+            <b>|</b>
+            <span><a href="#" target="_blank">营业执照</a></span>
+            <b>|</b>
+            <span>&nbsp;&nbsp;&nbsp;神游游有限公司&nbsp;&nbsp;&nbsp;神游游有限公司</span>
+            <p class="text">
+                <span>© 2019 神仙制作组版权所有</span>
+                <span>法律顾问：我们&nbsp;&nbsp;&nbsp;我们</span>
+            </p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
