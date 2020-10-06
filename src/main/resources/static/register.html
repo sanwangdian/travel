@@ -65,6 +65,7 @@
                 messages:{
                     logonId:{
                         required:"请输入手机号码",
+                        remote: "该手机号已经注册！！！",
                         regex:"请输入正确的手机号码格式"
                     },
                     password:{
@@ -140,12 +141,13 @@
                <div class="u-form-item foreign-tel" style="padding: 0 30px 8px 30px">
                     <input class="u-input" id="logonId" name="logonId" type="text" autocomplete="off"
                     onkeydown="if (event.keyCode==32) return false" placeholder="请输入手机号码" tabindex="1"
-                           datatype="/^1[3456789]{1}\d{9}$/" nullmsg="请输入手机号码" errormsg="手机号码格式不正确">
+                           datatype="/^1[3456789]{1}\d{9}$/"  nullmsg="请输入手机号码" errormsg="手机号码格式不正确">
                     <div class="u-form-explain"></div>
                </div>
                 <div class="ui-form-item" style="padding: 0 0 3px 30px;height:53px;">
                     <div class="clearfix" style="height: 54px;width: 300px;">
-                        <div id="slider1" class="slider"></div><span id="result1"></span>
+                        <div id="slider1" class="slider"></div>
+<!--                        <span id="result1"></span>-->
                     </div>
                 </div>
                 <div class="u-form-item foreign-act" style="padding: 0 30px 8px 30px;">
@@ -176,11 +178,12 @@
                <div class="u-form-item">
                    <input onkeydown="if(event.keyCode==32) return false" type="submit" class="u-btn-reg" id="submit" value="立即注册" tabindex="6">
                </div>
-            <div class="u-form-item">
-                <div class="attachment" style="text-align: center;">
-                    <a href="http://www.youxiake.com/reg?email=1">非大陆手机号注册</a>
-                </div>
-            </div>
+
+<!--            <div class="u-form-item">-->
+<!--                <div class="attachment" style="text-align: center;">-->
+<!--                    <a href="http://www.youxiake.com/reg?email=1">非大陆手机号注册</a>-->
+<!--                </div>-->
+<!--            </div>-->
            </form>
         </div>
         <!--E 注册 -->
