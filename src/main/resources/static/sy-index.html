@@ -146,14 +146,15 @@
         <div class="divbottom2" id="Articles">
             <ul class="ulbody">
                 <li class="box2" v-for="(list,index) in ArticleList ">
+
                     <a><img :src=list.ArticleImg width="188" height="124"></a>
                     <div class="content2">
                         <h3 class="title2">
-                            <a href="#" target="_blank">{{list.ArticleContent}} </a>
+                            <a href="javascript:void(0);" >{{list.ArticleContent}} </a>
                                 <!--向左是伊甸园的阶梯，往右是时光的任意门——外高加索很神奇,但你得开着好车去-->
                         </h3>
-                        <div class="info2">{{list.ArticleTime}} by
-                            <a href="#" target="_blank">{{list.UserName}}</a>
+                        <div class="info2">{{list.ArticleTime}} <span> 作者：</span>
+                            <a href="javascript:void(0);" >{{list.UserName}}</a>
                         </div>
                     </div>
                 </li>
@@ -515,6 +516,7 @@
                             }
                         }).responseText;
                         console.log(UserName);
+                        console.log(data[i].articleImg);
                         vm.ArticleList.push({
                             ArticleTime:data[i].articleTime.substring(0,10),
                             ArticleImg:data[i].articleImg,

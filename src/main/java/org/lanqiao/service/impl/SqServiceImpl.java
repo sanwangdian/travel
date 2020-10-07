@@ -39,6 +39,7 @@ public class SqServiceImpl implements SqService {
     @Override
     public List<Article> getNowCityArticle(String cityName) {
         List<Article> articles = null;
+        System.out.println("cityName:"+cityName);
         try {
             articles = new SolrUtil().querySolr(cityName);
         } catch (Exception e) {

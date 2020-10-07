@@ -27,7 +27,7 @@ public class SqController {
     SqService sqService;
 
     @RequestMapping("/getNowA")
-    public List getNowCityA(@RequestParam(defaultValue = "厦门") String cityName){
+    public List getNowCityA(@RequestParam(defaultValue = "天津市") String cityName){
         return sqService.getNowCityArticle(cityName);
     }
     @RequestMapping("/getUserName")

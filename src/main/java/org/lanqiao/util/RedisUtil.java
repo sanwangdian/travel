@@ -40,14 +40,14 @@ public class RedisUtil {
         //查看服务是否运行
         System.out.println("服务正在运行: "+jedis.ping());
 
-        new RedisUtil().setRedisCity("福州市");
+        new RedisUtil().setRedisCity("天津");
         new RedisUtil().getRedisCity();
 
         //创建一个有序集合，用来存城市的访问排名。
-        jedis.zadd("score", 0, "厦门市");
-        jedis.zadd("score", 0, "北京市");
-        jedis.zadd("score", 0, "上海市");
-        jedis.zadd("score", 0, "福州市");
+//        jedis.zadd("score", 0, "厦门市");
+//        jedis.zadd("score", 0, "北京市");
+//        jedis.zadd("score", 0, "上海市");
+//        jedis.zadd("score", 0, "福州市");
         System.out.println("城市获取到的"+jedis.zrange("score", 0, -1)
                 .stream()
                 .sorted(Comparator.reverseOrder())

@@ -25,11 +25,12 @@ public class SolrUtil {
      * 查询某城市的游记
      */
     public List<Article> querySolr(String cityName) throws Exception{
-        HttpSolrClient solrServer = new HttpSolrClient.Builder(SOLR_URL + "articles/").withConnectionTimeout(10000).withSocketTimeout(60000).build();
+        HttpSolrClient solrServer = new HttpSolrClient.Builder(SOLR_URL + "article/").withConnectionTimeout(10000).withSocketTimeout(60000).build();
         SolrQuery query = new SolrQuery();
         //下面设置solr查询参数
         query.set("q", "article_local:"+cityName);// 参数q  查询所有
 
+        System.out.println("solrUtil---cityName:"+cityName);
         //获取查询结果
         QueryResponse response = solrServer.query(query);
         //两种结果获取：得到文档集合或者实体对象
@@ -74,7 +75,7 @@ public class SolrUtil {
 
     public static void main(String[] args) throws Exception {
         SolrUtil solr = new SolrUtil();
-        solr.querySolr("吉林");
+        solr.querySolr("天津市");
     }
 }
 
