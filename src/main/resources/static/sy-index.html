@@ -127,7 +127,7 @@
     </a>
 </div>
 
-<div id="mybody">
+<div id="mybody" style="margin-left: 100px;margin-right: 150px">
     <hr>
     <img src="syimages/body1.jpg" width="580">
     <img src="syimages/body2.png" width="580">
@@ -135,7 +135,7 @@
     <div id="div3">
         <div class="divtop">
             <div class="titleleft">
-                <h2><i class="fa fa-paper-plane" style="font-size:32px"></i> <small>活动游记</small></h2>
+                <h2><i class="fa fa-paper-plane" style="font-size:32px"></i> <small>最新游记</small></h2>
             </div>
             <div class="titleright">
                 <ul class="breadcrumb">
@@ -143,24 +143,91 @@
                 </ul>
             </div>
         </div>
+
+<!--        <div class="divbottom2" id="Articles">-->
+<!--            <ul class="ulbody">-->
+<!--                <li class="box2" v-for="(list,index) in articleList ">-->
+
+<!--&lt;!&ndash;                    <a><img :src=list.articleImg width="300" height="240"></a>&ndash;&gt;-->
+<!--                    <a><img :src=list.articleImg style="width: 258px;height: 145px;"></a>-->
+<!--                    <div class="content2">-->
+<!--                        <h3 class="title2" >-->
+<!--                            <a href="javascript:void(0);" >{{list.articleContent}} </a>-->
+<!--                                &lt;!&ndash;向左是伊甸园的阶梯，往右是时光的任意门——外高加索很神奇,但你得开着好车去&ndash;&gt;-->
+<!--                        </h3>-->
+<!--                        <div class="info2" >-->
+<!--                            时间：{{list.articleTime}} <br/>-->
+<!--                            <span> 作者：</span>-->
+<!--                            <a href="javascript:void(0);" >{{list.UserName}}</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+
+<!--                &lt;!&ndash;发表游记按钮&ndash;&gt;-->
+<!--                <li ><a href="travel_articles.html">-->
+<!--                    <img  src="syimages/writebutton.png" class="imgbutton">-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--        <div data-v-4443603c="" data-v-694367fc="" class="article_item" v-for="(article,index) in articles"-->
+<!--             id="articles" @click="goToArticle(index)">-->
+<!--            <div data-v-4443603c="" class="f_pic">-->
+<!--                <a data-v-4443603c="" href="javascript:">-->
+<!--                    &lt;!&ndash;                                <img data-v-4443603c="" :src=article.articleFace lazy="loaded"&ndash;&gt;-->
+<!--                    <img data-v-4443603c="" :src=article.articleImg-->
+<!--                         style="width: 258px;height: 145px;">-->
+<!--                    <div data-v-4443603c="" class="fag fag0">-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--            <div data-v-4443603c="" class="f_right">-->
+<!--                <dl data-v-4443603c="">&lt;!&ndash;&ndash;&gt;-->
+<!--                    <a data-v-4443603c="" href="javascript:">-->
+<!--                        <dt data-v-4443603c="">{{article.articleTitle}}</dt>-->
+<!--                        <dd data-v-4443603c="">{{article.articleContent}}</dd>-->
+<!--                    </a>-->
+<!--                </dl>-->
+<!--                <div data-v-4443603c="" class="article_item_info">-->
+<!--                        <span data-v-4443603c="" data-id="1931" class="tz_mdd">-->
+<!--                            <i data-v-4443603c=""></i>{{article.articleLocal}}</span>-->
+<!--                    <a data-v-4443603c="" href="javascript:" class="auth" style="color:#ffba00">-->
+<!--                        <img data-v-4443603c="" :src=article.userPicaddress class="auth_tx"-->
+<!--                             style="width: 24px;height: 24px;">-->
+<!--                        {{article.userRickname}}-->
+<!--                    </a><span data-v-4443603c="" class="tz_look">-->
+<!--                        <i data-v-4443603c=""></i>{{article.hot}}</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+        
         <div class="divbottom2" id="Articles">
             <ul class="ulbody">
-                <li class="box2" v-for="(list,index) in ArticleList ">
+                <li class="box2" v-for="(list,index) in articleList ">
 
-                    <a><img :src=list.ArticleImg width="188" height="124"></a>
+                    <!--                    <a><img :src=list.articleImg width="300" height="240"></a>-->
+                    <a><img :src=list.articleImg width="400px" height="200"></a>
                     <div class="content2">
-                        <h3 class="title2">
-                            <a href="javascript:void(0);" >{{list.ArticleContent}} </a>
-                                <!--向左是伊甸园的阶梯，往右是时光的任意门——外高加索很神奇,但你得开着好车去-->
+                        <h3 class="title2" >
+                            <a href="javascript:void(0);" >{{list.articleContent}} </a>
+                            <!--向左是伊甸园的阶梯，往右是时光的任意门——外高加索很神奇,但你得开着好车去-->
                         </h3>
-                        <div class="info2">{{list.ArticleTime}} <span> 作者：</span>
+                        <div class="info2" >
+                            时间：{{list.articleTime}} <br/>
+                            <span> 作者：</span>
                             <a href="javascript:void(0);" >{{list.UserName}}</a>
                         </div>
                     </div>
                 </li>
 
                 <!--发表游记按钮-->
-                <li><a href="travel_articles.html"><img src="syimages/writebutton.png" class="imgbutton"></a></li>
+                <li ><a href="travel_articles.html">
+                    <img  src="syimages/writebutton.png" class="imgbutton">
+                </a>
+                </li>
             </ul>
 
         </div>
@@ -462,7 +529,7 @@
                         type:"post",
                         dataType: "json"
                     });
-                    vm.ArticleList=[];
+                    vm.articleList=[];
                     ajax();
                 }
             }
@@ -485,7 +552,7 @@
         var vm = new Vue({
             el: "#Articles",
             data: {
-                ArticleList:[]
+                articleList:[]
             },
             methods: {
             }
@@ -515,12 +582,12 @@
                             success:function (result) {
                             }
                         }).responseText;
-                        console.log(UserName);
-                        console.log(data[i].articleImg);
-                        vm.ArticleList.push({
-                            ArticleTime:data[i].articleTime.substring(0,10),
-                            ArticleImg:data[i].articleImg,
-                            ArticleContent:data[i].articleContent,
+                        // console.log(UserName);
+                        // console.log(data[i].articleImg);
+                        vm.articleList.push({
+                            articleTime:data[i].articleTime.substring(0,10),
+                            articleImg:data[i].articleImg,
+                            articleContent:data[i].articleContent,
                             UserName:UserName
                         });
                     }
@@ -539,18 +606,18 @@
                 },
                 dataType: "json",
                 success: function (data) {
-                    vm.ArticleList=[];
+                    vm.articleList=[];
                     for (var i = 0; i < data.length; i++) {
-                        vm.ArticleList.push({
-                            ArticleContent:data[i].articleContent,
+                        vm.articleList.push({
+                            articleContent:data[i].articleContent,
 //                        articleId:data[i].articleId,
 //                        userId:data[i].userId,
 //                        idBest:data[i].idBest,
 //                        hot:data[i].hot,
-                            ArticleTime:data[i].articleTime.substring(0,10),
+                            articleTime:data[i].articleTime.substring(0,10),
 //                        article_address:data[i].article_address,
 //                        article_local:data[i].article_local,
-                            ArticleImg:data[i].articleImg,
+                            articleImg:data[i].articleImg,
 //                        article_face:data[i].article_face,
 //                        articleContent:data[i].articleContent
                         });

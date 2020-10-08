@@ -12,8 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Article {
-    @Field(value = "Article_id")
-    private Integer articleId;
+    @Field(value = "article_id")
+    private String articleId;
 
     @Field(value = "user_id")
     private String userId;
