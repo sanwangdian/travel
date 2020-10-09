@@ -13,6 +13,8 @@ import java.util.Set;
 
 public interface SqService {
 
+    List<Article> getUserIdArticle(String userId);
+
     public List<Article> getNowCityArticle(String cityName);
 
     public String getUserName(Integer userId);

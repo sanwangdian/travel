@@ -38,10 +38,8 @@
                 }
             });
 
-
-
-
             var indexId = sessionStorage.getItem("articleId");
+            console.log(indexId);
             var content = null;
             if(indexId !=null){
                 indexId = parseInt(indexId);
@@ -63,16 +61,19 @@
                     },
                     dataType:"json",
                     success:function (data) {
+                        console.log(data);
                         vm.users.push({
                             userRickName:data.users.userRickname,
                             userPicaddress:data.users.userPicaddress,
-                            articleTime:data.articleTime,
+                            articleTime:data.articleTime.substring(0,10),
+                            // articleTime:data.articleTime,
                             hot:data.hot,
                             articleTitle:data.articleTitle,
                         });
 
                         content =data.articleAddress;
 
+                        // $(".m_prew_left").text(content);
                         $(".m_prew_left").html(content);
                         $(".btnList").hide();
                         $(".hoverBtn").hide();

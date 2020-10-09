@@ -20,17 +20,18 @@ public class WorkinfoController {
     }
 
     @RequestMapping("/changeUrl")
-    public String changeUrl(Workinfo workinfo){
-        Base64 base64 =new Base64();
-        String url= base64.base64(workinfo.getPicUrl());
+    public String changeUrl(Workinfo workinfo) {
+        Base64 base64 = new Base64();
+        String url = base64.base64(workinfo.getPicUrl());
         workinfo.setPicUrl(url);
-        if(workinfoService.insertOne(workinfo)==0){
+        if (workinfoService.insertOne(workinfo) == 0) {
             return "false";
         }
-            return "success";
+        return "success";
     }
+
     @RequestMapping("/selectByworkId")
-    public List<Workinfo> selectByWorkId(int workId){
+    public List<Workinfo> selectByWorkId(int workId) {
         return workinfoService.selectByWorkId(workId);
     }
 }

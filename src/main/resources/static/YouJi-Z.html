@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>精彩游记记录精彩瞬间</title>
@@ -11,15 +11,6 @@
     <script src="js/vue.min.js"></script>
     <script src="js/jquery-3.4.1.js"></script>
     <script>
-        // $(function () {
-        //     $(document).scroll(function () {
-        //         if($(document).scrollTop()>=300){
-        //             $("#bd ul").fadeIn(500);
-        //         }else{
-        //             $("#bd ul").fadeOut(500);
-        //         }
-        //     })
-        // })
         var i = 0;
 
         function change() {
@@ -39,9 +30,6 @@
                 aa();
             }, 5000);
         });
-        // setInterval
-        // $("#slideBox .hd li").click(function () {
-        // })
     </script>
     <script>
         $(function () {
@@ -51,12 +39,14 @@
             var vm = new Vue({
                 el: "#article",
                 data: {
+                    current: 0,
                     articles: [],
                     pages: []
                 },
                 methods: {
                     pageUp: function () {
                         if (pageNum > 1) {
+                            this.current -= 1;
                             pageNum--;
                             ajax();
                         } else {
@@ -65,13 +55,16 @@
                     },
                     pageDown: function () {
                         if (pageNum < pageMax) {
+                            this.current += 1;
                             pageNum++;
                             ajax();
                         } else {
-                            confirm("已经事最后一页了")
+                            confirm("已经是最后一页了")
                         }
                     },
                     pageIndex: function (index) {
+                        this.current = index;
+                        // console.log(index);
                         pageNum = index + 1;
                         ajax();
                     },
@@ -86,7 +79,9 @@
                             },
                             type: "post",
                             success: function () {
-                                location.href = "travel_details.html"
+                                // location.href = "travel_details.html"
+                                // location.href = "travel_details.html"
+                                window.open("travel_details.html");
                             }
                         });
                     }
@@ -97,12 +92,55 @@
                 $(this).addClass("active");
             });
 
+            //热门游记
             $(".nav_li:first").click(function () {
+                vm.current = 0;
                 pageNum = 1;
                 ajax();
             });
 
+            //最新游记
+            $(".nav_li:first").next().next().click(function (){
+                vm.current = 0;
+                pageNum = 1;
+                $.ajax({
+                    url: "/selectNewArticles",
+                    type: "post",
+                    data: {
+                        pageNum: pageNum
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        vm.pages = [];
+                        vm.articles = [];
+                        for (var i = 0; i < data.list.length; i++) {
+                            vm.articles.push({
+                                articleId: data.list[i].articleId,
+                                articleFace: data.list[i].articleFace,
+                                articleImg: data.list[i].articleImg,
+                                articleLocal: data.list[i].articleLocal,
+                                articleContent: data.list[i].articleContent,
+                                articleTitle: data.list[i].articleTitle,
+                                userRickname: data.list[i].users.userRickname,
+                                userPicaddress: data.list[i].users.userPicaddress,
+                                hot: data.list[i].hot
+                            });
+                        }
+                        for (var j = 0; j < data.pages; j++) {
+                            vm.pages.push({
+                                pageNum: j + 1
+                            })
+                        }
+                        pageMax = data.pages;
+                    }
+                })
+            });
+
+            //推荐游记
             $(".nav_li:first").next().click(function () {
+                vm.current = 0;
+                pageNum = 1;
                 $.ajax({
                     url: "/selectBestArticles",
                     type: "post",
@@ -112,6 +150,7 @@
                     },
                     dataType: "json",
                     success: function (data) {
+                        console.log(data);
                         vm.pages = [];
                         vm.articles = [];
                         for (var i = 0; i < data.list.length; i++) {
@@ -174,26 +213,76 @@
 
             $("#search_button").click(function () {
                 var msg = $(this).prev().val();
+                pageNum = 1;
                 $.ajax({
                     url: "/selectSolr",
                     data: {
-                        msg: msg
+                        msg: msg,
+                        pageNum: pageNum
                     },
                     type: "post",
                     dataType: "json",
                     success: function (data) {
-                        confirm("查询成功！")
+                        console.log(data);
+                        confirm("查询成功！");
+                        //
+                        // vm.pages = [];
+                        // vm.articles = [];
+                        // for (var i = 0; i < data.list.length; i++) {
+                        //     vm.articles.push({
+                        //         articleId: data.list[i].articleId,
+                        //         articleFace: data.list[i].articleFace,
+                        //         articleImg: data.list[i].articleImg,
+                        //         articleLocal: data.list[i].articleLocal,
+                        //         articleContent: data.list[i].articleContent,
+                        //         articleTitle: data.list[i].articleTitle,
+                        //         // userRickname: data.list[i].users.userRickname,
+                        //         // userPicaddress: data.list[i].users.userPicaddress,
+                        //         hot: data.list[i].hot
+                        //     });
+                        // }
+                        // for (var j = 0; j < data.pages; j++) {
+                        //     vm.pages.push({
+                        //         pageNum: j + 1
+                        //     })
+                        // }
+                        // pageMax = data.pages;
                     }
                 })
-
             })
-
-
         })
-
-
     </script>
+    <style>
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
 
+        ul.pagination li {
+            display: inline;
+        }
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        ul.pagination li a.active {
+            background-color: #e7872d;
+            color: white;
+            border-radius: 5px;
+        }
+
+        ul.pagination li a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+
+    </style>
 </head>
 <body>
 <div id="app">
@@ -231,33 +320,6 @@
                 <li style="float: right;"><a href="">登录</a></li>
                 <li class="xc_message right mouse_up">
                     <div class="xx"><i></i><span></span>消息 <span class="down"></span></div>
-                    <!--                    <ul class=" mouse_wrapper">-->
-                    <!--                        <li><a href="" target="_blank">订单消息</a></li>-->
-                    <!--                        <li><a href="" target="_blank">互动消息</a></li>-->
-                    <!--                        <li><a href="" target="_blank">系统通知</a></li>-->
-                    <!--                        <li><a href="" target="_blank">私信</a></li>-->
-                    <!--                    </ul>-->
-                </li>
-<!--                <li class="userinfo right mouse_up">-->
-<!--                    <div class="xx">-->
-<!--                        <a href="" target="_blank">-->
-<!--                            <img src="https://img3.youxiake.com/static/images/defaultAvatar.png?imageMogr2/thumbnail/!220x220r/gravity/Center/crop/!220x220/quality/90" alt="">-->
-<!--                        </a>-->
-<!--                        <span class="down"></span>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;                    <ul class="userinfo_wrapper mouse_wrapper">&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li class="color"><a href="" target="_blank">积分 1</a> / <a href="" target="_blank">游侠币 0.00</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg1"></span> <input type="hidden" value="11002928" id="yxkuid"> <a href="" target="_blank">我的等级</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg2"></span> <a href="" target="_blank">我的领地</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg3"></span> <a href="" target="_blank">我的订单</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg9"></span> <a href="" target="_blank">我的收藏</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg4"></span> <a href="" target="_blank">我的游记/攻略</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg5"></span> <a href="" target="_blank">我的草稿箱</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg6"></span> <a href="" target="_blank">摄影作品</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg7"></span> <a href="" target="_blank">个人设置</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                        <li><span class="bg bg8"></span><a href="">退出登录</a></li>&ndash;&gt;-->
-<!--                    &lt;!&ndash;                    </ul>&ndash;&gt;-->
-<!--                </li>-->
 
             </ul>
         </div>
@@ -269,9 +331,6 @@
         <div data-v-7b1fbd7c="" id="slideBox" class="slideBox">
             <div data-v-7b1fbd7c="" id="bd" class="bd"><!---->
                 <ul data-v-7b1fbd7c="" style="width: 1479px; height: 489.148px; position: relative;">
-                    <!--                <li data-v-7b1fbd7c="" style="width: 1479px; height: 489.148px; position: absolute; left: 0px; top: 0px; display: list-item;">-->
-                    <!--                    <a data-v-7b1fbd7c="" href="" target="_blank"><img data-v-7b1fbd7c="" src="https://travel-sy.oss-cn-beijing.aliyuncs.com/big/1.jpeg" width="1496px"  height="489px"></a>-->
-                    <!--                    <h3 data-v-7b1fbd7c="">勒，朦胧，夜幕降临</h3></li>-->
                     <li data-v-7b1fbd7c=""
                         style="width: 100%; position: absolute; left: 0px; top: 0px; display: list-item;">
                         <a data-v-7b1fbd7c="" href="" target="_blank"><img data-v-7b1fbd7c=""
@@ -325,7 +384,8 @@
             </div>
             <div data-v-7b1fbd7c="" class="search_home">
                 <div data-v-7b1fbd7c="" class="search_type">
-                    <input data-v-7b1fbd7c="" type="text" placeholder="游记/旅行攻略/目的地" autocomplete="off" class="input">
+                    <input data-v-7b1fbd7c="" type="text" placeholder="城市/作者/目的地" autocomplete="off" class="input">
+                    <!--                    <input data-v-7b1fbd7c="" type="text" placeholder="游记/旅行攻略/目的地" autocomplete="off" class="myinput">-->
                     <button data-v-7b1fbd7c="" id="search_button" class="button">搜索</button>
                     <div data-v-7b1fbd7c="" class="search-select j_search-select">
                         <ul data-v-7b1fbd7c="" mode="out-in"></ul>
@@ -351,7 +411,7 @@
                          id="articles" @click="goToArticle(index)">
                         <div data-v-4443603c="" class="f_pic">
                             <a data-v-4443603c="" href="javascript:">
-<!--                                <img data-v-4443603c="" :src=article.articleFace lazy="loaded"-->
+                                <!--                                <img data-v-4443603c="" :src=article.articleFace lazy="loaded"-->
                                 <img data-v-4443603c="" :src=article.articleImg
                                      style="width: 258px;height: 145px;">
                                 <div data-v-4443603c="" class="fag fag0">
@@ -378,11 +438,16 @@
                         </div>
                     </div>
 
-                    <div class="meneame" id="page">
-                        <a href="javascript:" @click="pageUp"> &lt; </a>
-                        <a href="javascript:" v-for="(page,index) in pages"
-                           @click="pageIndex(index)">{{page.pageNum}}</a>
-                        <a href="javascript:" @click="pageDown"> &gt; </a>
+                    <div class="page" id="page" style="margin-left: 400px">
+
+                        <ul class="pagination">
+                            <li @click="pageUp"><a href="javascript:">«</a></li>
+                            <li v-for="(page,index) in pages" @click="pageIndex(index)">
+                                <a href="javascript:" v-bind:class="{active:index==current}">{{page.pageNum}}</a>
+                            </li>
+                            <li @click="pageDown"><a href="javascript:">»</a></li>
+                        </ul>
+
                     </div>
 
                 </div>
@@ -402,8 +467,9 @@
                         </i>写游记</a>
                     </div>
                 </div>
-<!--                <div><img src="images/timg.jpg" alt="" width="280px" height="400px"></div>-->
-                <div><img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/logo/youji.png" alt="" width="280px" height="400px"></div>
+                <!--                <div><img src="images/timg.jpg" alt="" width="280px" height="400px"></div>-->
+                <div><img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/logo/youji.png" alt="" width="280px"
+                          height="400px"></div>
             </div>
 
 
@@ -413,7 +479,8 @@
     <!--        尾部                  -->
 
     <!--底部-->
-    <div class="b_floor" style="height: 430px;position: relative;top: 750px">
+<!--    <div class="b_floor" style="height: 430px;position: relative;top: 750px">-->
+    <div class="b_floor" style="height: 430px;top: 750px;margin-top: 500px">
         <div class="l_wrapper">
             <div class="m_unit_b2">
                 <div class="footerInfo">
@@ -457,9 +524,9 @@
                         <span>杭州途游电子商务有限公司</span>
                         <span>许可证编号：L-ZJ-CJ00161</span>
                     </p>
-                    <p>? 2019 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123
+                    <p>? 2020 shenyouwang.com 版权所有法律顾问：山西省律师事务所 *** 太原市旅游投诉电话：0571-96123
                         投诉及紧急事件联系电话：400-670-6300转5</p>
-                    <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+                    <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：山西省太原市山大电专大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
                 </div>
                 <div class="friendLines">
                     <div class="footerImages clearfix foot-ext">

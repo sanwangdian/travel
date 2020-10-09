@@ -7,16 +7,16 @@ import java.util.List;
 
 public interface ArticlesService {
 
-   int insertArticles(Article article);
-   List<Article> getAllArticles();
+    int insertArticles(Article article);
 
-   Article getArticleDetails(int articleId);
+    List<Article> getAllArticles();
 
-   List<Article> selectBestArticles(String isBest);
+    Article getArticleDetails(int articleId);
 
-   int updateHot(int articleId, int hot);
+    List<Article> selectBestArticles(String isBest);
 
+    List<Article> selectNewArticles();
 
-
+    int updateHot(int articleId, int hot);
 
 }

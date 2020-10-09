@@ -50,6 +50,19 @@ public class SqServiceImpl implements SqService {
     }
 
     @Override
+    public List<Article> getUserIdArticle(String userId) {
+        List<Article> articles = null;
+        System.out.println("userId:"+userId);
+        try {
+            articles = new SolrUtil().querySolr2(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return articles;
+        }
+    }
+
+    @Override
     public String getUserName(Integer userId) {
         return userMapper.selectUserNameByPK(userId);
 

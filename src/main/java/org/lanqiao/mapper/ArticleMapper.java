@@ -25,10 +25,14 @@ public interface ArticleMapper {
 
     List<Article> selectBestArticles(String isBest);
 
+    List<Article> selectNewArticles();
+
     //    hcy
     List selectAllArticle(Article record);
 
     Article selectByArticleId(Integer articleId);
 
     int updateHot(Integer articleId, Integer hot);
+
+    int updateIdBest(int articleId);
 }

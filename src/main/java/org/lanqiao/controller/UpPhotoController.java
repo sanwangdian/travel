@@ -15,11 +15,11 @@ public class UpPhotoController {
     UpPhotoService upPhotoService;
 
     @RequestMapping("/insertWork")
-    public int insertIntoWork(Work work){
+    public int insertIntoWork(Work work) {
         return upPhotoService.insertIntoWork(work);
     }
 
-   @RequestMapping("/selectBydefault")
+    @RequestMapping("/selectBydefault")
     public List<Work> selectBydefault() {
         return upPhotoService.selectBydefault();
     }
@@ -29,48 +29,49 @@ public class UpPhotoController {
         return upPhotoService.selectBydTime();
     }
 
-   @RequestMapping("/selectByHot")
+    @RequestMapping("/selectByHot")
     public List<Work> selectByHot() {
         return upPhotoService.selectByHot();
     }
 
     @RequestMapping("/selectHisWork")
-    public List<Work> selectHisWork(int userId){return upPhotoService.selectHisWork(userId);}
+    public List<Work> selectHisWork(int userId) {
+        return upPhotoService.selectHisWork(userId);
+    }
 
     @RequestMapping("/selectThisWork")
-    public Work selectThisWork(int workId){
+    public Work selectThisWork(int workId) {
         return upPhotoService.selectThisWork(workId);
     }
 
     @RequestMapping("/selectByTag")
-    public List<Work> selectByTag(String tag){
+    public List<Work> selectByTag(String tag) {
         return upPhotoService.selectByTag(tag);
     }
 
-//    @RequestMapping("/selectWorkId")
+    //    @RequestMapping("/selectWorkId")
 //    public int  selectWorkId(Work work){
 //        return upPhotoService.selectWorkId(work);
 //    }
     @RequestMapping("/selectByPrimaryKey")
-    public Work selectByPrimaryKey(int workId){
+    public Work selectByPrimaryKey(int workId) {
         return upPhotoService.selectByPrimaryKey(workId);
     }
 
     @RequestMapping("/updateTheWork")
-    public int updateTheWork(Work work){
+    public int updateTheWork(Work work) {
         return upPhotoService.updateTheWork(work);
     }
+
     @RequestMapping("/deletWorkAndInfo")
-    public int deletWorkAndInfo(int workId){
+    public int deletWorkAndInfo(int workId) {
         return upPhotoService.deletWorkAndInfo(workId);
     }
+
     @RequestMapping("/deteletInfo")
-    public int deteletInfo(int workId){
+    public int deteletInfo(int workId) {
         return upPhotoService.deleteWorkInfo(workId);
     }
-
-
-
 
 
 }

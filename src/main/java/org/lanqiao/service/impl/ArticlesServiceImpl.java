@@ -18,12 +18,11 @@ public class ArticlesServiceImpl implements ArticlesService {
 
     @Override
     public int insertArticles(Article article) {
-
         return articleMapper.insert(article);
     }
 
     @Override
-    public List<Article> getAllArticles(){
+    public List<Article> getAllArticles() {
         return articleMapper.getAllArticles();
     }
 
@@ -38,8 +37,14 @@ public class ArticlesServiceImpl implements ArticlesService {
     }
 
     @Override
+    public List<Article> selectNewArticles() {
+        return articleMapper.selectNewArticles();
+    }
+
+    @Override
     public int updateHot(int articleId, int hot) {
-        hot = hot+1;
-        return articleMapper.updateHot(articleId,hot);
+        hot = hot + 1;
+        int count = articleMapper.updateIdBest(articleId);
+        return articleMapper.updateHot(articleId, hot);
     }
 }

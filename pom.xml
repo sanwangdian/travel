@@ -64,10 +64,15 @@
 
 
         <!--        solr全局搜索-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.solr</groupId>-->
+<!--            <artifactId>solr-solrj</artifactId>-->
+<!--            <version>8.6.2</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-solrj</artifactId>
-            <version>8.6.2</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-solr</artifactId>
         </dependency>
 
         <!--引入druid-->

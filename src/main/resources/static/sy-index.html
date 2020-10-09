@@ -15,29 +15,38 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 
     <!--bootstrap-->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="//cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<!--    <script src="//cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>-->
+    <script src="//cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
 
     <script>
         $(function () {
-            var userId =  $.cookie('userId').toString();
+            var userId = $.cookie('userId').toString();
             sessionStorage.setItem("USERID", userId);
 
         })
 
     </script>
+
+
+
 </head>
-<body >
+<body>
 <!--登录注册-->
 <nav class="top-bar">
     <section class="top-bar-section">
         <ul class="left">
-            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> <span style="font-size: 10px">登录</span> </a></li>
-            <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> <span style="font-size: 10px">注册</span></a></li>
+            <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> <span
+                    style="font-size: 10px">登录</span> </a></li>
+            <li><a href="register.html"><span class="glyphicon glyphicon-user"></span> <span
+                    style="font-size: 10px">注册</span></a></li>
         </ul>
         <ul class="right">
-            <li style="margin-right: 33px"><a href="community_my.html"> <span class="glyphicon glyphicon-home"></span> <span style="font-size: 10px">我的社区</span> </a></li>
-<!--            <li><a href="#"> <span class="glyphicon glyphicon-bell"></span> 帮助中心 </a></li>-->
+            <li style="margin-right: 33px"><a href="community_my.html"> <span class="glyphicon glyphicon-home"></span>
+                <span style="font-size: 10px">我的社区</span> </a></li>
+            <!--            <li><a href="#"> <span class="glyphicon glyphicon-bell"></span> 帮助中心 </a></li>-->
         </ul>
     </section>
 </nav>
@@ -51,7 +60,7 @@
         <div class="textstyle" id="mycity">
             <div class="dropdown">
                 <button class="dropbtn">{{cityName}} <b class="caret"></b></button>
-                <div class="dropdown-content" >
+                <div class="dropdown-content">
                     <a href="#" v-for="(list,index) in hotCityList " @click="selectCity(index)">
                         {{list.HotCityName}}
                     </a>
@@ -77,24 +86,24 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#"> </a>
                 <ul class="nav navbar-nav ">
-                    <li ><a class="navbar-brand" href="#"> </a></li>
-                    <li ><a class="navbar-brand" href="sy-index.html">首 页</a></li>
-                    <li ><a class="navbar-brand" href="#"> </a></li>
-                    <li ><a class="navbar-brand" href="YouJi-Z.html">游 记</a></li>
-                    <li ><a class="navbar-brand" href="#"> </a></li>
-                    <li ><a class="navbar-brand" href="photo.html">图 片</a></li>
-                    <li ><a class="navbar-brand" href="#"> </a></li>
-                    <li ><a class="navbar-brand" href="video.html">视 频</a></li>
-                    <li ><a class="navbar-brand" href="#"> </a></li>
-                    <li ><a class="navbar-brand" href="community_my.html">我的社区</a></li>
-                    <li ><a class="navbar-brand" href="#"> </a></li>
+                    <li><a class="navbar-brand" href="#"> </a></li>
+                    <li><a class="navbar-brand" href="sy-index.html">首 页</a></li>
+                    <li><a class="navbar-brand" href="#"> </a></li>
+                    <li><a class="navbar-brand" href="YouJi-Z.html">游 记</a></li>
+                    <li><a class="navbar-brand" href="#"> </a></li>
+                    <li><a class="navbar-brand" href="photo.html">图 片</a></li>
+                    <li><a class="navbar-brand" href="#"> </a></li>
+                    <li><a class="navbar-brand" href="video.html">视 频</a></li>
+                    <li><a class="navbar-brand" href="#"> </a></li>
+                    <li><a class="navbar-brand" href="community_my.html">我的社区</a></li>
+                    <li><a class="navbar-brand" href="#"> </a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
 
-<!--轮播-->
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
     <!-- 轮播（Carousel）指标 -->
     <ol class="carousel-indicators">
@@ -107,13 +116,19 @@
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="syimages/slide1.jpg" alt="First slide">
+            <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/1.jpg" alt="First slide">
         </div>
         <div class="item">
-            <img src="syimages/slide1.jpg" alt="Second slide">
+            <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/2.jpg" alt="Second slide">
         </div>
         <div class="item">
-            <img src="syimages/slide1.jpg" alt="Third slide">
+            <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/3.jpg" alt="Third slide">
+        </div>
+        <div class="item">
+            <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/4.jpg" alt="Third slide">
+        </div>
+        <div class="item">
+            <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/slide1.jpg" alt="First slide">
         </div>
     </div>
     <!-- 轮播（Carousel）导航 -->
@@ -128,9 +143,10 @@
 </div>
 
 <div id="mybody" style="margin-left: 100px;margin-right: 150px">
+    <div style="margin-left: 40px">
     <hr>
-    <img src="syimages/body1.jpg" width="580">
-    <img src="syimages/body2.png" width="580">
+    <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/little/l1.jpg" width="580">
+    <img src="https://travel-sy.oss-cn-beijing.aliyuncs.com/sy-index/little/l2.jpg" width="580">
     <!--游记-->
     <div id="div3">
         <div class="divtop">
@@ -144,88 +160,27 @@
             </div>
         </div>
 
-<!--        <div class="divbottom2" id="Articles">-->
-<!--            <ul class="ulbody">-->
-<!--                <li class="box2" v-for="(list,index) in articleList ">-->
-
-<!--&lt;!&ndash;                    <a><img :src=list.articleImg width="300" height="240"></a>&ndash;&gt;-->
-<!--                    <a><img :src=list.articleImg style="width: 258px;height: 145px;"></a>-->
-<!--                    <div class="content2">-->
-<!--                        <h3 class="title2" >-->
-<!--                            <a href="javascript:void(0);" >{{list.articleContent}} </a>-->
-<!--                                &lt;!&ndash;向左是伊甸园的阶梯，往右是时光的任意门——外高加索很神奇,但你得开着好车去&ndash;&gt;-->
-<!--                        </h3>-->
-<!--                        <div class="info2" >-->
-<!--                            时间：{{list.articleTime}} <br/>-->
-<!--                            <span> 作者：</span>-->
-<!--                            <a href="javascript:void(0);" >{{list.UserName}}</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-
-<!--                &lt;!&ndash;发表游记按钮&ndash;&gt;-->
-<!--                <li ><a href="travel_articles.html">-->
-<!--                    <img  src="syimages/writebutton.png" class="imgbutton">-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-
-<!--        <div data-v-4443603c="" data-v-694367fc="" class="article_item" v-for="(article,index) in articles"-->
-<!--             id="articles" @click="goToArticle(index)">-->
-<!--            <div data-v-4443603c="" class="f_pic">-->
-<!--                <a data-v-4443603c="" href="javascript:">-->
-<!--                    &lt;!&ndash;                                <img data-v-4443603c="" :src=article.articleFace lazy="loaded"&ndash;&gt;-->
-<!--                    <img data-v-4443603c="" :src=article.articleImg-->
-<!--                         style="width: 258px;height: 145px;">-->
-<!--                    <div data-v-4443603c="" class="fag fag0">-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--            <div data-v-4443603c="" class="f_right">-->
-<!--                <dl data-v-4443603c="">&lt;!&ndash;&ndash;&gt;-->
-<!--                    <a data-v-4443603c="" href="javascript:">-->
-<!--                        <dt data-v-4443603c="">{{article.articleTitle}}</dt>-->
-<!--                        <dd data-v-4443603c="">{{article.articleContent}}</dd>-->
-<!--                    </a>-->
-<!--                </dl>-->
-<!--                <div data-v-4443603c="" class="article_item_info">-->
-<!--                        <span data-v-4443603c="" data-id="1931" class="tz_mdd">-->
-<!--                            <i data-v-4443603c=""></i>{{article.articleLocal}}</span>-->
-<!--                    <a data-v-4443603c="" href="javascript:" class="auth" style="color:#ffba00">-->
-<!--                        <img data-v-4443603c="" :src=article.userPicaddress class="auth_tx"-->
-<!--                             style="width: 24px;height: 24px;">-->
-<!--                        {{article.userRickname}}-->
-<!--                    </a><span data-v-4443603c="" class="tz_look">-->
-<!--                        <i data-v-4443603c=""></i>{{article.hot}}</span>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-        
         <div class="divbottom2" id="Articles">
             <ul class="ulbody">
-                <li class="box2" v-for="(list,index) in articleList ">
-
+                <li class="box2" v-for="(list,index) in articleList" @click="goToArticle(index)">
                     <!--                    <a><img :src=list.articleImg width="300" height="240"></a>-->
-                    <a><img :src=list.articleImg width="400px" height="200"></a>
+                    <a><img :src=list.articleImg width="200px" height="124"></a>
                     <div class="content2">
-                        <h3 class="title2" >
-                            <a href="javascript:void(0);" >{{list.articleContent}} </a>
+                        <h3 class="title2">
+                            <a href="javascript:void(0);">{{list.articleTitle}} </a>
                             <!--向左是伊甸园的阶梯，往右是时光的任意门——外高加索很神奇,但你得开着好车去-->
                         </h3>
-                        <div class="info2" >
-                            时间：{{list.articleTime}} <br/>
-                            <span> 作者：</span>
-                            <a href="javascript:void(0);" >{{list.UserName}}</a>
+                        <div class="info2">
+                            <span style="font-size: 12px">{{list.articleTime}} by</span>
+                            <span>  </span>
+                            <a href="javascript:void(0);">{{list.UserName}}</a>
                         </div>
                     </div>
                 </li>
 
                 <!--发表游记按钮-->
-                <li ><a href="travel_articles.html">
-                    <img  src="syimages/writebutton.png" class="imgbutton">
+                <li><a href="travel_articles.html">
+                    <img src="syimages/writebutton.png" class="imgbutton">
                 </a>
                 </li>
             </ul>
@@ -245,29 +200,7 @@
                 </ul>
             </div>
         </div>
-<!--        <div class="divbottom4">-->
-<!--            <div class="img1">-->
-<!--                <img src="syimages/img1.jpg">-->
-<!--            </div>-->
-<!--            <div class="img2">-->
-<!--                <img src="syimages/img1.jpg">-->
-<!--            </div>-->
-<!--            <div class="img3">-->
-<!--                <img src="syimages/img1.jpg">-->
-<!--            </div>-->
-<!--            <div class="img4">-->
-<!--                <img src="syimages/img1.jpg">-->
-<!--            </div>-->
-<!--            <div class="img5">-->
-<!--                <img src="syimages/img1.jpg">-->
-<!--            </div>-->
-<!--            <div class="img6" href="up_photos.html">-->
-<!--                <img src="syimages/uploadimg.png" >-->
-<!--            </div>-->
-<!--            <div class="img7">-->
-<!--                <img src="syimages/img1.jpg">-->
-<!--            </div>-->
-<!--        </div>-->
+
         <div class="divbottom4">
             <div class="img1">
                 <img src="syimages/img1.jpg">
@@ -284,14 +217,13 @@
             <div class="img5">
                 <img src="httpimg/八卦.jpg">
             </div>
-            <div class="img6" >
-                <a href="up_photos.html"><img src="syimages/uploadimg.png" ></a>
+            <div class="img6">
+                <a href="up_photos.html"><img src="syimages/uploadimg.png"></a>
             </div>
             <div class="img7">
                 <img src="httpimg/逐云.jpg">
             </div>
         </div>
-
 
 
     </div>
@@ -304,7 +236,7 @@
             </div>
             <div class="titleright">
                 <ul class="breadcrumb">
-                    <li ><a href="video.html">/更多 ></a></li>
+                    <li><a href="video.html">/更多 ></a></li>
                 </ul>
             </div>
         </div>
@@ -370,37 +302,68 @@
 
 <!--四个链接-->
 <div id="myfoo">
-    <div class="foottext">    <img src="syimages/interview.png" width="51"><h3>神仙之旅</h3> </div>
-    <div class="foottext">    <img src="syimages/story.png" width="51"><h3>神游攻略</h3></div>
-    <div class="foottext">    <img src="syimages/video.png" width="51"><h3>神游好图</h3></div>
-    <div class="foottext">    <img src="syimages/video.png" width="51"><h3>神游视频</h3></div>
+    <div class="foottext"><img src="syimages/interview.png" width="51">
+        <h3>神仙之旅</h3></div>
+    <div class="foottext"><img src="syimages/story.png" width="51">
+        <h3>神游攻略</h3></div>
+    <div class="foottext"><img src="syimages/video.png" width="51">
+        <h3>神游好图</h3></div>
+    <div class="foottext"><img src="syimages/video.png" width="51">
+        <h3>神游视频</h3></div>
 </div>
 <hr>
+
+
+<!--侧边栏-->
+<div class="sideMenu">
+    <div class="sideMenuTop">
+        <div class="sideMenuShop">
+        </div>
+        <!--<a class="sideMenuItem sideMenuItem-active"></a>-->
+        <a class="sideMenuItem sideMenuItem-photo" style="height: 70px" href="photo.html"></a>
+        <a class="sideMenuItem sideMenuItem-write" style="height: 70px" href="travel_articles.html"></a>
+        <a class="sideMenuItem sideMenuItem-imageupload" style="height: 70px" href="up_photos.html"></a>
+        <a class="sideMenuItem sideMenuItem-top"></a>
+    </div>
+</div>
+</div>
 <!--页脚-->
 <div>
     <div class="b_floor">
         <div class="l_wrapper">
             <div class="m_unit_b2">
                 <div class="footerInfo">
-<!--                    <ul class="weima">-->
-<!--                        <li>-->
-<!--                            <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77"><p>神游网公众号</p>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79"> <p>APP下单更优惠</p>-->
-<!--                        </li>-->
-<!--                    </ul>-->
+                    <ul class="weima">
+                        <li>
+                            <img src="https://img3.youxiake.com/static/images/weima1.png" width="77" height="77">
+                            <p>神游网公众号</p>
+                        </li>
+                        <li>
+                            <img src="https://img3.youxiake.com/static/images/weima2.png" width="78" height="79">
+                            <p>APP下单更优惠</p>
+                        </li>
+                    </ul>
                     <p>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">关于神游网</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)" target="_blank">制作组的故事</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)" target="_blank">联系制作组</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)" target="_blank">制作组招聘</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)" target="_blank">意见反馈</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)" target="_blank">使用协议</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)" target="_blank">隐私政策</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)" target="_blank">交换链接</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)" target="_blank">帮助中心</a>
-                        <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)" target="_blank">网站地图</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_关于游侠客" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">关于神游网</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_游侠客的故事" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">制作组的故事</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_联系游侠客" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">联系制作组</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_游侠客招聘" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">制作组招聘</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_意见反馈" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">意见反馈</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_使用协议" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">使用协议</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_隐私政策" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">隐私政策</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_交换链接" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">交换链接</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_帮助中心" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">帮助中心</a>
+                        <a data-trace="页面底部|页面底部_点击|页面底部_网站地图" rel="nofollow" href="javascript:void (0)"
+                           target="_blank">网站地图</a>
                     </p>
                     <p>
                         <span>浙ICP备 09011712 号-1</span>
@@ -410,31 +373,32 @@
                         <span>杭州途游电子商务有限公司</span>
                         <span>许可证编号：L-ZJ-CJ00161</span>
                     </p>
-                    <p> 2020 shenyouwang.com 版权所有法律顾问：浙江四海方圆律师事务所 傅林放 杭州市旅游投诉电话：0571-96123 投诉及紧急事件联系电话：400-670-6300转5</p>
-                    <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：浙江省杭州市西湖区教工路198号浙商大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
+                    <p>? 2020 shenyouwang.com 版权所有法律顾问：山西省律师事务所 *** 太原市旅游投诉电话：0571-96123
+                        投诉及紧急事件联系电话：400-670-6300转5</p>
+                    <p>旅游预订电话(免长途费)：400-670-6300，公司总部地址：山西省太原市山大电专大创业园D幢3楼，投诉建议邮箱：jianyi@youxiake.com</p>
                 </div>
 
                 <div class="friendLines">
                     <b>友情链接:</b>
                     <div class="boxLeft">
-                        <a href="http://www.dazijia.com/" target="_blank">自驾游</a>
-                        <a href="http://www.blmcy.com/" target="_blank">餐饮加盟</a>
+<!--                        <a href="http://www.dazijia.com/" target="_blank">自驾游</a>-->
+<!--                        <a href="http://www.blmcy.com/" target="_blank">餐饮加盟</a>-->
                         <a href="https://www.shaoshanlvyou.com/" target="_blank">韶山旅游</a>
                         <a href="http://www.share-africa.com/" target="_blank">非洲旅游</a>
                         <a href="https://www.zjjguide.com" target="_blank">张家界旅游导航网</a>
                         <a href="https://www.h-heguo.com" target="_blank">沙发</a>
                         <a href="https://www.hy588.com" target="_blank">上海旅游网</a>
                         <a href="http://www.cdyou.net/" target="_blank">长岛渔家乐</a>
-                        <a href="http://bbs.youxiake.com/mdd/1708.html" target="_blank">越南旅游</a>
-                        <a href="https://www.32.cn/" target="_blank">商标注册</a>
-                        <a href="http://www.pandamart.cn" target="_blank">上海装修公司</a>
-                        <a href="https://www.leica-camera.cn/" target="_blank">徕卡相机</a>
-                        <a href="http://cn.changiairport.com" target="_blank">新加坡机场</a>
+<!--                        <a href="http://bbs.youxiake.com/mdd/1708.html" target="_blank">越南旅游</a>-->
+<!--                        <a href="https://www.32.cn/" target="_blank">商标注册</a>-->
+<!--                        <a href="http://www.pandamart.cn" target="_blank">上海装修公司</a>-->
+<!--                        <a href="https://www.leica-camera.cn/" target="_blank">徕卡相机</a>-->
+<!--                        <a href="http://cn.changiairport.com" target="_blank">新加坡机场</a>-->
                         <a href="https://www.yyytang.com" target="_blank">野生菌</a>
                         <a href="http://www.360tea.cn" target="_blank">奇茶商城</a>
                         <a href="https://bbs.youxiake.com/mdd/2000.html" target="_blank">恩施旅游</a>
-                        <a href="https://www.ch.com/" target="_blank">飞机票</a>
-                        <a href="http://www.chinafranchiseexpo.com/" target="_blank">连锁加盟展</a>
+<!--                        <a href="https://www.ch.com/" target="_blank">飞机票</a>-->
+<!--                        <a href="http://www.chinafranchiseexpo.com/" target="_blank">连锁加盟展</a>-->
                         <a href="http://jiudian.jiameng.com" target="_blank">酒店加盟</a>
                         <a href="https://www.8684.cn/" target="_blank">公交车线路查询</a>
                         <a href="http://www.cits.cn" target="_blank">国旅在线</a>
@@ -456,18 +420,36 @@
                         <a href="http://www.fixdown.com" target="_blank">全方位下载</a>
                         <a href="http://bbs.youxiake.com/" target="_blank">游侠客社区</a>
                     </div>
-<!--                    <div class="friendLines">-->
-<!--                        <div class="footerimages_W clearfix foot-ext">-->
-<!--                            <a class="footer-ext-s2" href="javascript:;" onclick="window.open('http://net.china.com.cn/index.htm')" title="不良信息举报中心"></a>-->
-<!--                            <a class="footer-ext-s3" href="javascript:;" onclick="window.open('http://union.rising.com.cn/InfoManage/attestation.aspx?p0=W86D47XQRcVtTOYJMVjfRn-NIHQ6TlFupjQAkt-jEyg=')" title="瑞信安全认证"></a>-->
-<!--                            <a class="footer-ext-s4" href="javascript:;" onclick="window.open('http://www.12312.gov.cn')" title="12321垃圾信息举报中心"></a>-->
-<!--                            <a href="javascript:;" onclick="window.open('http://fun.alipay.com/down/index.htm?cid=shwaibusj&amp;pid=Q_ANDROID_SHWAIBUSJ')"><img width="116" height="47" src="http://static.youxiake.com/new/Public/images/alipay201305.png" alt="支付宝"></a>-->
-<!--                            <a class="footer-ext-s5" href="javascript:;" onclick="window.open('http://www.cyberpolice.cn/')" title="网络110报警服务"></a>-->
-<!--                            <a class="footer-ext-s6" href="javascript:;" onclick="window.open('http://122.224.75.236/wzba/login.do?method=hdurl&amp;doamin=http://www.youxiake.com&amp;id=330106000183104&amp;SHID=1223.0AFF_NAME=com.rouger. gs.main.UserInfoAff&amp;AFF_ACTION=qyhzdetail&amp;PAGE_URL=ShowDetail')" title="网上标识信息"></a>-->
-<!--                            <a class="footer-ext-s7" href="javascript:;" onclick="window.open('http://bbs.ifeng.com/special/bbs100/lty.shtml?bbsid=1912')" title="全球中文论坛100强"></a>-->
-<!--                            <a href="http://www.anquan.org/authenticate/cert/?site=www.youxiake.com&amp;sn=2013121115015380199" target="_blank" style="background:none"><img src="http://static.youxiake.com/new/Public/images/kx_124x47.png" alt="安全联盟" height="47"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="friendLines">-->
+                    <!--                        <div class="footerimages_W clearfix foot-ext">-->
+                    <!--                            <a class="footer-ext-s2" href="javascript:;" onclick="window.open('http://net.china.com.cn/index.htm')" title="不良信息举报中心"></a>-->
+                    <!--                            <a class="footer-ext-s3" href="javascript:;" onclick="window.open('http://union.rising.com.cn/InfoManage/attestation.aspx?p0=W86D47XQRcVtTOYJMVjfRn-NIHQ6TlFupjQAkt-jEyg=')" title="瑞信安全认证"></a>-->
+                    <!--                            <a class="footer-ext-s4" href="javascript:;" onclick="window.open('http://www.12312.gov.cn')" title="12321垃圾信息举报中心"></a>-->
+                    <!--                            <a href="javascript:;" onclick="window.open('http://fun.alipay.com/down/index.htm?cid=shwaibusj&amp;pid=Q_ANDROID_SHWAIBUSJ')"><img width="116" height="47" src="http://static.youxiake.com/new/Public/images/alipay201305.png" alt="支付宝"></a>-->
+                    <!--                            <a class="footer-ext-s5" href="javascript:;" onclick="window.open('http://www.cyberpolice.cn/')" title="网络110报警服务"></a>-->
+                    <!--                            <a class="footer-ext-s6" href="javascript:;" onclick="window.open('http://122.224.75.236/wzba/login.do?method=hdurl&amp;doamin=http://www.youxiake.com&amp;id=330106000183104&amp;SHID=1223.0AFF_NAME=com.rouger. gs.main.UserInfoAff&amp;AFF_ACTION=qyhzdetail&amp;PAGE_URL=ShowDetail')" title="网上标识信息"></a>-->
+                    <!--                            <a class="footer-ext-s7" href="javascript:;" onclick="window.open('http://bbs.ifeng.com/special/bbs100/lty.shtml?bbsid=1912')" title="全球中文论坛100强"></a>-->
+                    <!--                            <a href="http://www.anquan.org/authenticate/cert/?site=www.youxiake.com&amp;sn=2013121115015380199" target="_blank" style="background:none"><img src="http://static.youxiake.com/new/Public/images/kx_124x47.png" alt="安全联盟" height="47"></a>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="friendLines">
+                        <div class="footerImages clearfix foot-ext">
+                            <a href="javascript:;" rel="nofollow" title="不良信息举报中心" class="footer-ext-s2"></a>
+                            <a href="javascript:;" rel="nofollow" title="瑞信安全认证" class="footer-ext-s3"></a>
+                            <a href="javascript:;" rel="nofollow" title="12321垃圾信息举报中心" class="footer-ext-s4"></a>
+                            <a href="javascript:;" rel="nofollow">
+                                <img width="116" height="47" src="https://img3.youxiake.com/static/images/alipay201305.png"
+                                     alt="支付宝">
+                            </a>
+                            <a href="javascript:;" rel="nofollow" title="网络110报警服务" class="footer-ext-s5"></a>
+                            <a href="javascript:;" rel="nofollow" title="网上标识信息" class="footer-ext-s6"></a>
+                            <a href="javascript:;" rel="nofollow" title="全球中文论坛100强" class="footer-ext-s7"></a>
+                            <a target="cyxyv"
+                               href="https://v.yunaq.com/certificate?domain=bbs.youxiake.com&amp;from=label&amp;code=90020">
+                                <img src="https://aqyzmedia.yunaq.com/labels/label_sm_90020.png">
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -475,75 +457,61 @@
     </div>
 </div>
 
-
-<!--侧边栏-->
-<div class="sideMenu">
-    <div class="sideMenuTop">
-        <div class="sideMenuShop">
-        </div>
-        <!--<a class="sideMenuItem sideMenuItem-active"></a>-->
-        <a class="sideMenuItem sideMenuItem-photo" style="height: 70px" href="photo.html"></a>
-        <a class="sideMenuItem sideMenuItem-write" style="height: 70px" href="travel_articles.html"></a>
-        <a class="sideMenuItem sideMenuItem-imageupload" style="height: 70px" href="up_photos.html"></a>
-        <a class="sideMenuItem sideMenuItem-top"></a>
-    </div>
-
-</div>
-
 </body>
 
 <!--获取定位城市-->
 <script>
     $.getScript("http://api.map.baidu.com/location/ip?ak=07kWpLLMgsPnglpBwW7RH32f7rTbMmoE&callback=showLocation");
+
     // 07kWpLLMgsPnglpBwW7RH32f7rTbMmoE
     function showLocation(data) {
 //        console.log(data.content.address_detail.city);
-        var a =new Vue({
-            el:"#rightlogo",
-            data:{
-                cityName:data.content.address_detail.city,
-                hotCityList:[]
+        var a = new Vue({
+            el: "#rightlogo",
+            data: {
+                cityName: data.content.address_detail.city,
+                hotCityList: []
             },
             methods: {
-                changeCity :function () {
-                    if ($("#scity").val().indexOf("市")!=-1){
-                        this.cityName=$("#scity").val();
+                changeCity: function () {
+                    if ($("#scity").val().indexOf("市") != -1) {
+                        this.cityName = $("#scity").val();
                         $.ajax({
-                            url:"/setHot",
-                            data:{
-                                cityName:this.cityName
+                            url: "/setHot",
+                            data: {
+                                cityName: this.cityName
                             },
-                            type:"post",
+                            type: "post",
                             dataType: "json"
                         });
 
                     }
                 },
-                selectCity :function(index){
-                    this.cityName=this.hotCityList[index].HotCityName;
+                selectCity: function (index) {
+                    this.cityName = this.hotCityList[index].HotCityName;
                     $.ajax({
-                        url:"/setHot",
-                        data:{
-                            cityName:this.cityName
+                        url: "/setHot",
+                        data: {
+                            cityName: this.cityName
                         },
-                        type:"post",
+                        type: "post",
                         dataType: "json"
                     });
-                    vm.articleList=[];
+                    vm.articleList = [];
                     ajax();
                 }
             }
         });
         //获取热门城市
         $.ajax({
-            url:"/getHot",
-            type:"post",
-            dataType:"json",
-            success:function (data) {
-                for (var i =0;i<data.length && i<6;i++){
+            url: "/getHot",
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                for (var i = 0; i < data.length && i < 6; i++) {
                     a.hotCityList.push({
-                        HotCityName:data[i].element,
-                        Hot:data[i].score
+                        HotCityName: data[i].element,
+                        Hot: data[i].score
                     });
                 }
             }
@@ -552,48 +520,58 @@
         var vm = new Vue({
             el: "#Articles",
             data: {
-                articleList:[]
+                articleList: []
             },
             methods: {
+                goToArticle: function (index) {
+                    var indexId = this.articleList[index].articleId.toString();
+                    sessionStorage.setItem("articleId", indexId);
+                    // location.href = "travel_details.html";
+                    window.open("travel_details.html");
+                }
             }
         });
         console.log(a.cityName);
         //显示定位城市的游记
         ajax();
+
         function ajax() {
             $.ajax({
                 url: "/getNowA",
                 type: "post",
-                data:{
-                    cityName :a.cityName
+                data: {
+                    cityName: a.cityName
                 },
                 dataType: "json",
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
-                        var UserName="";
-                        UserName=$.ajax({
-                            url:"/getUserName",
-                            type:"post",
-                            data:{
-                                userid:data[i].userId
+                        var UserName = "";
+                        UserName = $.ajax({
+                            url: "/getUserName",
+                            type: "post",
+                            data: {
+                                userid: data[i].userId
                             },
-                            async:false,
-                            dataType:"text",
-                            success:function (result) {
+                            async: false,
+                            dataType: "text",
+                            success: function (result) {
                             }
                         }).responseText;
                         // console.log(UserName);
                         // console.log(data[i].articleImg);
                         vm.articleList.push({
-                            articleTime:data[i].articleTime.substring(0,10),
-                            articleImg:data[i].articleImg,
-                            articleContent:data[i].articleContent,
-                            UserName:UserName
+                            articleTime: data[i].articleTime.substring(0, 10),
+                            articleImg: data[i].articleImg,
+                            articleId: data[i].articleId,
+                            articleContent: data[i].articleContent,
+                            articleTitle: data[i].articleTitle,
+                            UserName: UserName
                         });
                     }
                 }
             });
         }
+
         //搜索城市显示内容
         $("#sbutton").click(function () {
             console.log($("#scity").val());
@@ -601,25 +579,26 @@
             $.ajax({
                 url: "/getNowA",
                 type: "post",
-                data:{
-                    cityName :searchCity
+                data: {
+                    cityName: searchCity
                 },
                 dataType: "json",
                 success: function (data) {
-                    vm.articleList=[];
+                    vm.articleList = [];
                     for (var i = 0; i < data.length; i++) {
                         vm.articleList.push({
-                            articleContent:data[i].articleContent,
+                            articleContent: data[i].articleContent,
 //                        articleId:data[i].articleId,
 //                        userId:data[i].userId,
 //                        idBest:data[i].idBest,
 //                        hot:data[i].hot,
-                            articleTime:data[i].articleTime.substring(0,10),
+                            articleTime: data[i].articleTime.substring(0, 10),
 //                        article_address:data[i].article_address,
-//                        article_local:data[i].article_local,
-                            articleImg:data[i].articleImg,
+//                        article_local:data[i].article_local,f
+                            articleImg: data[i].articleImg,
 //                        article_face:data[i].article_face,
-//                        articleContent:data[i].articleContent
+//                        articleContent:data[i].articleContent,
+                            articleTitle: data[i].articleTitle,
                         });
                     }
                 }
@@ -627,10 +606,6 @@
         });
 
     }
-
-
-
-
 
 
 </script>

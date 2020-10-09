@@ -166,19 +166,9 @@ a {
 .divbottom2{
     width: 100%;
 }
-/*.box2{*/
-/*    width: 360px;*/
-/*    height: 124px;*/
-/*    color: #666666;*/
-/*    background-color: #fff;*/
-/*    float: left;*/
-/*    margin-right: 8px;*/
-/*    margin-bottom: 8px;*/
-/*    overflow: hidden;*/
-/*}*/
 .box2{
-    width: 800px;
-    height: 165px;
+    width: 360px;
+    height: 124px;
     color: #666666;
     background-color: #fff;
     float: left;
@@ -186,29 +176,52 @@ a {
     margin-bottom: 8px;
     overflow: hidden;
 }
-/*.content2{*/
-/*    float: right;*/
-/*    width: 160px;*/
-/*    height: 124px;*/
+/*.box2{*/
+/*    width: 800px;*/
+/*    height: 165px;*/
+/*    color: #666666;*/
+/*    background-color: #fff;*/
+/*    float: left;*/
+/*    margin-right: 8px;*/
+/*    margin-bottom: 8px;*/
+/*    overflow: hidden;*/
 /*}*/
 .content2{
     float: right;
-    width: 388px;
-    height: 200px;
+    width: 160px;
+    height: 124px;
 }
-.title2{
-    font-size: 16px;
-    font-weight: 400;
-    margin-top: 22px;
-    overflow: hidden;
-    height: 80px;
-    margin-bottom: 23px;
+/*.content2{*/
+/*    float: right;*/
+/*    width: 388px;*/
+/*    height: 200px;*/
+/*}*/
+/*.title2{*/
+/*    font-size: 16px;*/
+/*    font-weight: 400;*/
+/*    margin-top: 22px;*/
+/*    overflow: hidden;*/
+/*    height: 80px;*/
+/*    margin-bottom: 23px;*/
 
+/*}*/
+
+.title2{
+    padding-left: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 18px;
+    overflow: hidden;
+    height: 50px;
+    /*margin-bottom: 23px;*/
 }
 .title2 a{
     color: #666;
 }
-.info2{  width: 187px;
+.info2{
+    padding-left: 8px;
+    padding-top: 18px;
+    width: 187px;
 }
 .info2 a{
     color: #ff9d00;
